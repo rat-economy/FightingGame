@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    //TODO: Make player-dependant values into a scriptable object
     [SerializeField] private float m_moveSpeed = 1.0f;
     [SerializeField] private float m_jumpSpeed = 7.0f;
 
@@ -20,10 +21,16 @@ public class PlayerController : MonoBehaviour
     private Vector2 m_moveDirection;
     private SpriteRenderer m_spriteRenderer;
 
+    /*
+        ANIMATION UPDATE & PLAYER INPUT PROCESSING
+
+        TODO: Restructure code so it's not all in Update
+        TODO: Update isJumping bool to be collider based, not y-velocity based
+    */
     void Update()
     {
+        //Get input and update rigidbody velocity to match
         m_moveDirection = i_move.ReadValue<Vector2>();
-
         m_rigidbody.velocity = new Vector2(m_moveDirection.x * m_moveSpeed, m_rigidbody.velocity.y);
 
         m_animator.SetBool("isMoving", _isMoving);
@@ -58,19 +65,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Jump()
+    /*-----------------------
+    PLAYER CONTROL METHODS
+    -----------------------*/
+    private void Jump() //W - Keyboard, Analog Stick Up - Controller 
     {
         m_animator.SetTrigger("Jump");
         m_rigidbody.velocity += new Vector2(0, m_jumpSpeed);
     }
 
-    private void Crouch()
+    private void Crouch() //S - Keyboard, Analog Stick Down - Controller 
     {
         transform.localScale = new Vector3(1f, 0.5f, 1f);
         transform.localPosition -= new Vector3(0f, 0.5f, 0f);
     }
 
-    private void UnCrouch()
+    private void UnCrouch() 
     {
         transform.localScale = new Vector3(1f, 1f, 1f);
         transform.localPosition += new Vector3(0f, 0.5f, 0f);
@@ -106,7 +116,9 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Block Attack Performed.");
     }
 
-
+    /*
+        UNITY NEW INPUT SYSTEM INITIALIZATION CODE
+    */
     [Header("Input Variables")]
     private InputActionAsset m_inputAsset;
     private InputActionMap m_player;
@@ -125,51 +137,13 @@ public class PlayerController : MonoBehaviour
         m_animator = GetComponent<Animator>();
         m_spriteRenderer = GetComponent<SpriteRenderer>();
         m_player = m_inputAsset.FindActionMap("Player");
-        // m_playerInput = new PlayerInput();
     }
     private void OnEnable()
     {
-       
-
         i_move = m_player.FindAction("Move");
-        // i_light = m_playerInput.Player.Light;
-        // i_heavy = m_playerInput.Player.Heavy;
-        // i_special = m_playerInput.Player.Special;
-        // i_block = m_playerInput.Player.Block;
-
-        // i_move.Enable();
-        // i_light.Enable();
-        // i_heavy.Enable();
-        // i_special.Enable();
-        // i_block.Enable();
-
-        // m_playerInput.Player.Move.performed += context => {
-        //     m_moveDirection = i_move.ReadValue<Vector2>();
-        //     _isMoving = true;
-        // };
-        // m_playerInput.Player.Move.canceled += context =>
-        // {
-        //     m_moveDirection = Vector2.zero;
-        //     _isMoving = false;
-        // };
-
-        // i_light.performed += Light;
-        // i_heavy.performed += Heavy;
-        // i_special.performed += Special;
-        // i_block.performed += Block;
 
         i_move.performed += Move;
         i_move.canceled += StopMove;
-        
-        // m_player.FindAction("Move").performed += context => {
-        //     m_moveDirection = i_move.ReadValue<Vector2>();
-        //     _isMoving = true;
-        // };
-        // m_player.FindAction("Move").canceled += context =>
-        // {
-        //     m_moveDirection = Vector2.zero;
-        //     _isMoving = false;
-        // };
 
         m_player.FindAction("Light").performed += Light;
         m_player.FindAction("Heavy").performed += Heavy;
@@ -181,24 +155,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        // i_move.Disable();
-        // i_light.Disable();
-        // i_heavy.Disable();
-        // i_special.Disable();
-        // i_block.Disable();
         m_player.FindAction("Light").performed -= Light;
         m_player.FindAction("Heavy").performed -= Heavy;
         m_player.FindAction("Special").performed -= Special;
         m_player.FindAction("Block").performed -= Block;
         m_player.Disable();
     }
-
-    void OnValidate()
-    {
-        
-    }
-
-
-
-    
 }
