@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,8 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     //TODO: Make player-dependant values into a scriptable object
-    [SerializeField] private float m_moveSpeed = 1.0f;
-    [SerializeField] private float m_jumpSpeed = 7.0f;
+
+    [SerializeField] private PlayerAttributes my;
 
     private bool _isJumping;
     private bool _isCrouching;
@@ -21,6 +22,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 m_moveDirection;
     private SpriteRenderer m_spriteRenderer;
 
+    private AudioManager audioManager;
+
     /*
         ANIMATION UPDATE & PLAYER INPUT PROCESSING
 
@@ -31,7 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         //Get input and update rigidbody velocity to match
         m_moveDirection = i_move.ReadValue<Vector2>();
-        m_rigidbody.velocity = new Vector2(m_moveDirection.x * m_moveSpeed, m_rigidbody.velocity.y);
+        m_rigidbody.velocity = new Vector2(m_moveDirection.x * my.moveSpeed, m_rigidbody.velocity.y);
 
         m_animator.SetBool("isMoving", _isMoving);
         m_animator.SetBool("isJumping", _isJumping);
@@ -71,48 +74,56 @@ public class PlayerController : MonoBehaviour
     private void Jump() //W - Keyboard, Analog Stick Up - Controller 
     {
         m_animator.SetTrigger("Jump");
-        m_rigidbody.velocity += new Vector2(0, m_jumpSpeed);
+        audioManager.PlaySoundOnce(my.s_jump);
+        m_rigidbody.velocity += new Vector2(0, my.jumpSpeed);
     }
 
     private void Crouch() //S - Keyboard, Analog Stick Down - Controller 
     {
+        audioManager.PlaySoundOnce(my.s_crouch);
         transform.localScale = new Vector3(1f, 0.5f, 1f);
-        transform.localPosition -= new Vector3(0f, 0.5f, 0f);
+        transform.localPosition -= new Vector3(0f, 0.2f, 0f);
     }
 
     private void UnCrouch() 
     {
         transform.localScale = new Vector3(1f, 1f, 1f);
-        transform.localPosition += new Vector3(0f, 0.5f, 0f);
+        transform.localPosition += new Vector3(0f, 0.2f, 0f);
     }
 
     private void Move(InputAction.CallbackContext context)
     {
+        audioManager.PlaySoundLooped(my.s_moving);
         _isMoving = true;
     }
 
     private void StopMove(InputAction.CallbackContext context)
     {
+        audioManager.StopSound(my.s_moving);
         _isMoving = false;
     }
 
     private void Light(InputAction.CallbackContext context)
     {
+        audioManager.PlaySoundOnce(my.s_light);
         m_animator.SetTrigger("LightAttack");
     }
 
     private void Heavy(InputAction.CallbackContext context)
     {
+        audioManager.PlaySoundOnce(my.s_heavy);
         Debug.Log("Heavy Attack Performed.");
     }
 
     private void Special(InputAction.CallbackContext context)
     {
+        audioManager.PlaySoundOnce(my.s_special);
         Debug.Log("Special Attack Performed.");
     }
 
     private void Block(InputAction.CallbackContext context)
     {
+        audioManager.PlaySoundOnce(my.s_block);
         Debug.Log("Block Attack Performed.");
     }
 
@@ -133,6 +144,9 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this);
+
+        audioManager = AudioManager.Instance;
+
         m_inputAsset = GetComponent<PlayerInput>().actions;
         m_rigidbody = GetComponent<Rigidbody2D>(); 
         m_animator = GetComponent<Animator>();
