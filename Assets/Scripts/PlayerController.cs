@@ -132,6 +132,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(this);
         m_inputAsset = GetComponent<PlayerInput>().actions;
         m_rigidbody = GetComponent<Rigidbody2D>(); 
         m_animator = GetComponent<Animator>();

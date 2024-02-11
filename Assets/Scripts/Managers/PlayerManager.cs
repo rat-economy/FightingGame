@@ -12,6 +12,8 @@ public class PlayerManager : MonoBehaviour
     //References
     private PlayerInputManager m_playerInputManager;
 
+    public static PlayerManager Instance;
+
     private void AddPlayer(PlayerInput player)
     {
         //Keeps a reference of the spawned player
@@ -45,7 +47,19 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
+        //SINGLETON CODE
+        DontDestroyOnLoad(this);
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
         m_playerInputManager =  GetComponent<PlayerInputManager>();
+        
     }
 
     private void OnEnable()
