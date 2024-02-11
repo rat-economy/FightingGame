@@ -1,5 +1,5 @@
 {
-    "name": "PlayerControls",
+    "name": "PlayerInput",
     "maps": [
         {
             "name": "Player",
@@ -45,6 +45,15 @@
                     "name": "Block",
                     "type": "Button",
                     "id": "a7d4b1df-a2af-43e2-9d1c-1cc04483e4bb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Join",
+                    "type": "Button",
+                    "id": "398d8825-d7fd-493b-87a8-d21ac67737f0",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -258,6 +267,28 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Block",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b6763907-dca2-418b-a031-45cff12058e9",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8bc06351-8ada-4554-b9c6-3a517eefe336",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Join",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

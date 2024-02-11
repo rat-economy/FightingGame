@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     [Header("Controller Variables")]
     [SerializeField, Range(0f, 1f)] private float c_deadzone = 0.3f;
 
-    private PlayerInput m_playerInput;
+
     private Rigidbody2D m_rigidbody;
     private Animator m_animator;
     private Vector2 m_moveDirection;
@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        m_moveDirection = i_move.ReadValue<Vector2>();
+
         m_rigidbody.velocity = new Vector2(m_moveDirection.x * m_moveSpeed, m_rigidbody.velocity.y);
 
         m_animator.SetBool("isMoving", _isMoving);
@@ -74,6 +76,16 @@ public class PlayerController : MonoBehaviour
         transform.localPosition += new Vector3(0f, 0.5f, 0f);
     }
 
+    private void Move(InputAction.CallbackContext context)
+    {
+        _isMoving = true;
+    }
+
+    private void StopMove(InputAction.CallbackContext context)
+    {
+        _isMoving = false;
+    }
+
     private void Light(InputAction.CallbackContext context)
     {
         m_animator.SetTrigger("LightAttack");
@@ -96,65 +108,97 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("Input Variables")]
+    private InputActionAsset m_inputAsset;
+    private InputActionMap m_player;
+    private PlayerInput m_playerInput;
+
     private InputAction i_move;
     private InputAction i_light;
     private InputAction i_heavy;
     private InputAction i_special;
     private InputAction i_block;
 
+    private void Awake()
+    {
+        m_inputAsset = GetComponent<PlayerInput>().actions;
+        m_rigidbody = GetComponent<Rigidbody2D>(); 
+        m_animator = GetComponent<Animator>();
+        m_spriteRenderer = GetComponent<SpriteRenderer>();
+        m_player = m_inputAsset.FindActionMap("Player");
+        // m_playerInput = new PlayerInput();
+    }
     private void OnEnable()
     {
+       
 
-        i_move = m_playerInput.Player.Move;
-        i_light = m_playerInput.Player.Light;
-        i_heavy = m_playerInput.Player.Heavy;
-        i_special = m_playerInput.Player.Special;
-        i_block = m_playerInput.Player.Block;
+        i_move = m_player.FindAction("Move");
+        // i_light = m_playerInput.Player.Light;
+        // i_heavy = m_playerInput.Player.Heavy;
+        // i_special = m_playerInput.Player.Special;
+        // i_block = m_playerInput.Player.Block;
 
-        i_move.Enable();
-        i_light.Enable();
-        i_heavy.Enable();
-        i_special.Enable();
-        i_block.Enable();
+        // i_move.Enable();
+        // i_light.Enable();
+        // i_heavy.Enable();
+        // i_special.Enable();
+        // i_block.Enable();
 
-        m_playerInput.Player.Move.performed += context => {
-            m_moveDirection = i_move.ReadValue<Vector2>();
-            _isMoving = true;
-        };
-        m_playerInput.Player.Move.canceled += context =>
-        {
-            m_moveDirection = Vector2.zero;
-            _isMoving = false;
-        };
+        // m_playerInput.Player.Move.performed += context => {
+        //     m_moveDirection = i_move.ReadValue<Vector2>();
+        //     _isMoving = true;
+        // };
+        // m_playerInput.Player.Move.canceled += context =>
+        // {
+        //     m_moveDirection = Vector2.zero;
+        //     _isMoving = false;
+        // };
 
-        i_light.performed += Light;
-        i_heavy.performed += Heavy;
-        i_special.performed += Special;
-        i_block.performed += Block;
+        // i_light.performed += Light;
+        // i_heavy.performed += Heavy;
+        // i_special.performed += Special;
+        // i_block.performed += Block;
 
+        i_move.performed += Move;
+        i_move.canceled += StopMove;
+        
+        // m_player.FindAction("Move").performed += context => {
+        //     m_moveDirection = i_move.ReadValue<Vector2>();
+        //     _isMoving = true;
+        // };
+        // m_player.FindAction("Move").canceled += context =>
+        // {
+        //     m_moveDirection = Vector2.zero;
+        //     _isMoving = false;
+        // };
+
+        m_player.FindAction("Light").performed += Light;
+        m_player.FindAction("Heavy").performed += Heavy;
+        m_player.FindAction("Special").performed += Special;
+        m_player.FindAction("Block").performed += Block;
+        m_player.Enable();
 
     }
 
     private void OnDisable()
     {
-        i_move.Disable();
-        i_light.Disable();
-        i_heavy.Disable();
-        i_special.Disable();
-        i_block.Disable();
+        // i_move.Disable();
+        // i_light.Disable();
+        // i_heavy.Disable();
+        // i_special.Disable();
+        // i_block.Disable();
+        m_player.FindAction("Light").performed -= Light;
+        m_player.FindAction("Heavy").performed -= Heavy;
+        m_player.FindAction("Special").performed -= Special;
+        m_player.FindAction("Block").performed -= Block;
+        m_player.Disable();
     }
 
     void OnValidate()
     {
-        m_rigidbody = GetComponent<Rigidbody2D>(); 
-        m_animator = GetComponent<Animator>();
-        m_spriteRenderer = GetComponent<SpriteRenderer>();
+        
     }
 
-    private void Awake()
-    {
-        m_playerInput = new PlayerInput();
-    }
+
 
     
 }
