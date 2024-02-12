@@ -16,11 +16,14 @@ MonoBehaviour:
   jumpSpeed: 7
   maxHealth: 100
   lightDamage: 5
-  lightDelay: 0.4
+  lightWindup: 0.4
+  lightCooldown: 0.1
   heavyDamage: 20
-  heavyDelay: 0
+  heavyWindup: 0
+  heavyCooldown: 0
   specialDamage: 40
-  specialDelay: 0
+  specialWindup: 0
+  specialCooldown: 0
   s_jump: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
   s_crouch: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
   s_moving: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}

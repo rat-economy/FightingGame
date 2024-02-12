@@ -119,7 +119,8 @@ public class PlayerController : MonoBehaviour
     {
         audioManager.PlaySoundOnce(my.s_light);
         m_animator.SetTrigger("LightAttack");
-        StartCoroutine(Attack(my.lightDamage, my.lightDelay));
+
+        StartCoroutine(Attack(my.lightDamage, my.lightWindup, my.lightCooldown));
     }
 
     private void Heavy(InputAction.CallbackContext context)
@@ -140,14 +141,21 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Block Attack Performed.");
     }
 
-    private IEnumerator Attack(float damage, float delay)
+    private IEnumerator Attack(float damage, float windup, float cooldown)
     {
-        yield return new WaitForSeconds(delay);
+        m_player.Disable();
+        //Windup delay
+        yield return new WaitForSeconds(windup);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(m_attackPoint.position, m_attackRadius, m_enemyLayer);
         foreach(Collider2D enemy in hitEnemies)
         {
             enemy.transform.GetComponent<PlayerController>().RecieveDamage(damage);
         }
+
+        //Cooldown delay
+        yield return new WaitForSeconds(cooldown);
+        m_player.Enable();
+
         yield return null;
     }
 
@@ -212,7 +220,8 @@ public class PlayerController : MonoBehaviour
 
         audioManager = AudioManager.Instance;
 
-        m_inputAsset = GetComponent<PlayerInput>().actions;
+        m_playerInput = GetComponent<PlayerInput>();
+        m_inputAsset = m_playerInput.actions;
         m_rigidbody = GetComponent<Rigidbody2D>(); 
         m_animator = GetComponent<Animator>();
         m_spriteRenderer = GetComponent<SpriteRenderer>();

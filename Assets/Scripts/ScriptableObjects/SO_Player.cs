@@ -11,15 +11,18 @@ public class PlayerAttributes : ScriptableObject
 
     [Header("Light Attack")]
     public float lightDamage = 10f;
-    public float lightDelay = 0f;
+    public float lightWindup = 0f;
+    public float lightCooldown = 0f;
 
     [Header("Heavy Attack")]
     public float heavyDamage = 10f;
-    public float heavyDelay = 0f;
+    public float heavyWindup = 0f;
+    public float heavyCooldown = 0f;
 
     [Header("Special Attack")]
     public float specialDamage = 10f;
-    public float specialDelay = 0f;
+    public float specialWindup = 0f;
+    public float specialCooldown = 0f;
 
     [Header("Sound Effects")]
     public Sound s_jump;
