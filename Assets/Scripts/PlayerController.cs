@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,9 +13,15 @@ public class PlayerController : MonoBehaviour
     private bool _isJumping;
     private bool _isCrouching;
     private bool _isMoving;
+    private float m_currentHealth;
 
     [Header("Controller Variables")]
     [SerializeField, Range(0f, 1f)] private float c_deadzone = 0.3f;
+
+    [Header("Attack Variables")]
+    [SerializeField] private Transform m_attackPoint;
+    [SerializeField, Range(0f, 10f)] private float m_attackRadius;
+    [SerializeField] private LayerMask m_enemyLayer;
 
 
     private Rigidbody2D m_rigidbody;
@@ -38,15 +45,18 @@ public class PlayerController : MonoBehaviour
 
         m_animator.SetBool("isMoving", _isMoving);
         m_animator.SetBool("isJumping", _isJumping);
+
+        //Flips the player
         if (m_rigidbody.velocity.x > 0)
         {
-            m_spriteRenderer.flipX = true;
+            transform.rotation = Quaternion.Euler(new Vector3 (0,180,0));
         }
         else if (m_rigidbody.velocity.x < 0)
         {
-            m_spriteRenderer.flipX = false;
+            transform.rotation = Quaternion.identity;
         }  
 
+        //Check isJumping
         if (m_moveDirection.y > c_deadzone && !_isJumping && !_isCrouching)
         {
             _isJumping = true;
@@ -56,6 +66,8 @@ public class PlayerController : MonoBehaviour
         {
             _isJumping = false;
         }
+
+        //Check isCrouching
         if (m_moveDirection.y < -1 * c_deadzone && !_isCrouching && !_isJumping)
         {
             _isCrouching = true;
@@ -82,13 +94,13 @@ public class PlayerController : MonoBehaviour
     {
         audioManager.PlaySoundOnce(my.s_crouch);
         transform.localScale = new Vector3(1f, 0.5f, 1f);
-        transform.localPosition -= new Vector3(0f, 0.2f, 0f);
+        transform.localPosition -= new Vector3(0f, 0.1f, 0f);
     }
 
     private void UnCrouch() 
     {
         transform.localScale = new Vector3(1f, 1f, 1f);
-        transform.localPosition += new Vector3(0f, 0.2f, 0f);
+        transform.localPosition += new Vector3(0f, 0.1f, 0f);
     }
 
     private void Move(InputAction.CallbackContext context)
@@ -107,6 +119,7 @@ public class PlayerController : MonoBehaviour
     {
         audioManager.PlaySoundOnce(my.s_light);
         m_animator.SetTrigger("LightAttack");
+        StartCoroutine(Attack(my.lightDamage, my.lightDelay));
     }
 
     private void Heavy(InputAction.CallbackContext context)
@@ -125,6 +138,58 @@ public class PlayerController : MonoBehaviour
     {
         audioManager.PlaySoundOnce(my.s_block);
         Debug.Log("Block Attack Performed.");
+    }
+
+    private IEnumerator Attack(float damage, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(m_attackPoint.position, m_attackRadius, m_enemyLayer);
+        foreach(Collider2D enemy in hitEnemies)
+        {
+            enemy.transform.GetComponent<PlayerController>().RecieveDamage(damage);
+        }
+        yield return null;
+    }
+
+    private void RecieveDamage(float damage)
+    {
+        // if (m_PlayerController.isDashing) return;
+        m_currentHealth -= damage;
+
+        //Cancel what the player is doing when they recieve damage
+        StopAllCoroutines();
+        if (m_currentHealth <= 0)
+        {
+            m_animator.SetTrigger("Death");
+            m_playerInput.DeactivateInput();
+
+            //INGNORE COLLISIONS EXCEPT FOR GROUND
+            Die();
+        }
+        else
+        {
+            Debug.Log("Hurt");
+            m_animator.SetTrigger("Hurt"); 
+            audioManager.PlaySoundOnce(my.s_hurt);
+           
+        }
+    }
+
+    private void Die()
+    {
+
+    }
+
+    public void SetEnemyLayer(LayerMask player)
+    {
+        m_enemyLayer = player;
+    }
+
+    void OnDrawGizmos()
+    {
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(m_attackPoint.position, m_attackRadius);
     }
 
     /*
@@ -152,6 +217,8 @@ public class PlayerController : MonoBehaviour
         m_animator = GetComponent<Animator>();
         m_spriteRenderer = GetComponent<SpriteRenderer>();
         m_player = m_inputAsset.FindActionMap("Player");
+
+        m_currentHealth = my.maxHealth;
     }
     private void OnEnable()
     {

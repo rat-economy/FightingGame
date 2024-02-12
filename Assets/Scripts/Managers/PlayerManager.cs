@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using UnityEditor;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,7 +7,15 @@ public class PlayerManager : MonoBehaviour
 {
     private List<PlayerInput> m_players = new List<PlayerInput>();
     [SerializeField] private List<Transform> m_startingPoints;
-    [SerializeField] private List<LayerMask> m_playerLayers;
+
+    [Header("Player 1")]
+    [SerializeField] private Transform m_player1StartingPoint;
+    [SerializeField] private LayerMask m_player1LayerMask;
+
+    [Header("Player 2")]
+    [SerializeField] private Transform m_player2StartingPoint;
+    [SerializeField] private LayerMask m_player2LayerMask;
+    
 
     //References
     private PlayerInputManager m_playerInputManager;
@@ -32,13 +40,19 @@ public class PlayerManager : MonoBehaviour
 
     public void SpawnPlayers()
     {
-        if(m_players.Count != 2)
+        if(m_players.Count != 2)    
         {
             Debug.LogError("Must need two players to spawn!");
+            return;
         }
-        //For each player, spawn them at their respective spawn point.
+        //Spawn each player at their respective spawn point.
         m_players[0].transform.position = m_startingPoints[0].position;
         m_players[1].transform.position = m_startingPoints[1].position;
+        //Label each player for collision
+        m_players[0].gameObject.layer = LayerMask.NameToLayer("Player1");
+        m_players[1].gameObject.layer = LayerMask.NameToLayer("Player2");
+        m_players[0].transform.GetComponent<PlayerController>().SetEnemyLayer(m_player2LayerMask);
+        m_players[1].transform.GetComponent<PlayerController>().SetEnemyLayer(m_player1LayerMask);
         foreach(PlayerInput player in m_players)
         {
             player.ActivateInput();

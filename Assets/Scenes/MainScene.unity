@@ -1435,7 +1435,14 @@ MonoBehaviour:
   m_startingPoints:
   - {fileID: 929036292}
   - {fileID: 1235793406}
-  m_playerLayers: []
+  m_player1StartingPoint: {fileID: 929036292}
+  m_player1LayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  m_player2StartingPoint: {fileID: 1235793406}
+  m_player2LayerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

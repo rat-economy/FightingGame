@@ -14,6 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3.5
   jumpSpeed: 7
+  maxHealth: 100
+  lightDamage: 5
+  lightDelay: 0.4
+  heavyDamage: 20
+  heavyDelay: 0
+  specialDamage: 40
+  specialDelay: 0
   s_jump: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
   s_crouch: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
   s_moving: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
@@ -21,4 +28,5 @@ MonoBehaviour:
   s_heavy: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
   s_special: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
   s_block: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  s_hurt: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
   s_voicelines: []
