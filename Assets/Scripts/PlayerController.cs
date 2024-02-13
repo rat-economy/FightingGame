@@ -149,7 +149,10 @@ public class PlayerController : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(m_attackPoint.position, m_attackRadius, m_enemyLayer);
         foreach(Collider2D enemy in hitEnemies)
         {
-            enemy.transform.GetComponent<PlayerController>().RecieveDamage(damage);
+            //TODO: FIX CODE SO TAKING DAMAGE, ATTACKING, AND PLAYER CONTROLELR ARE SEPARATE SCRIPTS
+            if(enemy.transform.TryGetComponent<PlayerController>(out var pc))
+                enemy.transform.GetComponent<PlayerController>().RecieveDamage(damage);
+            else enemy.transform.GetComponent<DummyController>().RecieveDamage(damage);
         }
 
         //Cooldown delay
@@ -176,7 +179,6 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Hurt");
             m_animator.SetTrigger("Hurt"); 
             audioManager.PlaySoundOnce(my.s_hurt);
            

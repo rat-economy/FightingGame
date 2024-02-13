@@ -1740,11 +1740,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 977181027}
   m_CullTransparentMesh: 1
---- !u!4 &1120125743 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4895362131319334401, guid: d53ecf635c9fd48ad9d308cc6bebf667, type: 3}
-  m_PrefabInstance: {fileID: 7636549500306775006}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1161279278
 GameObject:
   m_ObjectHideFlags: 0
@@ -2861,18 +2856,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 712235116370626448, guid: d53ecf635c9fd48ad9d308cc6bebf667, type: 3}
-      propertyPath: m_p1Prefab
-      value: 
-      objectReference: {fileID: 5686968132878280717, guid: 8f8e5b9ac9adb4be9bf081d200bdfa54, type: 3}
-    - target: {fileID: 712235116370626448, guid: d53ecf635c9fd48ad9d308cc6bebf667, type: 3}
-      propertyPath: m_p2Prefab
-      value: 
-      objectReference: {fileID: 5686968132878280717, guid: 8f8e5b9ac9adb4be9bf081d200bdfa54, type: 3}
-    - target: {fileID: 712235116370626448, guid: d53ecf635c9fd48ad9d308cc6bebf667, type: 3}
-      propertyPath: m_p1StartingPoint
-      value: 
-      objectReference: {fileID: 1120125743}
     - target: {fileID: 4095521942157107106, guid: d53ecf635c9fd48ad9d308cc6bebf667, type: 3}
       propertyPath: m_Name
       value: Player Manager
@@ -2916,10 +2899,6 @@ PrefabInstance:
     - target: {fileID: 6781772801202070616, guid: d53ecf635c9fd48ad9d308cc6bebf667, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128490707586582007, guid: d53ecf635c9fd48ad9d308cc6bebf667, type: 3}
-      propertyPath: m_JoinBehavior
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

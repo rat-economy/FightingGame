@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,6 +17,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Transform m_p2StartingPoint;
     [SerializeField] private LayerMask m_p2LayerMask;
     [SerializeField] private GameObject m_p2Prefab;
+
+    [SerializeField] private GameObject m_dummyPrefab;
     
 
     //References
@@ -37,14 +38,14 @@ public class PlayerManager : MonoBehaviour
 
         //playerController.DisableInput();
 
-        if(m_playerInputs.Count == 1)
-        {
-            Debug.Log("Player 1 has connected.");
-        } 
-        else if(m_playerInputs.Count == 2)
-        {
-            Debug.Log("Player 2 has connected.");
-        }
+        // if(m_playerInputs.Count == 1)
+        // {
+        //     Debug.Log("Player 1 has connected.");
+        // } 
+        // else if(m_playerInputs.Count == 2)
+        // {
+        //     Debug.Log("Player 2 has connected.");
+        // }
     }
 
     public void DisableInputs()
@@ -71,11 +72,20 @@ public class PlayerManager : MonoBehaviour
 
     public void SpawnBothPlayers()
     {
-        if(m_playerInputs.Count < 2)    
+        if (m_players.Count != 1)
         {
-            Debug.LogError("Must need two players to spawn!");
+            Debug.LogError("Alread spawned players!");
             return;
         }
+        // if(m_playerInputs.Count < 2)    
+        // {
+        //     Debug.LogError("Must need two players to spawn!");
+        //     return;
+        // }
+
+        Instantiate(m_p1Prefab);
+        Instantiate(m_p2Prefab);
+        
         //Spawn each player at their respective spawn point.
         m_players[0].position = m_p1StartingPoint.position;
         m_players[1].position = m_p2StartingPoint.position;
@@ -98,6 +108,7 @@ public class PlayerManager : MonoBehaviour
             return;
         }
         Instantiate(m_p1Prefab);
+        Instantiate(m_dummyPrefab, m_p2StartingPoint.position, Quaternion.identity);
         m_players[0].position = m_p1StartingPoint.position;
         m_players[0].gameObject.layer = LayerMask.NameToLayer("Player1");
         m_playerControllers[0].SetEnemyLayer(m_p2LayerMask);
