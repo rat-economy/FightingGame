@@ -22,7 +22,8 @@ public class PlayerManager : MonoBehaviour
     
 
     //References
-    private PlayerInputManager m_playerInputManager;
+    private PlayerInputManager _playerInputManager;
+    private GameManager _gameManager;
 
     public static PlayerManager Instance;
 
@@ -64,7 +65,6 @@ public class PlayerManager : MonoBehaviour
         }
 
     }
-
     private void RemovePlayer(PlayerInput player)
     {
         Debug.Log("Player Left");
@@ -72,7 +72,7 @@ public class PlayerManager : MonoBehaviour
 
     public void SpawnBothPlayers()
     {
-        if (m_players.Count != 1)
+        if (m_players.Count >= 1)
         {
             Debug.LogError("Alread spawned players!");
             return;
@@ -94,10 +94,8 @@ public class PlayerManager : MonoBehaviour
         m_players[1].gameObject.layer = LayerMask.NameToLayer("Player2");
         m_playerControllers[0].SetEnemyLayer(m_p2LayerMask);
         m_playerControllers[1].SetEnemyLayer(m_p1LayerMask);
-        foreach(var player in m_playerControllers)
-        {
-            player.EnableInput();
-        }
+        DisableInputs();
+        StartCoroutine(_gameManager.StartRound());
     }
 
     public void SpawnSinglePlayer()
@@ -128,14 +126,19 @@ public class PlayerManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        m_playerInputManager = GetComponent<PlayerInputManager>();
+        _playerInputManager = GetComponent<PlayerInputManager>();
         
+    }
+
+    private void Start()
+    {
+        _gameManager = GameManager.Instance;
     }
 
     private void OnEnable()
     {
-        m_playerInputManager.onPlayerJoined += AddPlayer;
-        m_playerInputManager.onPlayerLeft += RemovePlayer;
+        _playerInputManager.onPlayerJoined += AddPlayer;
+        _playerInputManager.onPlayerLeft += RemovePlayer;
 
         InputSystem.onDeviceChange +=
         (device, change) =>
@@ -157,7 +160,7 @@ public class PlayerManager : MonoBehaviour
     
     private void OnDisable()
     {
-        m_playerInputManager.onPlayerJoined -= AddPlayer;
-        m_playerInputManager.onPlayerLeft -= RemovePlayer;
+        _playerInputManager.onPlayerJoined -= AddPlayer;
+        _playerInputManager.onPlayerLeft -= RemovePlayer;
     }
 }
