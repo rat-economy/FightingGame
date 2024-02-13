@@ -169,7 +169,7 @@ public class PlayerController : MonoBehaviour
         if (m_currentHealth <= 0)
         {
             m_animator.SetTrigger("Death");
-            m_playerInput.DeactivateInput();
+            m_player.Disable();
 
             //INGNORE COLLISIONS EXCEPT FOR GROUND
             Die();
@@ -181,6 +181,16 @@ public class PlayerController : MonoBehaviour
             audioManager.PlaySoundOnce(my.s_hurt);
            
         }
+    }
+
+    public void DisableInput()
+    {
+        m_player.Disable();
+    }
+
+    public void EnableInput()
+    {
+        m_player.Enable();
     }
 
     private void Die()
@@ -206,7 +216,7 @@ public class PlayerController : MonoBehaviour
     [Header("Input Variables")]
     private InputActionAsset m_inputAsset;
     private InputActionMap m_player;
-    private PlayerInput m_playerInput;
+    public PlayerInput m_playerInput {get; private set;}
 
     private InputAction i_move;
     private InputAction i_light;

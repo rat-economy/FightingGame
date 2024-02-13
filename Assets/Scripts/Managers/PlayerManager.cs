@@ -5,8 +5,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerManager : MonoBehaviour
 {
-    private List<PlayerInput> m_players = new List<PlayerInput>();
-    [SerializeField] private List<Transform> m_startingPoints;
+    private readonly List<Transform> m_player = new();
+    private readonly List<PlayerInput> m_playerInputs = new();
+    private readonly List<PlayerController> m_playerControllers = new();
 
     [Header("Player 1")]
     [SerializeField] private Transform m_player1StartingPoint;
@@ -22,40 +23,62 @@ public class PlayerManager : MonoBehaviour
 
     public static PlayerManager Instance;
 
-    private void AddPlayer(PlayerInput player)
+    private void AddPlayer(PlayerInput playerInput)
     {
         //Keeps a reference of the spawned player
-        m_players.Add(player);
-        player.DeactivateInput();
+        var transform = playerInput.transform;
+        var playerController = playerInput.transform.GetComponent<PlayerController>();
 
-        if(m_players.Count == 2) {
+        m_player.Add(transform);
+        m_playerInputs.Add(playerInput);
+        m_playerControllers.Add(playerController);
+
+        //playerController.DisableInput();
+
+        if(m_playerInputs.Count == 2) {
             Debug.Log("Both players have joined.");
+        }
+    }
+
+    public void DisableInputs()
+    {
+        foreach(var player in m_playerControllers)
+        {
+            player.DisableInput();
+        }
+    }
+
+    public void EnableInputs()
+    {
+        foreach(var player in m_playerControllers)
+        {
+            player.EnableInput();
         }
     }
 
     private void RemovePlayer(PlayerInput player)
     {
-        
+        Debug.Log("Player Left");
     }
 
     public void SpawnPlayers()
     {
-        if(m_players.Count != 2)    
+        if(m_playerInputs.Count != 2)    
         {
             Debug.LogError("Must need two players to spawn!");
             return;
         }
         //Spawn each player at their respective spawn point.
-        m_players[0].transform.position = m_startingPoints[0].position;
-        m_players[1].transform.position = m_startingPoints[1].position;
-        //Label each player for collision
-        m_players[0].gameObject.layer = LayerMask.NameToLayer("Player1");
-        m_players[1].gameObject.layer = LayerMask.NameToLayer("Player2");
-        m_players[0].transform.GetComponent<PlayerController>().SetEnemyLayer(m_player2LayerMask);
-        m_players[1].transform.GetComponent<PlayerController>().SetEnemyLayer(m_player1LayerMask);
-        foreach(PlayerInput player in m_players)
+        m_player[0].position = m_player1StartingPoint.position;
+        m_player[1].position = m_player2StartingPoint.position;
+        //Label each player for collision detection
+        m_player[0].gameObject.layer = LayerMask.NameToLayer("Player1");
+        m_player[1].gameObject.layer = LayerMask.NameToLayer("Player2");
+        m_playerControllers[0].SetEnemyLayer(m_player2LayerMask);
+        m_playerControllers[0].SetEnemyLayer(m_player1LayerMask);
+        foreach(var player in m_playerControllers)
         {
-            player.ActivateInput();
+            player.EnableInput();
         }
     }
 
@@ -72,7 +95,7 @@ public class PlayerManager : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        m_playerInputManager =  GetComponent<PlayerInputManager>();
+        m_playerInputManager = GetComponent<PlayerInputManager>();
         
     }
 
