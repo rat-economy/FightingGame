@@ -29,7 +29,6 @@ public class UM_InGame : MonoBehaviour
     private void Start()
     {
         playerManager = PlayerManager.Instance;
-        Debug.Log(playerManager);
     }
 
     private void OnEnable()

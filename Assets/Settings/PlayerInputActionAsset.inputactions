@@ -1,5 +1,5 @@
 {
-    "name": "PlayerInput",
+    "name": "PlayerInputActionAsset",
     "maps": [
         {
             "name": "Player",
@@ -384,6 +384,15 @@
                     "type": "PassThrough",
                     "id": "cb1bb22c-45d2-4b30-9ddd-99a45c595d23",
                     "expectedControlType": "Quaternion",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Open/Close Menu",
+                    "type": "Button",
+                    "id": "e9094bad-749f-40d0-ab01-54ed3d297617",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -805,6 +814,17 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e3f2f843-0fc3-4f94-9c00-fe36a1d5c5ac",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Open/Close Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
