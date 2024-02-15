@@ -4,8 +4,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    //TODO: Make player-dependant values into a scriptable object
-
     [SerializeField] private PlayerAttributes my;
 
     private bool _isJumping;
@@ -21,11 +19,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Range(0f, 10f)] private float m_attackRadius;
     [SerializeField] private LayerMask m_enemyLayer;
 
+    private bool _canJump;
+
 
     private Rigidbody2D m_rigidbody;
     private Animator m_animator;
     private Vector2 m_moveDirection;
-    private SpriteRenderer m_spriteRenderer;
 
     private AudioManager audioManager;
 
@@ -55,14 +54,15 @@ public class PlayerController : MonoBehaviour
         }  
 
         //Check isJumping
-        if (m_moveDirection.y > c_deadzone && !_isJumping && !_isCrouching)
+        if (m_moveDirection.y > c_deadzone && !_isJumping && !_isCrouching && _canJump)
         {
             _isJumping = true;
+            _canJump = false;
             Jump();
         }
-        else if(m_rigidbody.velocity.y == 0 && m_moveDirection.y <= c_deadzone)
+        if(m_moveDirection.y <= c_deadzone)
         {
-            _isJumping = false;
+            _canJump = true;
         }
 
         //Check isCrouching
@@ -103,6 +103,10 @@ public class PlayerController : MonoBehaviour
 
     private void Move(InputAction.CallbackContext context)
     {
+        if(m_moveDirection.x == 0)
+        {
+            return;
+        }
         audioManager.PlaySoundLooped(my.s_moving);
         _isMoving = true;
     }
@@ -118,7 +122,7 @@ public class PlayerController : MonoBehaviour
         audioManager.PlaySoundOnce(my.s_light);
         m_animator.SetTrigger("LightAttack");
 
-        StartCoroutine(Attack(my.lightDamage, my.lightWindup, my.lightCooldown));
+        StartCoroutine(C_Attack(my.lightDamage, my.lightWindup, my.lightCooldown));
     }
 
     private void Heavy(InputAction.CallbackContext context)
@@ -139,7 +143,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Block Attack Performed.");
     }
 
-    private IEnumerator Attack(float damage, float windup, float cooldown)
+    private IEnumerator C_Attack(float damage, float windup, float cooldown)
     {
         m_player.Disable();
         //Windup delay
@@ -198,6 +202,14 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && _isJumping)
+        {
+            _isJumping = false;
+        }
+    }
+
     public void SetEnemyLayer(LayerMask player)
     {
         m_enemyLayer = player;
@@ -234,7 +246,6 @@ public class PlayerController : MonoBehaviour
         m_inputAsset = m_playerInput.actions;
         m_rigidbody = GetComponent<Rigidbody2D>(); 
         m_animator = GetComponent<Animator>();
-        m_spriteRenderer = GetComponent<SpriteRenderer>();
         m_player = m_inputAsset.FindActionMap("Player");
 
         m_currentHealth = my.maxHealth;

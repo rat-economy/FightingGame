@@ -95,7 +95,7 @@ public class PlayerManager : MonoBehaviour
         m_playerControllers[0].SetEnemyLayer(m_p2LayerMask);
         m_playerControllers[1].SetEnemyLayer(m_p1LayerMask);
         DisableInputs();
-        StartCoroutine(_gameManager.StartRound());
+        StartCoroutine(_gameManager.C_StartRound());
     }
 
     public void SpawnSinglePlayer()

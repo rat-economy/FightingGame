@@ -3,7 +3,8 @@ using UnityEngine;
 
 public enum GameState
 {
-
+    SINGLEPLAYER,
+    MULTIPLAYER
 }
 public class GameManager : MonoBehaviour
 {
@@ -35,12 +36,23 @@ public class GameManager : MonoBehaviour
         uiManager = UM_InGame.Instance;
     }
 
-    public IEnumerator StartRound()
+    //Called on the player selection screen
+    public void InitializeRound()
+    {
+        //Transition to ingame scene
+        //Setup loading screen
+        //Initialize the player prefabs into player manager
+        //Call spawnsingleplayer() / spawnbothplayers()
+        //Remove loading screen
+        StartCoroutine(C_StartRound());
+    }
+
+    //Called once in game.
+    public IEnumerator C_StartRound()
     {
         StartCoroutine(uiManager.Countdown());
         yield return new WaitForSeconds(m_countdown);
         playerManager.EnableInputs();
-
     }
 
 }
