@@ -3723,6 +3723,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4549001522548043129, guid: d383ee8efd34f4b45a655d38596b6ff1, type: 3}
+      propertyPath: sounds.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549001522548043129, guid: d383ee8efd34f4b45a655d38596b6ff1, type: 3}
+      propertyPath: sounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+    - target: {fileID: 4549001522548043129, guid: d383ee8efd34f4b45a655d38596b6ff1, type: 3}
+      propertyPath: sounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+    - target: {fileID: 4549001522548043129, guid: d383ee8efd34f4b45a655d38596b6ff1, type: 3}
+      propertyPath: sounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3736,6 +3752,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 712235116370626448, guid: d53ecf635c9fd48ad9d308cc6bebf667, type: 3}
+      propertyPath: m_p1Prefab
+      value: 
+      objectReference: {fileID: 6953301460390023672, guid: 8666d43a7d01b24438342982f30c16d4, type: 3}
     - target: {fileID: 4095521942157107106, guid: d53ecf635c9fd48ad9d308cc6bebf667, type: 3}
       propertyPath: m_Name
       value: Player Manager
@@ -3778,6 +3798,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6781772801202070616, guid: d53ecf635c9fd48ad9d308cc6bebf667, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128490707586582007, guid: d53ecf635c9fd48ad9d308cc6bebf667, type: 3}
+      propertyPath: m_SplitScreen
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

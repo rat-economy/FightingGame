@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43cab630ed1ad46ca92e024d43e31ed8, type: 3}
-  m_Name: Default
+  m_Name: PA_FantasyWarrior
   m_EditorClassIdentifier: 
-  moveSpeed: 3.5
-  jumpSpeed: 7
+  moveSpeed: 2
+  jumpSpeed: 6
   maxHealth: 100
-  lightDamage: 5
-  lightWindup: 0.4
-  lightCooldown: 0.1
+  lightDamage: 20
+  lightWindup: 0.6
+  lightCooldown: 1.93
   heavyDamage: 20
   heavyWindup: 0
   heavyCooldown: 0
