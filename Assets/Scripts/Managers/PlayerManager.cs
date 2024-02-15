@@ -70,6 +70,11 @@ public class PlayerManager : MonoBehaviour
         Debug.Log("Player Left");
     }
 
+    public void InitializePlayers(GameObject p1, GameObject p2)
+    {
+        
+    }
+
     public void SpawnBothPlayers()
     {
         if (m_players.Count >= 1)
