@@ -54,15 +54,10 @@ public class PlayerController : MonoBehaviour
         }  
 
         //Check isJumping
-        if (m_moveDirection.y > c_deadzone && !_isJumping && !_isCrouching && _canJump)
+        if (m_moveDirection.y > c_deadzone && !_isJumping && !_isCrouching)
         {
             _isJumping = true;
-            _canJump = false;
             Jump();
-        }
-        if(m_moveDirection.y <= c_deadzone)
-        {
-            _canJump = true;
         }
 
         //Check isCrouching
@@ -103,10 +98,6 @@ public class PlayerController : MonoBehaviour
 
     private void Move(InputAction.CallbackContext context)
     {
-        if(m_moveDirection.x == 0)
-        {
-            return;
-        }
         audioManager.PlaySoundLooped(my.s_moving);
         _isMoving = true;
     }

@@ -16,8 +16,8 @@ MonoBehaviour:
   jumpSpeed: 6
   maxHealth: 100
   lightDamage: 20
-  lightWindup: 0.6
-  lightCooldown: 1.93
+  lightWindup: 1.45
+  lightCooldown: 0.55
   heavyDamage: 20
   heavyWindup: 0
   heavyCooldown: 0

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4197257548232787592}
   m_Layer: 0
   m_Name: FantasyWarrior
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22760ec354e9e894b9fbf746541bb48c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  my: {fileID: 11400000, guid: 941253a623ae941cbb28e76ab712c7e3, type: 2}
+  my: {fileID: 11400000, guid: dd483eea1e11a944bb160a6f1a269e24, type: 2}
   c_deadzone: 0.6
   m_attackPoint: {fileID: 7944021923251193040}
   m_attackRadius: 0.59
