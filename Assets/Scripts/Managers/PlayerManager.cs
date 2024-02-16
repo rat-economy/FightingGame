@@ -70,6 +70,7 @@ public class PlayerManager : MonoBehaviour
         Debug.Log("Player Left");
     }
 
+    //Run before SPAWNING the players
     public void InitializePlayers(GameObject p1, GameObject p2)
     {
 

@@ -37,18 +37,22 @@ public class GameManager : MonoBehaviour
         uiManager = UM_InGame.Instance;
     }
 
-    //Called on the player selection screen
+    //Called in the main menu scene
     public void InitializeRound()
     {
         //Transition to ingame scene
+
         //Setup loading screen
+
         //Initialize the player prefabs into player manager
+        
         //Call spawnsingleplayer() / spawnbothplayers()
+
         //Remove loading screen
         StartCoroutine(C_StartRound());
     }
 
-    //Called once in game.
+    //Called once in game scene
     public IEnumerator C_StartRound()
     {
         StartCoroutine(uiManager.Countdown());
@@ -56,7 +60,8 @@ public class GameManager : MonoBehaviour
         playerManager.EnableInputs();
     }
 
-    public void SelectCharacter(CharacterName name, int player)
+    //Move to playerselect script
+    private void SelectCharacter(CharacterName name, int player)
     {
         Character c = FindCharacter(name);
         if (player == 0)
@@ -69,6 +74,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Move to player select script
     private Character FindCharacter(CharacterName name)
     {
         foreach(Character c in m_characters)
@@ -82,6 +88,7 @@ public class GameManager : MonoBehaviour
         return new Character();
     }
 
+    //Move to player slect script
     public void SelectRandomCharacters()
     {
 
