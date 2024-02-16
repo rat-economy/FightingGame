@@ -1,11 +1,8 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameState
-{
-    SINGLEPLAYER,
-    MULTIPLAYER
-}
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -13,6 +10,10 @@ public class GameManager : MonoBehaviour
 
     private PlayerManager playerManager;
     private UM_InGame uiManager;
+
+    [SerializeField] private List<Character> m_characters;
+    private Character p1_selectedCharacter;
+    private Character p2_selectedCharacter;
 
     private readonly int m_countdown = 3;
 
@@ -55,4 +56,36 @@ public class GameManager : MonoBehaviour
         playerManager.EnableInputs();
     }
 
+    public void SelectCharacter(CharacterName name, int player)
+    {
+        Character c = FindCharacter(name);
+        if (player == 0)
+        {
+            p1_selectedCharacter = c;
+        }
+        else 
+        {
+            p2_selectedCharacter = c;
+        }
+    }
+
+    private Character FindCharacter(CharacterName name)
+    {
+        foreach(Character c in m_characters)
+        {
+            if(c.name == name)
+            {
+                return c;
+            }
+        }
+        Debug.LogError("Cannot find character. Add the character to GameManager.");
+        return new Character();
+    }
+
+    public void SelectRandomCharacters()
+    {
+
+    }
+
 }
+

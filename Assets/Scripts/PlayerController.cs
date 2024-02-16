@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private PlayerAttributes my;
+    [SerializeField] private CharacterAttribute my;
 
     private bool _isJumping;
     private bool _isCrouching;
@@ -16,8 +16,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Attack Variables")]
     [SerializeField] private Transform m_attackPoint;
-    [SerializeField, Range(0f, 10f)] private float m_attackRadius;
-    [SerializeField] private LayerMask m_enemyLayer;
+    [SerializeField, Range(0f, 2f)] private float m_attackRadius;
+    [SerializeField] private int m_enemyLayer;
 
     private bool _canJump;
 
@@ -201,7 +201,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void SetEnemyLayer(LayerMask player)
+    public void SetEnemyLayer(int player)
     {
         m_enemyLayer = player;
     }

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cd71a73dc734926b6aaeb18d9d371f, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  m_Clip: {fileID: 0}
+  m_Clip: {fileID: 8300000, guid: 8678a87fa9eb94671b1fb5cf2fff7f4f, type: 3}
   m_Volume: 1
   m_Source: {fileID: 0}

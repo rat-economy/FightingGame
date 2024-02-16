@@ -1,8 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(menuName = ("Player Attributes"))]
-public class PlayerAttributes : ScriptableObject
+
+
+[CreateAssetMenu(menuName = ("Character Attribute"))]
+public class CharacterAttribute : ScriptableObject
 {
     [Header("Player Stats")]
     public float moveSpeed = 1.0f;

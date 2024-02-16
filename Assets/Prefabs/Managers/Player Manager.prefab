@@ -122,16 +122,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e91298233b6d043d0951e34731cb18ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_p1StartingPoint: {fileID: 4895362131319334401}
-  m_p1LayerMask:
+  p1_startingPoint: {fileID: 4895362131319334401}
+  p1_layerMask:
     serializedVersion: 2
-    m_Bits: 64
-  m_p1Prefab: {fileID: 5686968132878280717, guid: 8f8e5b9ac9adb4be9bf081d200bdfa54, type: 3}
-  m_p2StartingPoint: {fileID: 2124379871756840380}
-  m_p2LayerMask:
+    m_Bits: 0
+  p1_prefab: {fileID: 5686968132878280717, guid: 8f8e5b9ac9adb4be9bf081d200bdfa54, type: 3}
+  p2_startingPoint: {fileID: 2124379871756840380}
+  p2_layerMask:
     serializedVersion: 2
-    m_Bits: 128
-  m_p2Prefab: {fileID: 5686968132878280717, guid: 8f8e5b9ac9adb4be9bf081d200bdfa54, type: 3}
+    m_Bits: 0
+  p2_prefab: {fileID: 6953301460390023672, guid: 8666d43a7d01b24438342982f30c16d4, type: 3}
   m_dummyPrefab: {fileID: 5686968132878280717, guid: b367b6422dced43c79b463c980b2a698, type: 3}
 --- !u!1 &5195250982193642826
 GameObject:

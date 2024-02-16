@@ -169,7 +169,7 @@ MonoBehaviour:
   m_attackRadius: 0.32
   m_enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
 --- !u!50 &5523957576689005330
 Rigidbody2D:
   serializedVersion: 4

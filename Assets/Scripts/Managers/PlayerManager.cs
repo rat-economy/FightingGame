@@ -9,14 +9,14 @@ public class PlayerManager : MonoBehaviour
     private readonly List<PlayerController> m_playerControllers = new();
 
     [Header("Player 1")]
-    [SerializeField] private Transform m_p1StartingPoint;
-    [SerializeField] private LayerMask m_p1LayerMask;
-    [SerializeField] private GameObject m_p1Prefab;
+    [SerializeField] private Transform p1_startingPoint;
+    [SerializeField] private LayerMask p1_layerMask;
+    [SerializeField] private GameObject p1_prefab;
 
     [Header("Player 2")]
-    [SerializeField] private Transform m_p2StartingPoint;
-    [SerializeField] private LayerMask m_p2LayerMask;
-    [SerializeField] private GameObject m_p2Prefab;
+    [SerializeField] private Transform p2_startingPoint;
+    [SerializeField] private LayerMask p2_layerMask;
+    [SerializeField] private GameObject p2_prefab;
 
     [SerializeField] private GameObject m_dummyPrefab;
     
@@ -72,7 +72,7 @@ public class PlayerManager : MonoBehaviour
 
     public void InitializePlayers(GameObject p1, GameObject p2)
     {
-        
+
     }
 
     public void SpawnBothPlayers()
@@ -88,17 +88,17 @@ public class PlayerManager : MonoBehaviour
         //     return;
         // }
 
-        Instantiate(m_p1Prefab);
-        Instantiate(m_p2Prefab);
+        Instantiate(p1_prefab);
+        Instantiate(p2_prefab);
         
         //Spawn each player at their respective spawn point.
-        m_players[0].position = m_p1StartingPoint.position;
-        m_players[1].position = m_p2StartingPoint.position;
+        m_players[0].position = p1_startingPoint.position;
+        m_players[1].position = p2_startingPoint.position;
         //Label each player for collision detection
         m_players[0].gameObject.layer = LayerMask.NameToLayer("Player1");
         m_players[1].gameObject.layer = LayerMask.NameToLayer("Player2");
-        m_playerControllers[0].SetEnemyLayer(m_p2LayerMask);
-        m_playerControllers[1].SetEnemyLayer(m_p1LayerMask);
+        m_playerControllers[0].SetEnemyLayer(p2_layerMask);
+        m_playerControllers[1].SetEnemyLayer(p1_layerMask);
         DisableInputs();
         StartCoroutine(_gameManager.C_StartRound());
     }
@@ -110,11 +110,11 @@ public class PlayerManager : MonoBehaviour
             Debug.LogError("Already spawned a player!");
             return;
         }
-        Instantiate(m_p1Prefab);
-        Instantiate(m_dummyPrefab, m_p2StartingPoint.position, Quaternion.identity);
-        m_players[0].position = m_p1StartingPoint.position;
+        Instantiate(p1_prefab);
+        Instantiate(m_dummyPrefab, p2_startingPoint.position, Quaternion.identity);
+        m_players[0].position = p1_startingPoint.position;
         m_players[0].gameObject.layer = LayerMask.NameToLayer("Player1");
-        m_playerControllers[0].SetEnemyLayer(m_p2LayerMask);
+        m_playerControllers[0].SetEnemyLayer(p2_layerMask);
         m_playerControllers[0].EnableInput();
     }
 
