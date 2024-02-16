@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 5523957576689005330}
   - component: {fileID: 7722890412401559843}
   - component: {fileID: 1300372546728361985}
+  - component: {fileID: -3468927848037853086}
   m_Layer: 0
   m_Name: LightBandit
   m_TagString: Untagged
@@ -167,9 +168,7 @@ MonoBehaviour:
   c_deadzone: 0.6
   m_attackPoint: {fileID: 7900907143821953346}
   m_attackRadius: 0.32
-  m_enemyLayer:
-    serializedVersion: 2
-    m_Bits: 128
+  m_enemyLayer: 0
 --- !u!50 &5523957576689005330
 Rigidbody2D:
   serializedVersion: 4
@@ -253,3 +252,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-3468927848037853086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5686968132878280717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 915319976dbbf4a94826a1e6d12f68b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  my: {fileID: 11400000, guid: 941253a623ae941cbb28e76ab712c7e3, type: 2}
+  m_attackPoint: {fileID: 7900907143821953346}
+  m_attackRadius: 0.32
+  m_enemyLayer: 0

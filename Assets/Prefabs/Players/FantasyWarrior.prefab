@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2071379779060288603}
   - component: {fileID: 7940226610026989771}
   - component: {fileID: 4197257548232787592}
+  - component: {fileID: 7675688311923527070}
   m_Layer: 0
   m_Name: FantasyWarrior
   m_TagString: Player
@@ -136,9 +137,7 @@ MonoBehaviour:
   c_deadzone: 0.6
   m_attackPoint: {fileID: 7944021923251193040}
   m_attackRadius: 0.59
-  m_enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  m_enemyLayer: 0
 --- !u!50 &2071379779060288603
 Rigidbody2D:
   serializedVersion: 4
@@ -222,6 +221,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7675688311923527070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6953301460390023672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 915319976dbbf4a94826a1e6d12f68b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  my: {fileID: 11400000, guid: dd483eea1e11a944bb160a6f1a269e24, type: 2}
+  m_attackPoint: {fileID: 7944021923251193040}
+  m_attackRadius: 0.59
+  m_enemyLayer: 0
 --- !u!1 &7871145070957327553
 GameObject:
   m_ObjectHideFlags: 0

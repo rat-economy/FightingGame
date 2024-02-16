@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,14 +20,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Range(0f, 2f)] private float m_attackRadius;
     [SerializeField] private int m_enemyLayer;
 
-    private bool _canJump;
-
-
     private Rigidbody2D m_rigidbody;
     private Animator m_animator;
     private Vector2 m_moveDirection;
 
     private AudioManager audioManager;
+
+    //TODO TEAMPOORARY< REMOVE AFTER YOU MAKE CHARACTER STATUS
+    private PlayerCombat playerCombat;
 
     /*
         ANIMATION UPDATE & PLAYER INPUT PROCESSING
@@ -108,54 +109,7 @@ public class PlayerController : MonoBehaviour
         _isMoving = false;
     }
 
-    private void Light(InputAction.CallbackContext context)
-    {
-        audioManager.PlaySoundOnce(my.s_light);
-        m_animator.SetTrigger("LightAttack");
-
-        StartCoroutine(C_Attack(my.lightDamage, my.lightWindup, my.lightCooldown));
-    }
-
-    private void Heavy(InputAction.CallbackContext context)
-    {
-        audioManager.PlaySoundOnce(my.s_heavy);
-        Debug.Log("Heavy Attack Performed.");
-    }
-
-    private void Special(InputAction.CallbackContext context)
-    {
-        audioManager.PlaySoundOnce(my.s_special);
-        Debug.Log("Special Attack Performed.");
-    }
-
-    private void Block(InputAction.CallbackContext context)
-    {
-        audioManager.PlaySoundOnce(my.s_block);
-        Debug.Log("Block Attack Performed.");
-    }
-
-    private IEnumerator C_Attack(float damage, float windup, float cooldown)
-    {
-        m_player.Disable();
-        //Windup delay
-        yield return new WaitForSeconds(windup);
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(m_attackPoint.position, m_attackRadius, m_enemyLayer);
-        foreach(Collider2D enemy in hitEnemies)
-        {
-            //TODO: FIX CODE SO TAKING DAMAGE, ATTACKING, AND PLAYER CONTROLELR ARE SEPARATE SCRIPTS
-            if(enemy.transform.TryGetComponent<PlayerController>(out var pc))
-                enemy.transform.GetComponent<PlayerController>().RecieveDamage(damage);
-            else enemy.transform.GetComponent<DummyController>().RecieveDamage(damage);
-        }
-
-        //Cooldown delay
-        yield return new WaitForSeconds(cooldown);
-        m_player.Enable();
-
-        yield return null;
-    }
-
-    private void RecieveDamage(float damage)
+    public void RecieveDamage(float damage)
     {
         // if (m_PlayerController.isDashing) return;
         m_currentHealth -= damage;
@@ -168,7 +122,6 @@ public class PlayerController : MonoBehaviour
             m_player.Disable();
 
             //INGNORE COLLISIONS EXCEPT FOR GROUND
-            Die();
         }
         else
         {
@@ -188,11 +141,6 @@ public class PlayerController : MonoBehaviour
         m_player.Enable();
     }
 
-    private void Die()
-    {
-
-    }
-
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && _isJumping)
@@ -204,6 +152,7 @@ public class PlayerController : MonoBehaviour
     public void SetEnemyLayer(int player)
     {
         m_enemyLayer = player;
+        playerCombat.m_enemyLayer = player;
     }
 
     void OnDrawGizmos()
@@ -219,28 +168,30 @@ public class PlayerController : MonoBehaviour
     [Header("Input Variables")]
     private InputActionAsset m_inputAsset;
     private InputActionMap m_player;
-    public PlayerInput m_playerInput {get; private set;}
+    public PlayerInput PlayerInput {get; private set;}
 
     private InputAction i_move;
-    private InputAction i_light;
-    private InputAction i_heavy;
-    private InputAction i_special;
-    private InputAction i_block;
 
     private void Awake()
     {
-        DontDestroyOnLoad(this);
-
-        audioManager = AudioManager.Instance;
-
-        m_playerInput = GetComponent<PlayerInput>();
-        m_inputAsset = m_playerInput.actions;
+        PlayerInput = GetComponent<PlayerInput>();
+        m_inputAsset = PlayerInput.actions;
         m_rigidbody = GetComponent<Rigidbody2D>(); 
         m_animator = GetComponent<Animator>();
         m_player = m_inputAsset.FindActionMap("Player");
 
+        //TODO REMOVE
+        playerCombat = GetComponent<PlayerCombat>();
+
         m_currentHealth = my.maxHealth;
     }
+
+    private void Start()
+    {
+        audioManager = AudioManager.Instance;
+    
+    }
+
     private void OnEnable()
     {
         i_move = m_player.FindAction("Move");
@@ -248,20 +199,12 @@ public class PlayerController : MonoBehaviour
         i_move.performed += Move;
         i_move.canceled += StopMove;
 
-        m_player.FindAction("Light").performed += Light;
-        m_player.FindAction("Heavy").performed += Heavy;
-        m_player.FindAction("Special").performed += Special;
-        m_player.FindAction("Block").performed += Block;
         m_player.Enable();
 
     }
 
     private void OnDisable()
     {
-        m_player.FindAction("Light").performed -= Light;
-        m_player.FindAction("Heavy").performed -= Heavy;
-        m_player.FindAction("Special").performed -= Special;
-        m_player.FindAction("Block").performed -= Block;
         m_player.Disable();
     }
 }

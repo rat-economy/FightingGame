@@ -924,7 +924,7 @@ GameObject:
   m_Component:
   - component: {fileID: 307547632}
   m_Layer: 0
-  m_Name: -----------UI----------
+  m_Name: -----------UI--------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3735,19 +3735,11 @@ PrefabInstance:
     - target: {fileID: 712235116370626448, guid: d53ecf635c9fd48ad9d308cc6bebf667, type: 3}
       propertyPath: p1_prefab
       value: 
-      objectReference: {fileID: 5686968132878280717, guid: 8f8e5b9ac9adb4be9bf081d200bdfa54, type: 3}
+      objectReference: {fileID: 6953301460390023672, guid: 8666d43a7d01b24438342982f30c16d4, type: 3}
     - target: {fileID: 712235116370626448, guid: d53ecf635c9fd48ad9d308cc6bebf667, type: 3}
       propertyPath: p2_prefab
       value: 
       objectReference: {fileID: 5686968132878280717, guid: 8f8e5b9ac9adb4be9bf081d200bdfa54, type: 3}
-    - target: {fileID: 712235116370626448, guid: d53ecf635c9fd48ad9d308cc6bebf667, type: 3}
-      propertyPath: p1_layerMask.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 712235116370626448, guid: d53ecf635c9fd48ad9d308cc6bebf667, type: 3}
-      propertyPath: p2_layerMask.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
     - target: {fileID: 4095521942157107106, guid: d53ecf635c9fd48ad9d308cc6bebf667, type: 3}
       propertyPath: m_Name
       value: Player Manager
