@@ -25,8 +25,6 @@ public class PlayerManager : MonoBehaviour
     private PlayerInputManager _playerInputManager;
     private GameManager _gameManager;
 
-    public static PlayerManager Instance;
-
     private void AddPlayer(PlayerInput playerInput)
     {
         //Keeps a reference of the spawned player
@@ -89,8 +87,8 @@ public class PlayerManager : MonoBehaviour
         //     return;
         // }
 
-        Instantiate(p1_prefab);
-        Instantiate(p2_prefab);
+        Instantiate(GameManager.p1_selectedCharacter.prefab);
+        Instantiate(GameManager.p2_selectedCharacter.prefab);
         
         //Spawn each player at their respective spawn point.
         m_players[0].position = p1_startingPoint.position;
@@ -111,7 +109,7 @@ public class PlayerManager : MonoBehaviour
             Debug.LogError("Already spawned a player!");
             return;
         }
-        Instantiate(p1_prefab);
+        Instantiate(GameManager.p1_selectedCharacter.prefab);
         Instantiate(m_dummyPrefab, p2_startingPoint.position, Quaternion.identity);
         m_players[0].position = p1_startingPoint.position;
         m_players[0].gameObject.layer = LayerMask.NameToLayer("Player1");
@@ -121,19 +119,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        //SINGLETON CODE
-        DontDestroyOnLoad(this);
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
         _playerInputManager = GetComponent<PlayerInputManager>();
-        
     }
 
     private void Start()

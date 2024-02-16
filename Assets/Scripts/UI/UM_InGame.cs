@@ -28,7 +28,12 @@ public class UM_InGame : MonoBehaviour
 
     }
 
-    public IEnumerator Countdown()
+    public void StartCountdown()
+    {
+        StartCoroutine(Countdown());
+    }
+
+    private IEnumerator Countdown()
     {
         //3
         m_coundownGraphics[0].SetActive(true);
@@ -51,7 +56,7 @@ public class UM_InGame : MonoBehaviour
 
     private void Start()
     {
-        playerManager = PlayerManager.Instance;
+        //playerManager = PlayerManager.Instance;
     }
 
     private void OnEnable()

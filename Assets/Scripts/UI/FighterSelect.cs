@@ -10,7 +10,7 @@ public class FighterSelect : MonoBehaviour
         CharacterName name = (CharacterName)nameIndex;
         SelectCharacter(name, currPlayer);
 
-        GameManager.Instance.InitializeRound();
+        GameManager.Instance.StartInitializeRound(false); //Passes in false for now, so always single player. Can change later.
     }
     //Move to playerselect script
     private void SelectCharacter(CharacterName name, bool player)

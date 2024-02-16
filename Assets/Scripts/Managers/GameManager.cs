@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public static GameState state;
 
-    private PlayerManager playerManager;
     private UM_InGame uiManager;
 
     public List<Character> m_characters; //Pretty sure we could move this to FighterSelect.cs
@@ -17,6 +16,8 @@ public class GameManager : MonoBehaviour
     public static Character p2_selectedCharacter;
 
     private readonly int m_countdown = 3;
+
+    private PlayerManager playerManager;
 
     private void Awake()
     {
@@ -30,23 +31,45 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        uiManager = UM_InGame.Instance;
     }
 
     private void Start()
     {
-        playerManager = PlayerManager.Instance;
-        uiManager = UM_InGame.Instance;
+        
+    }
+
+    //I have to do this cause Unity is a terrible game engine
+    public void StartInitializeRound(bool isTwoPlayer)
+    {
+        StartCoroutine(InitializeRound(isTwoPlayer));
     }
 
     //Called in the main menu scene
-    public void InitializeRound()
+    private IEnumerator InitializeRound(bool isTwoPlayer)
     {
+        Debug.Log("Ding!");
         //Transition to ingame scene
         SceneManager.LoadScene("MainScene");
 
         //TODO: Setup loading screen
 
+        yield return new WaitForSeconds(0.2f);
+
+        Debug.Log("Dong!");
+
         //Initialize the player prefabs into player manager
+        playerManager = FindObjectOfType<PlayerManager>();
+        uiManager = UM_InGame.Instance;
+        Debug.Log(playerManager.gameObject.name);
+        if (isTwoPlayer == false)
+        {
+            playerManager.SpawnSinglePlayer();
+        }
+        else
+        {
+            playerManager.SpawnBothPlayers();
+        }
         
         //Call spawnsingleplayer() / spawnbothplayers()
 
@@ -57,7 +80,7 @@ public class GameManager : MonoBehaviour
     //Called once in game scene
     public IEnumerator C_StartRound()
     {
-        StartCoroutine(uiManager.Countdown());
+        uiManager.StartCountdown();
         yield return new WaitForSeconds(m_countdown);
         playerManager.EnableInputs();
     }
