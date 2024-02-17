@@ -12,24 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43cab630ed1ad46ca92e024d43e31ed8, type: 3}
   m_Name: PA_FantasyWarrior
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  jumpSpeed: 6
-  maxHealth: 100
-  lightDamage: 30
-  lightWindup: 1.45
-  lightCooldown: 0.55
-  heavyDamage: 20
-  heavyWindup: 0
-  heavyCooldown: 0
-  specialDamage: 40
-  specialWindup: 0
-  specialCooldown: 0
-  s_jump: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
-  s_crouch: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
-  s_moving: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
-  s_light: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
-  s_heavy: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
-  s_special: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
-  s_block: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
-  s_hurt: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
-  s_voicelines: []
+  MoveSpeed: 1
+  JumpSpeed: 7
+  MaxHealth: 100
+  LightDamage: 10
+  LightWindup: 0.4
+  LightCooldown: 0.2
+  HeavyDamage: 10
+  HeavyWindup: 0
+  HeavyCooldown: 0
+  SpecialDamage: 10
+  SpecialWindup: 0
+  SpecialCooldown: 0
+  S_Jump: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  S_Crouch: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  S_Moving: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  S_Light: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  S_Heavy: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  S_Special: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  S_Block: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  S_Hurt: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  S_Voicelines: []

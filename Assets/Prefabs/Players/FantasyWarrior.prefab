@@ -11,13 +11,12 @@ GameObject:
   - component: {fileID: 7034334359778410703}
   - component: {fileID: 3583662999224361500}
   - component: {fileID: 3007485904130403646}
-  - component: {fileID: 4191781167620169176}
   - component: {fileID: 2071379779060288603}
   - component: {fileID: 7940226610026989771}
   - component: {fileID: 4197257548232787592}
-  - component: {fileID: 7675688311923527070}
-  - component: {fileID: -8530885552684485293}
-  - component: {fileID: 1530366813813844077}
+  - component: {fileID: 8080647965637236838}
+  - component: {fileID: 6589046721288757563}
+  - component: {fileID: 9187270984927727785}
   m_Layer: 0
   m_Name: FantasyWarrior
   m_TagString: Player
@@ -123,23 +122,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &4191781167620169176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6953301460390023672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22760ec354e9e894b9fbf746541bb48c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  my: {fileID: 11400000, guid: dd483eea1e11a944bb160a6f1a269e24, type: 2}
-  c_deadzone: 0.6
-  m_attackPoint: {fileID: 7944021923251193040}
-  m_attackRadius: 0.59
-  m_enemyLayer: 0
 --- !u!50 &2071379779060288603
 Rigidbody2D:
   serializedVersion: 4
@@ -154,8 +136,8 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1.6
+  m_AngularDrag: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -223,7 +205,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7675688311923527070
+--- !u!114 &8080647965637236838
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -236,34 +218,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_attackPoint: {fileID: 7944021923251193040}
-  m_attackRadius: 0.59
+  m_attackRadius: 0.544
   m_enemyLayer: 0
---- !u!114 &-8530885552684485293
+--- !u!114 &6589046721288757563
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6953301460390023672}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2f60c6f7e83d9c4cb60cf4ffcd56d0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  c_deadzone: 0.3
---- !u!114 &1530366813813844077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6953301460390023672}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6566eb0593dfb394f98f7d1e663b050a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Attributes: {fileID: 11400000, guid: dd483eea1e11a944bb160a6f1a269e24, type: 2}
+  c_deadzone: 0.3
+--- !u!114 &9187270984927727785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6953301460390023672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99a42afc948417c49975e0fdcc7e0be3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7871145070957327553
 GameObject:
   m_ObjectHideFlags: 0

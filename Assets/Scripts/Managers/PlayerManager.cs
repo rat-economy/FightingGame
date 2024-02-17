@@ -38,15 +38,6 @@ public class PlayerManager : MonoBehaviour
         m_playerControllers.Add(playerController);
 
         //playerController.DisableInput();
-
-        // if(m_playerInputs.Count == 1)
-        // {
-        //     Debug.Log("Player 1 has connected.");
-        // } 
-        // else if(m_playerInputs.Count == 2)
-        // {
-        //     Debug.Log("Player 2 has connected.");
-        // }
     }
 
     public void DisableInputs()
@@ -65,6 +56,7 @@ public class PlayerManager : MonoBehaviour
         }
 
     }
+
     private void RemovePlayer(PlayerInput player)
     {
         Debug.Log("Player Left");
@@ -98,8 +90,8 @@ public class PlayerManager : MonoBehaviour
         //Label each player for collision detection
         m_players[0].gameObject.layer = LayerMask.NameToLayer("Player1");
         m_players[1].gameObject.layer = LayerMask.NameToLayer("Player2");
-        m_playerControllers[0].SetEnemyLayer(p2_layerMask);
-        m_playerControllers[1].SetEnemyLayer(p1_layerMask);
+        m_playerControllers[0].EnemyLayer = (p2_layerMask);
+        m_playerControllers[1].EnemyLayer = (p1_layerMask);
         DisableInputs();
         StartCoroutine(_gameManager.C_StartRound());
     }
@@ -115,7 +107,7 @@ public class PlayerManager : MonoBehaviour
         Instantiate(m_dummyPrefab, p2_startingPoint.position, Quaternion.identity);
         m_players[0].position = p1_startingPoint.position;
         m_players[0].gameObject.layer = LayerMask.NameToLayer("Player1");
-        m_playerControllers[0].SetEnemyLayer(p2_layerMask);
+        m_playerControllers[0].EnemyLayer = (p2_layerMask);
         m_playerControllers[0].EnableInput();
     }
 
