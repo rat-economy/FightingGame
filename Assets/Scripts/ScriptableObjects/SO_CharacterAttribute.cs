@@ -35,4 +35,7 @@ public class CharacterAttribute : ScriptableObject
     public Sound S_Hurt;
     public Sound S_Land;
     public List<Sound> S_Voicelines;
+
+    [Header("Controller")]
+    [Range(0f, 1f)] public float C_Deadzone = 0.8f;
 }

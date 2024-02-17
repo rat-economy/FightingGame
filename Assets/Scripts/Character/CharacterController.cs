@@ -14,8 +14,6 @@ public class CharacterController : MonoBehaviour
     [HideInInspector] public MovementAxis MovementAxis { get; private set; }
     [HideInInspector] public Vector2 MovementVect { get; private set; }
 
-    [SerializeField] protected float c_deadzone = 0.3f;
-
     private bool _isJumping;
     private bool _isCrouching;
 
@@ -114,12 +112,12 @@ public class CharacterController : MonoBehaviour
         //Check if able to crouch
         i_move.performed += ctx =>
         {
-            if (MovementVect.y < -1 * c_deadzone && !_isCrouching && !_isJumping)
+            if (MovementVect.y < -1 * Attributes.C_Deadzone && !_isCrouching && !_isJumping)
             {
                 _isCrouching = true;
                 m_characterMovement.Crouch();
             }
-            else if (MovementVect.y > -1 * c_deadzone && _isCrouching)
+            else if (MovementVect.y > -1 * Attributes.C_Deadzone && _isCrouching)
             {
                 _isCrouching = false;
                 m_characterMovement.Stand();
@@ -130,7 +128,7 @@ public class CharacterController : MonoBehaviour
         i_move.performed += ctx =>
         {
             //Check if already in the air
-            if (MovementVect.y > c_deadzone && !_isJumping && !_isCrouching)
+            if (MovementVect.y > Attributes.C_Deadzone && !_isJumping && !_isCrouching)
             {
                 _isJumping = true;
                 m_characterMovement.Jump();
