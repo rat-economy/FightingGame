@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43cab630ed1ad46ca92e024d43e31ed8, type: 3}
   m_Name: PA_LightBandit
   m_EditorClassIdentifier: 
-  moveSpeed: 3.5
-  jumpSpeed: 7.5
-  maxHealth: 100
-  lightDamage: 10
-  lightWindup: 0.4
-  lightCooldown: 0.1
-  heavyDamage: 20
-  heavyWindup: 0
+  MoveSpeed: 3
+  JumpSpeed: 7
+  MaxHealth: 100
+  LightDamage: 10
+  LightWindup: 0
+  LightCooldown: 0
+  HeavyDamage: 10
+  HeavyWindup: 0
   heavyCooldown: 0
   specialDamage: 40
   specialWindup: 0

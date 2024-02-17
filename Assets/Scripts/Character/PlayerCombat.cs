@@ -4,15 +4,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
-    [SerializeField] private CharacterAttribute my;
-    private Rigidbody2D m_rigidbody;
-    private Animator m_animator;
-    private Vector2 m_moveDirection;
+    private CharacterAttribute M;
+    private Character_Status Status;
 
-    //Booleans
-    private bool _isJumping;
-    private bool _isCrouching;
-    private bool _isMoving;
+    private Animator m_animator;
 
     //References
     private AudioManager audioManager;
@@ -39,19 +34,21 @@ public class PlayerCombat : MonoBehaviour
 
         PlayerInput = GetComponent<PlayerInput>();
         m_inputAsset = PlayerInput.actions;
-        m_rigidbody = GetComponent<Rigidbody2D>(); 
         m_animator = GetComponent<Animator>();
         m_player = m_inputAsset.FindActionMap("Player");
 
+
+        Status = GetComponent<Player_Status>();
+        M = Status.Attributes;
     }
 
 
     private void Light(InputAction.CallbackContext context)
     {
-        audioManager.PlaySoundOnce(my.s_light);
+        audioManager.PlaySoundOnce(M.s_light);
         m_animator.SetTrigger("LightAttack");
 
-        StartCoroutine(C_Attack(my.lightDamage, my.lightWindup, my.lightCooldown));
+        StartCoroutine(C_Attack(M.LightDamage, M.LightWindup, M.LightCooldown));
     }
 
 
@@ -78,19 +75,19 @@ public class PlayerCombat : MonoBehaviour
 
     private void Heavy(InputAction.CallbackContext context)
     {
-        audioManager.PlaySoundOnce(my.s_heavy);
+        audioManager.PlaySoundOnce(M.s_heavy);
         Debug.Log("Heavy Attack Performed.");
     }
 
     private void Special(InputAction.CallbackContext context)
     {
-        audioManager.PlaySoundOnce(my.s_special);
+        audioManager.PlaySoundOnce(M.s_special);
         Debug.Log("Special Attack Performed.");
     }
 
     private void Block(InputAction.CallbackContext context)
     {
-        audioManager.PlaySoundOnce(my.s_block);
+        audioManager.PlaySoundOnce(M.s_block);
         Debug.Log("Block Attack Performed.");
     }
 
@@ -114,4 +111,5 @@ public class PlayerCombat : MonoBehaviour
         m_player.FindAction("Block").performed -= Block;
         m_player.Disable();
     }
+
 }

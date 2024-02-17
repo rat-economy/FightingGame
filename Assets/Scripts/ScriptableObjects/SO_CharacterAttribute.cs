@@ -7,22 +7,22 @@ using System.Collections.Generic;
 public class CharacterAttribute : ScriptableObject
 {
     [Header("Player Stats")]
-    public float moveSpeed = 1.0f;
-    public float jumpSpeed = 7.0f;
-    public float maxHealth = 100f;
+    public float MoveSpeed = 1.0f;
+    public float JumpSpeed = 7.0f;
+    public float MaxHealth = 100f;
 
     [Header("Light Attack")]
-    public float lightDamage = 10f;
-    public float lightWindup = 0f;
-    public float lightCooldown = 0f;
+    public float LightDamage = 10f;
+    public float LightWindup = 0f;
+    public float LightCooldown = 0f;
 
     [Header("Heavy Attack")]
-    public float heavyDamage = 10f;
-    public float heavyWindup = 0f;
+    public float HeavyDamage = 10f;
+    public float HeavyWindup = 0f;
     public float heavyCooldown = 0f;
 
     [Header("Special Attack")]
-    public float specialDamage = 10f;
+    public float SpecialDamage = 10f;
     public float specialWindup = 0f;
     public float specialCooldown = 0f;
 

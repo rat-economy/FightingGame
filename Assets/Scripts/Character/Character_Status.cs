@@ -3,16 +3,16 @@ using UnityEngine.InputSystem;
 
 public class Character_Status : MonoBehaviour
 {
-    public CharacterAttribute my;
+    public CharacterAttribute Attributes;
 
-    [HideInInspector] public bool IsJumping { get; private set; }
+    [HideInInspector] public bool IsJumping { get; set; }
     [HideInInspector] public bool IsCrouching { get; set; }
-    [HideInInspector] public bool IsMoving { get; private set; }
+    [HideInInspector] public bool IsMoving { get; set; }
     [HideInInspector] public float CurrentHealth { get; private set; }
-    [HideInInspector] public int EnemyLayer;
+    [HideInInspector] public int EnemyLayer { get; set; }
+
 
     private AudioManager audioManager;
-
     private Animator m_animator;
     private Rigidbody2D m_rigidbody;
 
@@ -32,8 +32,8 @@ public class Character_Status : MonoBehaviour
         }
         else
         {
-            m_animator.SetTrigger("Hurt"); 
-            audioManager.PlaySoundOnce(my.s_hurt); 
+            m_animator.SetTrigger("Hurt");
+            audioManager.PlaySoundOnce(Attributes.s_hurt);
         }
     }
 
@@ -61,17 +61,17 @@ public class Character_Status : MonoBehaviour
     [Header("Input Variables")]
     private InputActionAsset m_inputAsset;
     private InputActionMap m_player;
-    public PlayerInput PlayerInput {get; private set;}
-    
+    public PlayerInput PlayerInput { get; private set; }
+
     private void Awake()
     {
         PlayerInput = GetComponent<PlayerInput>();
         m_inputAsset = PlayerInput.actions;
-        m_rigidbody = GetComponent<Rigidbody2D>(); 
+        m_rigidbody = GetComponent<Rigidbody2D>();
         m_animator = GetComponent<Animator>();
         m_player = m_inputAsset.FindActionMap("Player");
 
-        CurrentHealth = my.maxHealth;
+        CurrentHealth = Attributes.MaxHealth;
     }
 
     private void Start()
@@ -79,12 +79,12 @@ public class Character_Status : MonoBehaviour
         audioManager = AudioManager.Instance;
     }
 
-    private void OnEnable()
+    protected void OnEnable()
     {
         m_player.Enable();
     }
 
-    private void OnDisable()
+    protected void OnDisable()
     {
         m_player.Disable();
     }

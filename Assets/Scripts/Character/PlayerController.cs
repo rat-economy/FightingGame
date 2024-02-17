@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     {
         //Get input and update rigidbody velocity to match
         m_moveDirection = i_move.ReadValue<Vector2>();
-        m_rigidbody.velocity = new Vector2(m_moveDirection.x * my.moveSpeed, m_rigidbody.velocity.y);
+        m_rigidbody.velocity = new Vector2(m_moveDirection.x * my.MoveSpeed, m_rigidbody.velocity.y);
 
         m_animator.SetBool("isMoving", _isMoving);
         m_animator.SetBool("isJumping", _isJumping);
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
     {
         m_animator.SetTrigger("Jump");
         audioManager.PlaySoundOnce(my.s_jump);
-        m_rigidbody.velocity += new Vector2(0, my.jumpSpeed);
+        m_rigidbody.velocity += new Vector2(0, my.JumpSpeed);
     }
 
     private void Crouch() //S - Keyboard, Analog Stick Down - Controller 
@@ -183,7 +183,7 @@ public class PlayerController : MonoBehaviour
         //TODO REMOVE
         playerCombat = GetComponent<PlayerCombat>();
 
-        m_currentHealth = my.maxHealth;
+        m_currentHealth = my.MaxHealth;
     }
 
     private void Start()

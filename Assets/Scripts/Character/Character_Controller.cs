@@ -1,103 +1,104 @@
-// using UnityEngine;
-// using UnityEngine.InputSystem;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
-// public abstract class Character_Controller : MonoBehaviour
-// {
-//     private Character_Status m;
-//     private Rigidbody2D m_rigidbody;
-//     private Animator m_animator;
-//     private Vector2 m_moveDirection;
+public abstract class Character_Controller : MonoBehaviour
+{
+    [SerializeField] protected float c_deadzone = 0.3f;
 
-//     private AudioManager audioManager;
+    protected Character_Status Status;
+    protected CharacterAttribute M;
 
-//     protected abstract void Jump();
-//     protected abstract void Crouch();
-//     protected abstract void UnCrouch();
-//     protected abstract void Move();
-//     protected abstract void StopMove();
+    protected Rigidbody2D m_rigidbody;
+    protected Animator m_animator;
+    protected Vector2 m_moveDirection;
 
-//     void Update()
-//     {
-//         //Get input and update rigidbody velocity to match
-//         m_moveDirection = i_move.ReadValue<Vector2>();
-//         m_rigidbody.velocity = new Vector2(m_moveDirection.x * my.moveSpeed, m_rigidbody.velocity.y);
+    protected AudioManager audioManager;
 
-//         m_animator.SetBool("isMoving", m.IsMoving);
-//         m_animator.SetBool("isJumping", m.IsJumping);
+    protected abstract void Jump();
+    protected abstract void Crouch();
+    protected abstract void UnCrouch();
+    protected abstract void Move(InputAction.CallbackContext context);
+    protected abstract void StopMove(InputAction.CallbackContext context);
 
-//         //Flips the player
-//         if (m_rigidbody.velocity.x > 0)
-//         {
-//             transform.rotation = Quaternion.Euler(new Vector3 (0,180,0));
-//         }
-//         else if (m_rigidbody.velocity.x < 0)
-//         {
-//             transform.rotation = Quaternion.identity;
-//         }  
+    void Update()
+    {
+        //Get input and update rigidbody velocity to match
+        m_moveDirection = i_move.ReadValue<Vector2>();
+        m_rigidbody.velocity = new Vector2(m_moveDirection.x * M.MoveSpeed, m_rigidbody.velocity.y);
 
-//         //Check isJumping
-//         if (m_moveDirection.y > c_deadzone && !m.IsJumping && !m.IsCrouching)
-//         {
-//             m.IsJumping = true;
-//             Jump();
-//         }
+        m_animator.SetBool("isMoving", Status.IsMoving);
+        m_animator.SetBool("isJumping", Status.IsJumping);
 
-//         //Check isCrouching
-//         if (m_moveDirection.y < -1 * c_deadzone && !m.IsCrouching && !m.IsJumping)
-//         {
-//             m.IsCrouching = true;
-//             Crouch();
-//         }
-//         else if(m_moveDirection.y > -1 * c_deadzone && m.IsCrouching)
-//         {
-//             m.IsCrouching = false;
-//             UnCrouch();
-//         }
-//     }
+        //Flips the player
+        if (m_rigidbody.velocity.x > 0)
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+        }
+        else if (m_rigidbody.velocity.x < 0)
+        {
+            transform.rotation = Quaternion.identity;
+        }
 
-//      /*
-//         UNITY NEW INPUT SYSTEM INITIALIZATION CODE
-//     */
-//     [Header("Input Variables")]
-//     private InputActionAsset m_inputAsset;
-//     private InputActionMap m_player;
-//     public PlayerInput PlayerInput {get; private set;}
+        //Check isJumping
+        if (m_moveDirection.y > c_deadzone && !Status.IsJumping && !Status.IsCrouching)
+        {
+            Status.IsJumping = true;
+            Jump();
+        }
 
-//     private InputAction i_move;
+        //Check isCrouching
+        if (m_moveDirection.y < -1 * c_deadzone && !Status.IsCrouching && !Status.IsJumping)
+        {
+            Status.IsCrouching = true;
+            Crouch();
+        }
+        else if (m_moveDirection.y > -1 * c_deadzone && Status.IsCrouching)
+        {
+            Status.IsCrouching = false;
+            UnCrouch();
+        }
+    }
 
-//     private void Awake()
-//     {
-//         PlayerInput = GetComponent<PlayerInput>();
-//         m_inputAsset = PlayerInput.actions;
-//         m_rigidbody = GetComponent<Rigidbody2D>(); 
-//         m_animator = GetComponent<Animator>();
-//         m_player = m_inputAsset.FindActionMap("Player");
+    /*
+       UNITY NEW INPUT SYSTEM INITIALIZATION CODE
+   */
+    [Header("Input Variables")]
+    private InputActionAsset m_inputAsset;
+    private InputActionMap m_player;
+    public PlayerInput PlayerInput { get; private set; }
 
-//         //TODO REMOVE
-//         playerCombat = GetComponent<PlayerCombat>();
+    protected InputAction i_move;
 
-//         m_currentHealth = my.maxHealth;
-//     }
+    private void Awake()
+    {
+        PlayerInput = GetComponent<PlayerInput>();
+        m_inputAsset = PlayerInput.actions;
+        m_rigidbody = GetComponent<Rigidbody2D>();
+        m_animator = GetComponent<Animator>();
+        m_player = m_inputAsset.FindActionMap("Player");
 
-//     private void Start()
-//     {
-//         audioManager = AudioManager.Instance;
-    
-//     }
+        Status = GetComponent<Player_Status>();
+        M = Status.Attributes;
+    }
 
-//     private void OnEnable()
-//     {
-//         i_move = m_player.FindAction("Move");
+    private void Start()
+    {
+        audioManager = AudioManager.Instance;
+    }
 
-//         i_move.performed += Move;
-//         i_move.canceled += StopMove;
+    private void OnEnable()
+    {
+        i_move = m_player.FindAction("Move");
 
-//         m_player.Enable();
+        i_move.performed += Move;
+        i_move.canceled += StopMove;
 
-//     }
+        m_player.Enable();
 
-//     private void OnDisable()
-//     {
-//         m_player.Disable();
-//     }
-// }
+    }
+
+    private void OnDisable()
+    {
+        m_player.Disable();
+    }
+}

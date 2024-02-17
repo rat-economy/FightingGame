@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 7940226610026989771}
   - component: {fileID: 4197257548232787592}
   - component: {fileID: 7675688311923527070}
+  - component: {fileID: -8530885552684485293}
+  - component: {fileID: 1530366813813844077}
   m_Layer: 0
   m_Name: FantasyWarrior
   m_TagString: Player
@@ -233,10 +235,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 915319976dbbf4a94826a1e6d12f68b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  my: {fileID: 11400000, guid: dd483eea1e11a944bb160a6f1a269e24, type: 2}
   m_attackPoint: {fileID: 7944021923251193040}
   m_attackRadius: 0.59
   m_enemyLayer: 0
+--- !u!114 &-8530885552684485293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6953301460390023672}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f60c6f7e83d9c4cb60cf4ffcd56d0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  c_deadzone: 0.3
+--- !u!114 &1530366813813844077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6953301460390023672}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6566eb0593dfb394f98f7d1e663b050a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Attributes: {fileID: 11400000, guid: dd483eea1e11a944bb160a6f1a269e24, type: 2}
 --- !u!1 &7871145070957327553
 GameObject:
   m_ObjectHideFlags: 0
