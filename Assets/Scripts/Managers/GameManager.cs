@@ -14,10 +14,15 @@ public class GameManager : MonoBehaviour
     public List<Character> m_characters; //Pretty sure we could move this to FighterSelect.cs
     public static Character p1_selectedCharacter;
     public static Character p2_selectedCharacter;
+    public static bool isTwoPlayer;
+
+    public List<Level> m_levels;
+    public static Level selectedLevel;
 
     private readonly int m_countdown = 3;
 
     private PlayerManager playerManager;
+    private LevelManager levelManager;
 
     private void Awake()
     {
@@ -60,6 +65,7 @@ public class GameManager : MonoBehaviour
 
         //Initialize the player prefabs into player manager
         playerManager = FindObjectOfType<PlayerManager>();
+        levelManager = FindObjectOfType<LevelManager>();
         uiManager = UM_InGame.Instance;
         Debug.Log(playerManager.gameObject.name);
         if (isTwoPlayer == false)
@@ -72,6 +78,7 @@ public class GameManager : MonoBehaviour
         }
         
         //Call spawnsingleplayer() / spawnbothplayers()
+        levelManager.SetupBackground();
 
         //Remove loading screen
         StartCoroutine(C_StartRound());

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum GameState
 {
@@ -22,4 +23,18 @@ public enum CharacterName
 public struct Character {
   public GameObject prefab;
   public CharacterName name;
+}
+
+
+public enum LevelName
+{
+  Level1,
+  Level2,
+  Level3
+}
+
+[System.Serializable]
+public struct Level {
+  public Sprite levelArt;
+  public LevelName name;
 }

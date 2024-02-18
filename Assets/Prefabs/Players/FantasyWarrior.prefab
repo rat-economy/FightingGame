@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 688678417, guid: 3bc9ef9517606494aa80f424009ea241, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -136,9 +136,7 @@ MonoBehaviour:
   c_deadzone: 0.6
   m_attackPoint: {fileID: 7944021923251193040}
   m_attackRadius: 0.59
-  m_enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  m_enemyLayer: 0
 --- !u!50 &2071379779060288603
 Rigidbody2D:
   serializedVersion: 4

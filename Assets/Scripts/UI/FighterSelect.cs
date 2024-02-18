@@ -35,7 +35,10 @@ public class FighterSelect : MonoBehaviour
         }
         else
         {
-            GameManager.Instance.StartInitializeRound(isTwoPlayer); //Passes in false for now, so always single player. Can change later.
+            GameManager.isTwoPlayer = isTwoPlayer;
+            MoveToLevelSelect();
+            MainMenuManager.Instance.MoveToLevelSelect();
+            //GameManager.Instance.StartInitializeRound(isTwoPlayer); //Passes in false for now, so always single player. Can change later.
         }
     }
     //Move to playerselect script
@@ -73,6 +76,11 @@ public class FighterSelect : MonoBehaviour
 
     //Move to player slect script
     public void SelectRandomCharacters()
+    {
+
+    }
+
+    private void MoveToLevelSelect()
     {
 
     }
