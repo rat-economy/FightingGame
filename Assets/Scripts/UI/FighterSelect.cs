@@ -1,25 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class FighterSelect : MonoBehaviour
 {
+    public static FighterSelect Instance;
+
+    [SerializeField] private TextMeshProUGUI selectionText;
     [SerializeField] private GameObject selectionFrame;
     [SerializeField] private GameObject selectionButton;
 
 
-    bool isTwoPlayer = false; //To test 2 player: change to true
     bool currPlayer = false;
     int currentlySelectedFighter;
 
     Vector2[] frameLocationPerCharacter = new Vector2[] {new Vector2(-375, 125), new Vector2(-125, 125), new Vector2(125, 125), new Vector2(375, 125), new Vector2(-375, -125), new Vector2(-125, -125), new Vector2(125, -125), new Vector2(375, -125)};
 
+    void Start()
+    {
+        Instance = this;
+        ResetText();
+    }
     public void ClickFighter(int nameIndex)
     {
         currentlySelectedFighter = nameIndex;
 
-        selectionFrame.SetActive(true);
-        selectionButton.SetActive(true);
+        EnableSelectionObjs(true);
 
         selectionFrame.GetComponent<RectTransform>().anchoredPosition = frameLocationPerCharacter[nameIndex];
     }
@@ -32,30 +39,35 @@ public class FighterSelect : MonoBehaviour
         if (currPlayer == false)
         {
             currPlayer = true;
+
+            if (GameManager.isTwoPlayer == false)
+            {
+                selectionText.text = "Choose Your Opponent!";
+            }
+            else
+            {
+                selectionText.text = "Player Two\nChoose Your Fighter!";
+            }
         }
         else
         {
-            GameManager.isTwoPlayer = isTwoPlayer;
-            MoveToLevelSelect();
             MainMenuManager.Instance.MoveToLevelSelect();
-            //GameManager.Instance.StartInitializeRound(isTwoPlayer); //Passes in false for now, so always single player. Can change later.
         }
     }
     //Move to playerselect script
     private void SelectCharacter(CharacterName name, bool player)
     {
-        selectionFrame.SetActive(false);
-        selectionButton.SetActive(false);
+        EnableSelectionObjs(false);
 
         Character c = FindCharacter(name);
         if (player == false)
         {
-            Debug.Log("Assigning Player 1: " + name);
+            //Debug.Log("Assigning Player 1: " + name);
             GameManager.p1_selectedCharacter = c;
         }
         else
         {
-            Debug.Log("Assigning Player 2: " + name);
+            //Debug.Log("Assigning Player 2: " + name);
             GameManager.p2_selectedCharacter = c;
         }
     }
@@ -80,8 +92,33 @@ public class FighterSelect : MonoBehaviour
 
     }
 
-    private void MoveToLevelSelect()
+    public void ResetFighterSelect(bool exitMenu)
     {
+        currPlayer = false;
+        currentlySelectedFighter = 0;
+        EnableSelectionObjs(false);
 
+        if (exitMenu)
+        {
+            MainMenuManager.Instance.ExitFighterSelect();
+        }
+    }
+
+    private void EnableSelectionObjs(bool status)
+    {
+        selectionFrame.SetActive(status);
+        selectionButton.SetActive(status);
+    }
+
+    public void ResetText()
+    {
+        if (GameManager.isTwoPlayer)
+        {
+            selectionText.text = "Player One\nChoose Your Fighter!";
+        }
+        else
+        {
+            selectionText.text = "Choose Your Fighter!";
+        }
     }
 }

@@ -14,8 +14,7 @@ public class LevelSelect : MonoBehaviour
     {
         currentlySelectedLevel = levelIndex;
 
-        selectionFrame.SetActive(true);
-        selectionButton.SetActive(true);
+        EnableSelectionObjs(true);
 
         selectionFrame.GetComponent<RectTransform>().anchoredPosition = frameLocationPerLevel[levelIndex];
     }
@@ -25,13 +24,12 @@ public class LevelSelect : MonoBehaviour
         LevelName level = (LevelName)currentlySelectedLevel;
         SelectLevel(level);
 
-        GameManager.Instance.StartInitializeRound(GameManager.isTwoPlayer);
+        GameManager.Instance.StartInitializeRound();
     }
     //Move to playerselect script
     private void SelectLevel(LevelName level)
     {
-        selectionFrame.SetActive(false);
-        selectionButton.SetActive(false);
+        EnableSelectionObjs(false);
 
         Level l = FindLevel(level);
 
@@ -56,5 +54,18 @@ public class LevelSelect : MonoBehaviour
     public void SelectRandomLevels()
     {
 
+    }
+
+    public void ResetLevelSelect()
+    {
+        EnableSelectionObjs(false);
+        FighterSelect.Instance.ResetFighterSelect(false);
+        MainMenuManager.Instance.ExitLevelSelect();
+    }
+
+    private void EnableSelectionObjs(bool status)
+    {
+        selectionFrame.SetActive(status);
+        selectionButton.SetActive(status);
     }
 }

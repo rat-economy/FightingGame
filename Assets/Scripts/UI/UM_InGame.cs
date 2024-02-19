@@ -6,7 +6,7 @@ public class UM_InGame : MonoBehaviour
     [SerializeField] private GameObject m_pauseMenu;
     [SerializeField] private GameObject[] m_coundownGraphics;
 
-    private PlayerManager playerManager;
+    [SerializeField] private PlayerManager playerManager;
     public static UM_InGame Instance {get; private set;}
 
     public void Pause()

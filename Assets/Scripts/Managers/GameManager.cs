@@ -45,23 +45,20 @@ public class GameManager : MonoBehaviour
     }
 
     //I have to do this cause Unity is a terrible game engine
-    public void StartInitializeRound(bool isTwoPlayer)
+    public void StartInitializeRound()
     {
-        StartCoroutine(InitializeRound(isTwoPlayer));
+        StartCoroutine(InitializeRound());
     }
 
     //Called in the main menu scene
-    private IEnumerator InitializeRound(bool isTwoPlayer)
+    private IEnumerator InitializeRound()
     {
-        Debug.Log("Ding!");
         //Transition to ingame scene
         SceneManager.LoadScene("MainScene");
 
         //TODO: Setup loading screen
 
         yield return new WaitForSeconds(0.2f);
-
-        Debug.Log("Dong!");
 
         //Initialize the player prefabs into player manager
         playerManager = FindObjectOfType<PlayerManager>();

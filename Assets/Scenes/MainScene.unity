@@ -157,10 +157,10 @@ RectTransform:
   - {fileID: 977181028}
   m_Father: {fileID: 345465981}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1092, y: -32}
+  m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &45202958
 MonoBehaviour:
@@ -961,7 +961,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &345465981
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1965,10 +1965,10 @@ RectTransform:
   - {fileID: 223191630}
   m_Father: {fileID: 345465981}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 828, y: -32}
+  m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &945635812
 MonoBehaviour:
@@ -3715,6 +3715,10 @@ PrefabInstance:
       propertyPath: m_pauseMenu
       value: 
       objectReference: {fileID: 1560043669}
+    - target: {fileID: 3264222207189245359, guid: 3d4be6e4aa68d486caf07f1a0a2fc8f8, type: 3}
+      propertyPath: playerManager
+      value: 
+      objectReference: {fileID: 2084840733}
     - target: {fileID: 3264222207189245359, guid: 3d4be6e4aa68d486caf07f1a0a2fc8f8, type: 3}
       propertyPath: m_coundownGraphics.Array.data[0]
       value: 
