@@ -27,5 +27,5 @@ public abstract class CharacterMovement : MonoBehaviour
     private void Start()
     {
         audioManager = AudioManager.Instance;
-    }
+    }   
 }

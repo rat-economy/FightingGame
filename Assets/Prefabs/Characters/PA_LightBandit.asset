@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 3
   JumpSpeed: 7
-  MaxHealth: 100
+  MaxHealth: 1000
   LightDamage: 10
   LightWindup: 0.4
-  LightCooldown: 0.2
+  LightCooldown: 0.6
   HeavyDamage: 10
   HeavyWindup: 0
   HeavyCooldown: 0
@@ -32,5 +32,7 @@ MonoBehaviour:
   S_Special: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
   S_Block: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
   S_Hurt: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  S_Land: {fileID: 0}
   S_Voicelines:
   - {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  C_Deadzone: 0.8

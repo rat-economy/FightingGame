@@ -10,11 +10,6 @@ public class DummyCombat : CharacterCombat
         
     }
 
-    public override IEnumerator C_Attack(float damage, float windup, float cooldown)
-    {
-        yield return null;
-    }
-
     public override void Heavy(InputAction.CallbackContext context)
     {
 
