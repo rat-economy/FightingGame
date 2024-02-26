@@ -17,7 +17,7 @@ MonoBehaviour:
   MaxHealth: 1000
   LightDamage: 10
   LightWindup: 0.4
-  LightCooldown: 0.6
+  LightCooldown: 0.4
   HeavyDamage: 10
   HeavyWindup: 0
   HeavyCooldown: 0

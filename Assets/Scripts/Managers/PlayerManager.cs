@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Transform p1_startingPoint;
     [SerializeField] private LayerMask p1_layerMask;
     [SerializeField] private GameObject p1_prefab;
+    private Actor m_player1;
+    private Actor m_player2;
 
     [Header("Player 2")]
     [SerializeField] private Transform p2_startingPoint;
@@ -22,39 +25,84 @@ public class PlayerManager : MonoBehaviour
     
 
     //References
-    private PlayerInputManager _playerInputManager;
+    private static PlayerInputManager _playerInputManager;
     private GameManager _gameManager;
 
     public static PlayerManager Instance;
 
-    private void AddPlayer(PlayerInput playerInput)
+
+    //Player initialization sequence
+    //SetPlayerInput() -> SetPlayerPrefabs() -> SpawnPlayers()
+
+    //Called when player selects mode in Main Menu
+    public void SetOnePlayerInput(InputDevice p1Input)
     {
-        //Keeps a reference of the spawned player
-        var transform = playerInput.transform;
-        var playerController = playerInput.transform.GetComponent<PlayerController>();
+        m_player1.InputDevice = p1Input;        
+        m_player2.InputDevice = p1Input;
+    }
+    
+    public void SetTwoPlayerInput(InputDevice p1Input, InputDevice p2Input)
+    {
+        m_player1.InputDevice = p1Input;    
+        m_player2.InputDevice = p2Input;
+    }
 
-        m_players.Add(transform);
-        m_playerInputs.Add(playerInput);
-        m_playerControllers.Add(playerController);
+    //Temporary functions, replace with an input selection screen!
+    public void SetOnePlayerInputToKeyboard()
+    {
+        SetOnePlayerInput(Keyboard.current);
+    }
+    public void SetTwoPlayerInputToKeyboardAndController()
+    {
+        if(Gamepad.all[0] == null || Keyboard.current == null)
+        {
+            Debug.LogError("Controller not connected! Two players isn't possible");
+            return;
+        }
+        SetTwoPlayerInput(Keyboard.current, Gamepad.all[0]);
+    }
 
-        //playerController.DisableInput();
+    //Called when player locks in and starts the game
+    public void SetPlayerPrefabs(GameObject p1, GameObject p2)
+    {
+        m_player1.Prefab = p1;
+        m_player2.Prefab = p2;
+    }
+
+    //Temporaru Function before implementing lock in screen
+    public void SetPlayerPrefabsFromPlayerManager()
+    {
+        m_player1.Prefab = p1_prefab;
+        m_player2.Prefab = p2_prefab;
+    }
+
+    //Called during game initialization sequence
+    public void SpawnPlayers()
+    {
+        m_player1.StartingPoint = p1_startingPoint;
+        m_player1.LayerMask = p1_layerMask;
+        m_player2.StartingPoint = p2_startingPoint;
+        m_player2.LayerMask = p2_layerMask;
+        m_player1.Spawn();
+        m_player2.Spawn(); 
+        m_player1.MyTransform.gameObject.layer = LayerMask.NameToLayer("Player1");
+        m_player2.MyTransform.gameObject.layer = LayerMask.NameToLayer("Player2");
+        m_player1.PlayerController.EnemyLayer = (p2_layerMask);
+        m_player2.PlayerController.EnemyLayer = (p1_layerMask);
+        DisableInputs();
+        StartCoroutine(_gameManager.C_StartRound());
     }
 
     public void DisableInputs()
     {
-        foreach(var player in m_playerControllers)
-        {
-            player.DisableInput();
-        }
+        m_player1.PlayerController.DisableInput();
+        m_player2.PlayerController.DisableInput();
     }
 
     public void EnableInputs()
     {
-        foreach(var player in m_playerControllers)
-        {
-            player.EnableInput();
-        }
-
+        m_player1.PlayerController.EnableInput();
+        m_player2.PlayerController.EnableInput();
     }
 
     private void RemovePlayer(PlayerInput player)
@@ -62,11 +110,7 @@ public class PlayerManager : MonoBehaviour
         Debug.Log("Player Left");
     }
 
-    //Run before SPAWNING the players
-    public void InitializePlayers(GameObject p1, GameObject p2)
-    {
 
-    }
 
     public void SpawnBothPlayers()
     {
@@ -75,11 +119,6 @@ public class PlayerManager : MonoBehaviour
             Debug.LogError("Alread spawned players!");
             return;
         }
-        // if(m_playerInputs.Count < 2)    
-        // {
-        //     Debug.LogError("Must need two players to spawn!");
-        //     return;
-        // }
 
         Instantiate(p1_prefab);
         Instantiate(p2_prefab);
@@ -125,7 +164,8 @@ public class PlayerManager : MonoBehaviour
         }
 
         _playerInputManager = GetComponent<PlayerInputManager>();
-        
+        m_player1 = ScriptableObject.CreateInstance<Actor>();
+        m_player2 = ScriptableObject.CreateInstance<Actor>();
     }
 
     private void Start()
@@ -135,7 +175,7 @@ public class PlayerManager : MonoBehaviour
 
     private void OnEnable()
     {
-        _playerInputManager.onPlayerJoined += AddPlayer;
+        //_playerInputManager.onPlayerJoined += AddPlayer;
         _playerInputManager.onPlayerLeft += RemovePlayer;
 
         InputSystem.onDeviceChange +=
@@ -158,7 +198,7 @@ public class PlayerManager : MonoBehaviour
     
     private void OnDisable()
     {
-        _playerInputManager.onPlayerJoined -= AddPlayer;
+        //_playerInputManager.onPlayerJoined -= AddPlayer;
         _playerInputManager.onPlayerLeft -= RemovePlayer;
     }
 }

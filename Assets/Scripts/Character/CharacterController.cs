@@ -16,6 +16,7 @@ public class CharacterController : MonoBehaviour
 
     private bool _isJumping;
     private bool _isCrouching;
+    private bool _isBlocking;
 
     private AudioManager audioManager;
     private Animator m_animator;
@@ -23,10 +24,32 @@ public class CharacterController : MonoBehaviour
     private CharacterMovement m_characterMovement;
     private CharacterCombat m_characterCombat;
 
-    public void RecieveDamage(float damage)
+    //Returns true if stance is broken
+    //Returns false if stance is good
+    public bool RecieveDamage(float damage)
     {
-        CurrentHealth -= damage;
+        //Make a check for damage type
+        //Light - Doesn't break stance, takes minimal damage
+        //Heavy - Breaks stance, takes minimal damage 
+        //Combo Finisher - Breaks stance, takes moderate damage
+        if (_isBlocking) {
+            CurrentHealth -= 0.5f * damage;
+        }
+        else CurrentHealth -= damage;
 
+        if (CurrentHealth <= 0)
+        {
+            m_animator.SetTrigger("Death");
+            DisableInput();
+        }
+
+        if (_isBlocking)
+        {
+            return false;
+        }
+
+        //Code below is break stance code
+        
         //Cancel what the player is doing when they recieve damage
         StopAllCoroutines();
         if (CurrentHealth <= 0)
@@ -39,6 +62,7 @@ public class CharacterController : MonoBehaviour
             m_animator.SetTrigger("Hurt");
             audioManager.PlaySoundOnce(Attributes.S_Hurt);
         }
+        return true;
     }
 
     void OnCollisionEnter2D(Collision2D collision)

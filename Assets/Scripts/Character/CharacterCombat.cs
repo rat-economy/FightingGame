@@ -19,14 +19,14 @@ public abstract class CharacterCombat : MonoBehaviour
     protected Coroutine m_attackCoroutine;
 
     protected CharacterAttribute M;
-    protected PlayerController Status;
+    protected CharacterController Status;
 
     protected virtual void Awake()
     {
         m_attackBuffer.Clear();
         audioManager = AudioManager.Instance;
         m_animator = GetComponent<Animator>();
-        Status = GetComponent<PlayerController>();
+        Status = GetComponent<CharacterController>();
         M = Status.Attributes;
     }
 
@@ -47,10 +47,10 @@ public abstract class CharacterCombat : MonoBehaviour
         //Windup delay
         yield return new WaitForSeconds(windup);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(m_attackPoint.position, m_attackRadius, Status.EnemyLayer);
-        bool isHit = hitEnemies.Length != 0;
+        bool isHit = false;
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.transform.GetComponent<CharacterController>().RecieveDamage(damage);
+            isHit = enemy.transform.GetComponent<CharacterController>().RecieveDamage(damage);
         }
 
         //If hit enemy, & haven't hit combo finisher
@@ -68,7 +68,6 @@ public abstract class CharacterCombat : MonoBehaviour
             Status.EnableInput();
         }
 
-        
         string combo = "";
         foreach(AttackType t in m_attackBuffer)
         {
