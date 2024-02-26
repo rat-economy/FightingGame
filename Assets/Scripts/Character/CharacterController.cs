@@ -14,10 +14,9 @@ public class CharacterController : MonoBehaviour
     [HideInInspector] public MovementAxis MovementAxis { get; private set; }
     [HideInInspector] public Vector2 MovementVect { get; private set; }
 
-    [SerializeField] protected float c_deadzone = 0.3f;
-
     private bool _isJumping;
     private bool _isCrouching;
+    private bool _isBlocking;
 
     private AudioManager audioManager;
     private Animator m_animator;
@@ -25,10 +24,32 @@ public class CharacterController : MonoBehaviour
     private CharacterMovement m_characterMovement;
     private CharacterCombat m_characterCombat;
 
-    public void RecieveDamage(float damage)
+    //Returns true if stance is broken
+    //Returns false if stance is good
+    public bool RecieveDamage(float damage)
     {
-        CurrentHealth -= damage;
+        //Make a check for damage type
+        //Light - Doesn't break stance, takes minimal damage
+        //Heavy - Breaks stance, takes minimal damage 
+        //Combo Finisher - Breaks stance, takes moderate damage
+        if (_isBlocking) {
+            CurrentHealth -= 0.5f * damage;
+        }
+        else CurrentHealth -= damage;
 
+        if (CurrentHealth <= 0)
+        {
+            m_animator.SetTrigger("Death");
+            DisableInput();
+        }
+
+        if (_isBlocking)
+        {
+            return false;
+        }
+
+        //Code below is break stance code
+        
         //Cancel what the player is doing when they recieve damage
         StopAllCoroutines();
         if (CurrentHealth <= 0)
@@ -41,6 +62,7 @@ public class CharacterController : MonoBehaviour
             m_animator.SetTrigger("Hurt");
             audioManager.PlaySoundOnce(Attributes.S_Hurt);
         }
+        return true;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -114,12 +136,12 @@ public class CharacterController : MonoBehaviour
         //Check if able to crouch
         i_move.performed += ctx =>
         {
-            if (MovementVect.y < -1 * c_deadzone && !_isCrouching && !_isJumping)
+            if (MovementVect.y < -1 * Attributes.C_Deadzone && !_isCrouching && !_isJumping)
             {
                 _isCrouching = true;
                 m_characterMovement.Crouch();
             }
-            else if (MovementVect.y > -1 * c_deadzone && _isCrouching)
+            else if (MovementVect.y > -1 * Attributes.C_Deadzone && _isCrouching)
             {
                 _isCrouching = false;
                 m_characterMovement.Stand();
@@ -130,7 +152,7 @@ public class CharacterController : MonoBehaviour
         i_move.performed += ctx =>
         {
             //Check if already in the air
-            if (MovementVect.y > c_deadzone && !_isJumping && !_isCrouching)
+            if (MovementVect.y > Attributes.C_Deadzone && !_isJumping && !_isCrouching)
             {
                 _isJumping = true;
                 m_characterMovement.Jump();

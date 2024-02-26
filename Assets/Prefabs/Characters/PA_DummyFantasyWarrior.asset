@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43cab630ed1ad46ca92e024d43e31ed8, type: 3}
-  m_Name: PA_LightBandit
+  m_Name: PA_DummyFantasyWarrior
   m_EditorClassIdentifier: 
   MoveSpeed: 3
   JumpSpeed: 7
   MaxHealth: 100
   LightDamage: 10
-  LightWindup: 0.4
-  LightCooldown: 0.2
+  LightWindup: 0
+  LightCooldown: 0
   HeavyDamage: 10
   HeavyWindup: 0
   HeavyCooldown: 0
@@ -32,5 +32,6 @@ MonoBehaviour:
   S_Special: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
   S_Block: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
   S_Hurt: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
-  S_Voicelines:
-  - {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  S_Land: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  S_Voicelines: []
+  C_Deadzone: 0.8
