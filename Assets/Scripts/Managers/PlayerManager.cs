@@ -87,8 +87,8 @@ public class PlayerManager : MonoBehaviour
         m_player2.Spawn(); 
         m_player1.MyTransform.gameObject.layer = LayerMask.NameToLayer("Player1");
         m_player2.MyTransform.gameObject.layer = LayerMask.NameToLayer("Player2");
-        m_player1.PlayerController.EnemyLayer = (p2_layerMask);
-        m_player2.PlayerController.EnemyLayer = (p1_layerMask);
+        m_player1.PlayerController.EnemyLayer = p2_layerMask;
+        m_player2.PlayerController.EnemyLayer = p1_layerMask;
         DisableInputs();
         StartCoroutine(_gameManager.C_StartRound());
     }
@@ -109,47 +109,7 @@ public class PlayerManager : MonoBehaviour
     {
         Debug.Log("Player Left");
     }
-
-
-
-    public void SpawnBothPlayers()
-    {
-        if (m_players.Count >= 1)
-        {
-            Debug.LogError("Alread spawned players!");
-            return;
-        }
-
-        Instantiate(p1_prefab);
-        Instantiate(p2_prefab);
-        
-        //Spawn each player at their respective spawn point.
-        m_players[0].position = p1_startingPoint.position;
-        m_players[1].position = p2_startingPoint.position;
-        //Label each player for collision detection
-        m_players[0].gameObject.layer = LayerMask.NameToLayer("Player1");
-        m_players[1].gameObject.layer = LayerMask.NameToLayer("Player2");
-        m_playerControllers[0].EnemyLayer = (p2_layerMask);
-        m_playerControllers[1].EnemyLayer = (p1_layerMask);
-        DisableInputs();
-        StartCoroutine(_gameManager.C_StartRound());
-    }
-
-    public void SpawnSinglePlayer()
-    {
-        if(m_players.Count == 1)
-        {
-            Debug.LogError("Already spawned a player!");
-            return;
-        }
-        Instantiate(p1_prefab);
-        Instantiate(m_dummyPrefab, p2_startingPoint.position, Quaternion.identity);
-        m_players[0].position = p1_startingPoint.position;
-        m_players[0].gameObject.layer = LayerMask.NameToLayer("Player1");
-        m_playerControllers[0].EnemyLayer = (p2_layerMask);
-        m_playerControllers[0].EnableInput();
-    }
-
+    
     private void Awake()
     {
         //SINGLETON CODE

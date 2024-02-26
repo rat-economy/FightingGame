@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Timeline;
 
 public abstract class CharacterCombat : MonoBehaviour
 {
@@ -68,18 +67,23 @@ public abstract class CharacterCombat : MonoBehaviour
             Status.EnableInput();
         }
 
-        string combo = "";
-        foreach(AttackType t in m_attackBuffer)
-        {
-            combo += type.ToString();
-        }
-        Debug.Log(combo);
+        PrintInputBuffer();
 
         //Reset input buffer
         m_attackBuffer.Clear();
         m_attackCoroutine = null;
 
         yield return null;
+    }
+
+    private void PrintInputBuffer()
+    {
+        string combo = "";
+        foreach(AttackType t in m_attackBuffer)
+        {
+            combo += t.ToString();
+        }
+        Debug.Log(combo);
     }
 
     public void StopAttack()
