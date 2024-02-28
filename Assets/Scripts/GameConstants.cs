@@ -23,6 +23,7 @@ public enum CharacterName
 public struct Character {
   public GameObject prefab;
   public CharacterName name;
+  public Sprite charSplash;
 }
 
 
@@ -37,4 +38,9 @@ public enum LevelName
 public struct Level {
   public Sprite levelArt;
   public LevelName name;
+}
+
+public class Constants
+{
+  public static float COUNTDOWN = 4f;
 }

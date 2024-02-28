@@ -114,7 +114,8 @@ public class PlayerManager : MonoBehaviour
         m_players[0].position = p1_startingPoint.position;
         m_players[0].gameObject.layer = LayerMask.NameToLayer("Player1");
         m_playerControllers[0].SetEnemyLayer(p2_layerMask);
-        m_playerControllers[0].EnableInput();
+        DisableInputs();
+        StartCoroutine(_gameManager.C_StartRound());
     }
 
     private void Awake()

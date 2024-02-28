@@ -84,8 +84,9 @@ public class GameManager : MonoBehaviour
     //Called once in game scene
     public IEnumerator C_StartRound()
     {
-        uiManager.StartCountdown();
-        yield return new WaitForSeconds(m_countdown);
+        uiManager.SetupGameUI();
+        yield return new WaitForSeconds(Constants.COUNTDOWN);
+        Debug.Log("Enable");
         playerManager.EnableInputs();
     }
 }

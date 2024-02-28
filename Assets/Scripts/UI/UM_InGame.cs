@@ -1,10 +1,14 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UM_InGame : MonoBehaviour
 {
     [SerializeField] private GameObject m_pauseMenu;
     [SerializeField] private GameObject[] m_coundownGraphics;
+    [SerializeField] private GameObject splashScreen;
+    [SerializeField] private Image player1Image;
+    [SerializeField] private Image player2Image;
 
     [SerializeField] private PlayerManager playerManager;
     public static UM_InGame Instance {get; private set;}
@@ -25,12 +29,13 @@ public class UM_InGame : MonoBehaviour
 
     public void Quit()
     {
-
+        
     }
 
-    public void StartCountdown()
+    public void SetupGameUI()
     {
         StartCoroutine(Countdown());
+        StartCoroutine(VSText());
     }
 
     private IEnumerator Countdown()
@@ -52,6 +57,16 @@ public class UM_InGame : MonoBehaviour
         yield return new WaitForSeconds(1);
         m_coundownGraphics[3].SetActive(false);
         yield return null;
+    }
+
+    private IEnumerator VSText()
+    {
+        splashScreen.SetActive(true);
+        player1Image.sprite = GameManager.p1_selectedCharacter.charSplash;
+        player2Image.sprite = GameManager.p2_selectedCharacter.charSplash;
+
+        yield return new WaitForSeconds(Constants.COUNTDOWN);
+        splashScreen.SetActive(false);
     }
 
     private void Start()
