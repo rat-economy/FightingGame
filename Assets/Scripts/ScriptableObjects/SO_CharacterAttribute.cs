@@ -9,33 +9,20 @@ public class CharacterAttribute : ScriptableObject
     public float JumpSpeed = 7.0f;
     public float MaxHealth = 100f;
 
-    [Header("Light Attack")]
-    public float LightDamage = 10f;
-    public float LightWindup = 0f;
-    public float LightCooldown = 0f;
-
-    [Header("Heavy Attack")]
-    public float HeavyDamage = 10f;
-    public float HeavyWindup = 0f;
-    public float HeavyCooldown = 0f;
-
-    [Header("Special Attack")]
-    public float SpecialDamage = 10f;
-    public float SpecialWindup = 0f;
-    public float SpecialCooldown = 0f;
+    [Header("Attacks")]
+    public Attack Light1;
+    public Attack Light2;
+    public Attack Heavy1;
+    public Attack Heavy2;
+    public Attack[] Combos;
+    
 
     [Header("Sound Effects")]
     public Sound S_Jump;
     public Sound S_Crouch;
     public Sound S_Moving;
-    public Sound S_Light;
-    public Sound S_Heavy;
-    public Sound S_Special;
     public Sound S_Block;
     public Sound S_Hurt;
     public Sound S_Land;
     public List<Sound> S_Voicelines;
-
-    [Header("Controller")]
-    [Range(0f, 1f)] public float C_Deadzone = 0.8f;
 }
