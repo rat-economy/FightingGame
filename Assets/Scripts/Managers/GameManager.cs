@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public static GameState state;
 
     private UM_InGame uiManager;
+    private AudioManager audioManager;
 
     public List<Character> m_characters; //Pretty sure we could move this to FighterSelect.cs
     public static Character p1_selectedCharacter;
@@ -18,8 +19,6 @@ public class GameManager : MonoBehaviour
 
     public List<Level> m_levels;
     public static Level selectedLevel;
-
-    private readonly int m_countdown = 3;
 
     private PlayerManager playerManager;
     private LevelManager levelManager;
@@ -36,6 +35,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
         uiManager = UM_InGame.Instance;
     }
 
@@ -85,7 +85,15 @@ public class GameManager : MonoBehaviour
     public IEnumerator C_StartRound()
     {
         uiManager.SetupGameUI();
-        yield return new WaitForSeconds(Constants.COUNTDOWN);
+
+        if (audioManager == null)
+        {
+            audioManager = AudioManager.Instance;
+        }
+        audioManager.BeginGameStart_Announcer(p1_selectedCharacter.announcerLine, p2_selectedCharacter.announcerLine);
+
+        yield return new WaitForSeconds(Constants.SPLASH_COUNTDOWN);
+        
         Debug.Log("Enable");
         playerManager.EnableInputs();
     }

@@ -24,6 +24,7 @@ public struct Character {
   public GameObject prefab;
   public CharacterName name;
   public Sprite charSplash;
+  public Sound announcerLine;
 }
 
 
@@ -42,5 +43,9 @@ public struct Level {
 
 public class Constants
 {
-  public static float COUNTDOWN = 4f;
+  //In-Game UI Constants
+  public static float SPLASH_COUNTDOWN = 4f;
+
+  //In-Game Audio Constants
+  public static float ANNOUNCER_DELAY = 1f;
 }

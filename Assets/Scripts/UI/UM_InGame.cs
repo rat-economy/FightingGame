@@ -65,7 +65,7 @@ public class UM_InGame : MonoBehaviour
         player1Image.sprite = GameManager.p1_selectedCharacter.charSplash;
         player2Image.sprite = GameManager.p2_selectedCharacter.charSplash;
 
-        yield return new WaitForSeconds(Constants.COUNTDOWN);
+        yield return new WaitForSeconds(Constants.SPLASH_COUNTDOWN);
         splashScreen.SetActive(false);
     }
 
