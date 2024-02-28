@@ -24,4 +24,9 @@ public class DummyCombat : CharacterCombat
     {
 
     }
+
+    public override void Combo(InputType inputType)
+    {
+        throw new System.NotImplementedException();
+    }
 }

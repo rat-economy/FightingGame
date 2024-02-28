@@ -13,7 +13,8 @@ public abstract class CharacterCombat : MonoBehaviour
     [SerializeField] protected Transform m_attackPoint;
     [SerializeField, Range(0f, 2f)] protected float m_attackRadius;
 
-    protected List<AttackType> m_attackBuffer = new(new AttackType[Combat.MAX_COMBO_SIZE]);
+    protected List<InputType> m_attackBuffer = new(new InputType[Constant.MAX_COMBO_SIZE]);
+    protected int m_comboStage { get { return m_attackBuffer.Count; } }
     protected Coroutine m_inputListener;
     protected Coroutine m_attackCoroutine;
 
@@ -37,37 +38,54 @@ public abstract class CharacterCombat : MonoBehaviour
 
     public abstract void Light(InputAction.CallbackContext context);
 
-    public IEnumerator C_Attack(float damage, float windup, float cooldown, AttackType type)
+    public IEnumerator C_Attack(Attack attack)
     {
         Status.DisableInput();
-        //Add attack type to input buffer
-        m_attackBuffer.Add(type);
+
+        m_animator.SetTrigger(attack.AnimationName.ToString());
+        audioManager.PlaySoundOnce(attack.Sound);
 
         //Windup delay
-        yield return new WaitForSeconds(windup);
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(m_attackPoint.position, m_attackRadius, Status.EnemyLayer);
+        yield return new WaitForSeconds(attack.WindupTime);
+
         bool isHit = false;
-        foreach (Collider2D enemy in hitEnemies)
+
+        if(attack.AttackType == AttackType.Melee)
         {
-            isHit = enemy.transform.GetComponent<CharacterController>().RecieveDamage(damage);
+            //Melee Attack
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(m_attackPoint.position, m_attackRadius, Status.EnemyLayer);
+            
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                isHit = enemy.transform.GetComponent<CharacterController>().RecieveDamage(attack.Damage);
+            }
+        }
+        
+        //TODO: Add Projectile Attack
+        if(attack.AttackType == AttackType.Projectile)
+        {
+
+        }
+
+        if (attack.AttackType == AttackType.MeleeDash)
+        {
+            
         }
 
         //If hit enemy, & haven't hit combo finisher
         //Then listen for combos
-        if(isHit && m_attackBuffer.Count != Combat.MAX_COMBO_SIZE)
+        if(isHit && m_attackBuffer.Count < Constant.MAX_COMBO_SIZE)
         {
             Status.EnableInput();
-            yield return new WaitForSeconds(Combat.INPUT_BUFFER_LENGTH);
+            yield return new WaitForSeconds(attack.CooldownTime);
         }
         else //If you missed enemy or you hit combo finisher
         //Then reset attack buffer and play cooldown
         {
             //Cooldown delay
-            yield return new WaitForSeconds(cooldown);
+            yield return new WaitForSeconds(attack.CooldownTime);
             Status.EnableInput();
         }
-
-        PrintInputBuffer();
 
         //Reset input buffer
         m_attackBuffer.Clear();
@@ -79,7 +97,7 @@ public abstract class CharacterCombat : MonoBehaviour
     private void PrintInputBuffer()
     {
         string combo = "";
-        foreach(AttackType t in m_attackBuffer)
+        foreach(InputType t in m_attackBuffer)
         {
             combo += t.ToString();
         }
@@ -96,20 +114,11 @@ public abstract class CharacterCombat : MonoBehaviour
         m_attackCoroutine = null;
     }
 
-    private IEnumerator C_InputListener()
-    {
-        //Check if this is the last part of the combo
-        if (m_attackBuffer.Count != Combat.MAX_COMBO_SIZE ) 
-        {
-            yield return new WaitForSeconds(Combat.INPUT_BUFFER_LENGTH);
-            StopAttack();
-        }
-        yield return null;
-    }
-
     public abstract void Heavy(InputAction.CallbackContext context);
 
     public abstract void Special(InputAction.CallbackContext context);
 
     public abstract void Block(InputAction.CallbackContext context);
+
+    public abstract void Combo(InputType inputType);
 }
