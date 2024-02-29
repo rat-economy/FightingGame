@@ -3,7 +3,16 @@ guid: 43cab630ed1ad46ca92e024d43e31ed8
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - S_Jump: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  - S_Crouch: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  - S_Moving: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  - S_Light: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  - S_Heavy: {instanceID: 0}
+  - S_Special: {instanceID: 0}
+  - S_Block: {instanceID: 0}
+  - S_Hurt: {instanceID: 0}
+  - S_Land: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
