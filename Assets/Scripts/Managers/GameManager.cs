@@ -67,11 +67,15 @@ public class GameManager : MonoBehaviour
         Debug.Log(playerManager.gameObject.name);
         if (isTwoPlayer == false)
         {
-            playerManager.SpawnSinglePlayer();
+            playerManager.SetOnePlayerInputToKeyboard();
+            playerManager.SetPlayerPrefabs(p1_selectedCharacter.prefab, p2_selectedCharacter.prefab);
+            playerManager.SpawnPlayers();
         }
         else
         {
-            playerManager.SpawnBothPlayers();
+            playerManager.SetTwoPlayerInputToKeyboardAndController();
+            playerManager.SetPlayerPrefabs(p1_selectedCharacter.prefab, p2_selectedCharacter.prefab);
+            playerManager.SpawnPlayers();
         }
         
         //Call spawnsingleplayer() / spawnbothplayers()
