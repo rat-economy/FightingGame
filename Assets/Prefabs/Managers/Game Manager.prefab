@@ -47,5 +47,14 @@ MonoBehaviour:
   m_characters:
   - prefab: {fileID: 6953301460390023672, guid: 8666d43a7d01b24438342982f30c16d4, type: 3}
     name: 1
+    charSplash: {fileID: 21300000, guid: 885a950dbf068424fa8b285618732f4a, type: 3}
   - prefab: {fileID: 5686968132878280717, guid: 8f8e5b9ac9adb4be9bf081d200bdfa54, type: 3}
     name: 0
+    charSplash: {fileID: 21300000, guid: d8d0932c18379f042970da80891ae1b9, type: 3}
+  m_levels:
+  - levelArt: {fileID: 21300000, guid: 7d7dc90d19c25204dbb1068f8e39b9ce, type: 3}
+    name: 0
+  - levelArt: {fileID: 21300000, guid: 312d1199aa2593d46bdabb5623a5f89f, type: 3}
+    name: 1
+  - levelArt: {fileID: 21300000, guid: c5d38f1d5c4941d4d9e349c741526ac8, type: 3}
+    name: 2

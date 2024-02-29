@@ -2,20 +2,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public static GameState state;
 
-    private PlayerManager playerManager;
     private UM_InGame uiManager;
+    private AudioManager audioManager;
 
-    [SerializeField] private List<Character> m_characters;
-    private Character p1_selectedCharacter;
-    private Character p2_selectedCharacter;
+    public List<Character> m_characters; //Pretty sure we could move this to FighterSelect.cs
+    public static Character p1_selectedCharacter;
+    public static Character p2_selectedCharacter;
+    public static bool isTwoPlayer;
 
-    private readonly int m_countdown = 3;
+    public List<Level> m_levels;
+    public static Level selectedLevel;
+
+    private PlayerManager playerManager;
+    private LevelManager levelManager;
 
     private void Awake()
     {
@@ -29,24 +35,47 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        uiManager = UM_InGame.Instance;
     }
 
     private void Start()
     {
-        playerManager = PlayerManager.Instance;
-        uiManager = UM_InGame.Instance;
+        
+    }
+
+    //I have to do this cause Unity is a terrible game engine
+    public void StartInitializeRound()
+    {
+        StartCoroutine(InitializeRound());
     }
 
     //Called in the main menu scene
-    public void InitializeRound()
+    private IEnumerator InitializeRound()
     {
         //Transition to ingame scene
+        SceneManager.LoadScene("MainScene");
 
-        //Setup loading screen
+        //TODO: Setup loading screen
+
+        yield return new WaitForSeconds(0.2f);
 
         //Initialize the player prefabs into player manager
+        playerManager = FindObjectOfType<PlayerManager>();
+        levelManager = FindObjectOfType<LevelManager>();
+        uiManager = UM_InGame.Instance;
+        Debug.Log(playerManager.gameObject.name);
+        if (isTwoPlayer == false)
+        {
+            playerManager.SpawnSinglePlayer();
+        }
+        else
+        {
+            playerManager.SpawnBothPlayers();
+        }
         
         //Call spawnsingleplayer() / spawnbothplayers()
+        levelManager.SetupBackground();
 
         //Remove loading screen
         StartCoroutine(C_StartRound());
@@ -55,44 +84,17 @@ public class GameManager : MonoBehaviour
     //Called once in game scene
     public IEnumerator C_StartRound()
     {
-        StartCoroutine(uiManager.Countdown());
-        yield return new WaitForSeconds(m_countdown);
+        uiManager.SetupGameUI();
+
+        if (audioManager == null)
+        {
+            audioManager = AudioManager.Instance;
+        }
+        audioManager.BeginGameStart_Announcer(p1_selectedCharacter.announcerLine, p2_selectedCharacter.announcerLine);
+
+        yield return new WaitForSeconds(Constants.SPLASH_COUNTDOWN);
+        
+        Debug.Log("Enable");
         playerManager.EnableInputs();
     }
-
-    //Move to playerselect script
-    private void SelectCharacter(CharacterName name, int player)
-    {
-        Character c = FindCharacter(name);
-        if (player == 0)
-        {
-            p1_selectedCharacter = c;
-        }
-        else 
-        {
-            p2_selectedCharacter = c;
-        }
-    }
-
-    //Move to player select script
-    private Character FindCharacter(CharacterName name)
-    {
-        foreach(Character c in m_characters)
-        {
-            if(c.name == name)
-            {
-                return c;
-            }
-        }
-        Debug.LogError("Cannot find character. Add the character to GameManager.");
-        return new Character();
-    }
-
-    //Move to player slect script
-    public void SelectRandomCharacters()
-    {
-
-    }
-
 }
-

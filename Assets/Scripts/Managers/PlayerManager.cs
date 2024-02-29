@@ -112,17 +112,6 @@ public class PlayerManager : MonoBehaviour
     
     private void Awake()
     {
-        //SINGLETON CODE
-        DontDestroyOnLoad(this);
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
         _playerInputManager = GetComponent<PlayerInputManager>();
         m_player1 = ScriptableObject.CreateInstance<Actor>();
         m_player2 = ScriptableObject.CreateInstance<Actor>();

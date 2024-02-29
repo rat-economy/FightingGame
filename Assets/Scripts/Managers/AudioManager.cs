@@ -1,20 +1,23 @@
 using UnityEngine;
+using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
     public static AudioManager Instance;
+    [SerializeField] private Sound vs_Sound;
     private void Awake()
     {
-        DontDestroyOnLoad(this);
 
+        DontDestroyOnLoad(this);
+        
         if (Instance == null)
         {
             Instance = this;
         }
         else
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
 
         foreach (var sound in sounds)
@@ -66,5 +69,20 @@ public class AudioManager : MonoBehaviour
         }
         Debug.LogError("Sound Name Not Found!");
         return null;
+    }
+
+    public void BeginGameStart_Announcer(Sound p1, Sound p2)
+    {
+        StartCoroutine(GameStart_Announcer(p1, p2));
+    }
+
+    private IEnumerator GameStart_Announcer(Sound p1, Sound p2)
+    {
+        PlaySoundOnce(p1);
+        yield return new WaitForSeconds(Constants.ANNOUNCER_DELAY);
+        PlaySoundOnce(vs_Sound);
+        yield return new WaitForSeconds(Constants.ANNOUNCER_DELAY);
+        PlaySoundOnce(p2);
+        
     }
 }
