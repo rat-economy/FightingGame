@@ -48,9 +48,15 @@ MonoBehaviour:
   - prefab: {fileID: 6953301460390023672, guid: 8666d43a7d01b24438342982f30c16d4, type: 3}
     name: 1
     charSplash: {fileID: 21300000, guid: 885a950dbf068424fa8b285618732f4a, type: 3}
+    announcerLine: {fileID: 0}
   - prefab: {fileID: 5686968132878280717, guid: 8f8e5b9ac9adb4be9bf081d200bdfa54, type: 3}
     name: 0
     charSplash: {fileID: 21300000, guid: d8d0932c18379f042970da80891ae1b9, type: 3}
+    announcerLine: {fileID: 0}
+  - prefab: {fileID: 6953301460390023672, guid: 06d6399b29cd2496e84162c4ddd573e8, type: 3}
+    name: 2
+    charSplash: {fileID: -72451387396073069, guid: f4f6cc5eceacd4d1a9935b101bf388aa, type: 3}
+    announcerLine: {fileID: 0}
   m_levels:
   - levelArt: {fileID: 21300000, guid: 7d7dc90d19c25204dbb1068f8e39b9ce, type: 3}
     name: 0
