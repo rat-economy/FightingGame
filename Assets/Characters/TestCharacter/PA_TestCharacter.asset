@@ -12,20 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43cab630ed1ad46ca92e024d43e31ed8, type: 3}
   m_Name: PA_TestCharacter
   m_EditorClassIdentifier: 
-  MoveSpeed: 2.5
-  JumpSpeed: 7
+  MoveSpeed: 4
+  JumpSpeed: 5
   MaxHealth: 100
-  Light1: {fileID: 11400000, guid: 8ef55aee3ef4a4e2c9c94467b8d377bf, type: 2}
-  Light2: {fileID: 11400000, guid: 9b7e204c336b84329a50b3cf232b0770, type: 2}
-  Heavy1: {fileID: 0}
+  Light1: {fileID: 11400000, guid: 32a51f1b9783a4929a286cd9319e4128, type: 2}
+  Light2: {fileID: 11400000, guid: 9f5a584e2d98f457f9f23fc35e2f2963, type: 2}
+  Heavy1: {fileID: 11400000, guid: 41c77d948434049e29244d39bef72b3d, type: 2}
   Heavy2: {fileID: 0}
   Combos:
-  - {fileID: 11400000, guid: a27e58ba542724544ba1bb89fcf9705b, type: 2}
+  - {fileID: 11400000, guid: 1cc4fa43ac99e4b4fba248a1550d5434, type: 2}
   S_Jump: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
   S_Crouch: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
   S_Moving: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
   S_Block: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
   S_Hurt: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
-  S_Land: {fileID: 0}
+  S_Land: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
   S_Voicelines: []
-  C_Deadzone: 0.8

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: TestCharacter_Light2
   m_EditorClassIdentifier: 
   Damage: 10
-  WindupFrames: 4
-  CooldownFrames: 5
+  WindupFrames: 1
+  CooldownFrames: 7
   AttackType: 0
   InputType: 0
-  AnimationName: 0
+  AnimationName: 1
   isComboFinisher: 0
   ComboInput: 
   Sound: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
