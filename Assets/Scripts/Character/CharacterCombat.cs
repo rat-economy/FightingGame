@@ -40,7 +40,7 @@ public abstract class CharacterCombat : MonoBehaviour
 
     public IEnumerator C_Attack(Attack attack)
     {
-        Status.DisableInput();
+        Status.DisableInputInGame();
 
         m_animator.SetTrigger(attack.AnimationName.ToString());
         audioManager.PlaySoundOnce(attack.Sound);
@@ -57,7 +57,7 @@ public abstract class CharacterCombat : MonoBehaviour
             
             foreach (Collider2D enemy in hitEnemies)
             {
-                isHit = enemy.transform.GetComponent<CharacterController>().RecieveDamage(attack.Damage);
+                isHit = enemy.transform.GetComponentInParent<CharacterController>().RecieveDamage(attack.Damage);
             }
         }
         
@@ -76,7 +76,7 @@ public abstract class CharacterCombat : MonoBehaviour
         //Then listen for combos
         if(isHit && m_attackBuffer.Count < Constant.MAX_COMBO_SIZE)
         {
-            Status.EnableInput();
+            Status.EnableInputInGame();
             yield return new WaitForSeconds(attack.CooldownTime);
         }
         else //If you missed enemy or you hit combo finisher
@@ -84,7 +84,7 @@ public abstract class CharacterCombat : MonoBehaviour
         {
             //Cooldown delay
             yield return new WaitForSeconds(attack.CooldownTime);
-            Status.EnableInput();
+            Status.EnableInputInGame();
         }
 
         //Reset input buffer
@@ -115,11 +115,8 @@ public abstract class CharacterCombat : MonoBehaviour
     }
 
     public abstract void Heavy(InputAction.CallbackContext context);
-
     public abstract void Special(InputAction.CallbackContext context);
-
     public abstract void Block(InputAction.CallbackContext context);
     public abstract void Unblock(InputAction.CallbackContext context);
-
     public abstract void Combo(InputType inputType);
 }

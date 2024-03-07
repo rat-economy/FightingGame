@@ -3,7 +3,8 @@ using UnityEngine.InputSystem;
 
 public abstract class CharacterMovement : MonoBehaviour
 {
-
+    [SerializeField] protected Collider2D m_crouchCollider;
+    [SerializeField] protected Collider2D m_standCollider;
     protected Rigidbody2D m_rigidbody;
     protected Animator m_animator;
     protected Vector2 m_moveDirection;

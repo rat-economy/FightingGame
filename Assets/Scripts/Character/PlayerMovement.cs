@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerMovement : CharacterMovement
 {
@@ -29,6 +26,8 @@ public class PlayerMovement : CharacterMovement
 
     public override void Crouch() //S - Keyboard, Analog Stick Down - Controller 
     {
+        m_standCollider.enabled = false;
+        m_crouchCollider.enabled = true;
         audioManager.PlaySoundOnce(M.S_Crouch);
         transform.localScale = new Vector3(1f, 0.5f, 1f);
         transform.localPosition -= new Vector3(0f, 0.1f, 0f);
@@ -36,6 +35,8 @@ public class PlayerMovement : CharacterMovement
 
     public override void Stand()
     {
+        m_standCollider.enabled = true;
+        m_crouchCollider.enabled = false;
         transform.localScale = new Vector3(1f, 1f, 1f);
         transform.localPosition += new Vector3(0f, 0.1f, 0f);
     }
@@ -48,6 +49,8 @@ public class PlayerMovement : CharacterMovement
 
     public override void Move()
     {
+        if (Status.MovementVect.x == 0) return;
+        Status.IsMoving = true;
         m_animator.SetBool("isMoving", Status.IsMoving);
         audioManager.PlaySoundLooped(M.S_Moving);
 
@@ -64,6 +67,7 @@ public class PlayerMovement : CharacterMovement
 
     public override void StopMove()
     {
+        Status.IsMoving = false;
         m_rigidbody.velocity = new Vector2(0, m_rigidbody.velocity.y);
         m_animator.SetBool("isMoving", Status.IsMoving);
         audioManager.StopSound(M.S_Moving);

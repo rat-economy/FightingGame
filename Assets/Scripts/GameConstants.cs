@@ -3,8 +3,9 @@ using UnityEngine.UI;
 
 public enum GameState
 {
-    SINGLEPLAYER,
-    MULTIPLAYER
+    INGAME,
+    ROUNDEND,
+    MATCHEND
 }
 
 public enum CharacterName

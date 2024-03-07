@@ -5,10 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerManager : MonoBehaviour
 {
-    private readonly List<Transform> m_players = new();
-    private readonly List<PlayerInput> m_playerInputs = new();
-    private readonly List<PlayerController> m_playerControllers = new();
-
     [Header("Player 1")]
     [SerializeField] private Transform p1_startingPoint;
     [SerializeField] private LayerMask p1_layerMask;
@@ -61,6 +57,7 @@ public class PlayerManager : MonoBehaviour
         }
         SetTwoPlayerInput(Keyboard.current, Gamepad.all[0]);
     }
+    //----------------
 
     //Called when player locks in and starts the game
     public void SetPlayerPrefabs(GameObject p1, GameObject p2)
@@ -87,6 +84,14 @@ public class PlayerManager : MonoBehaviour
         m_player2.Spawn(); 
         m_player1.MyTransform.gameObject.layer = LayerMask.NameToLayer("Player1");
         m_player2.MyTransform.gameObject.layer = LayerMask.NameToLayer("Player2");
+        foreach (Transform child in m_player1.MyTransform)
+        {
+            child.gameObject.layer = LayerMask.NameToLayer("Player1");
+        }
+        foreach (Transform child in m_player2.MyTransform)
+        {
+            child.gameObject.layer = LayerMask.NameToLayer("Player2");
+        }
         m_player1.PlayerController.EnemyLayer = p2_layerMask;
         m_player2.PlayerController.EnemyLayer = p1_layerMask;
         DisableInputs();

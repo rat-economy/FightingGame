@@ -28,4 +28,3 @@ MonoBehaviour:
   S_Hurt: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
   S_Land: {fileID: 0}
   S_Voicelines: []
-  C_Deadzone: 0.8

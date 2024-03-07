@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
 
     //I have to do this cause Unity is a terrible game engine
@@ -64,7 +63,6 @@ public class GameManager : MonoBehaviour
         playerManager = FindObjectOfType<PlayerManager>();
         levelManager = FindObjectOfType<LevelManager>();
         uiManager = UM_InGame.Instance;
-        Debug.Log(playerManager.gameObject.name);
         if (isTwoPlayer == false)
         {
             playerManager.SetOnePlayerInputToKeyboard();
@@ -77,7 +75,7 @@ public class GameManager : MonoBehaviour
             playerManager.SetPlayerPrefabs(p1_selectedCharacter.prefab, p2_selectedCharacter.prefab);
             playerManager.SpawnPlayers();
         }
-        
+
         //Call spawnsingleplayer() / spawnbothplayers()
         levelManager.SetupBackground();
 
@@ -97,8 +95,14 @@ public class GameManager : MonoBehaviour
         audioManager.BeginGameStart_Announcer(p1_selectedCharacter.announcerLine, p2_selectedCharacter.announcerLine);
 
         yield return new WaitForSeconds(Constants.SPLASH_COUNTDOWN);
-        
-        Debug.Log("Enable");
+
+        state = GameState.INGAME;
         playerManager.EnableInputs();
+    }
+
+    public void OnPlayerDeath()
+    {
+        state = GameState.ROUNDEND;
+        playerManager.DisableInputs();
     }
 }
