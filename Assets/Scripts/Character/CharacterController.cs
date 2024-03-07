@@ -61,6 +61,8 @@ public class CharacterController : MonoBehaviour
     {
         DisableInputInGame();
         m_characterCombat.StopAttack();
+        m_characterCombat.ClearInputBuffer();
+        
         m_animator.SetTrigger("Hurt");
         audioManager.PlaySoundOnce(Attributes.S_Hurt);
         yield return new WaitForSeconds(Attributes.HurtTime);
