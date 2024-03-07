@@ -22,10 +22,12 @@ public class GameManager : MonoBehaviour
     private PlayerManager playerManager;
     private LevelManager levelManager;
 
+    private int playerOneWins;
+    private int playerTwoWins;
+    
+
     private void Awake()
     {
-        DontDestroyOnLoad(this);
-
         if (Instance == null)
         {
             Instance = this;
@@ -34,6 +36,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        DontDestroyOnLoad(this);
 
         uiManager = UM_InGame.Instance;
     }
@@ -100,9 +104,37 @@ public class GameManager : MonoBehaviour
         playerManager.EnableInputs();
     }
 
-    public void OnPlayerDeath()
+    public void OnPlayerDeath(bool playerOneWonRound)
     {
         state = GameState.ROUNDEND;
         playerManager.DisableInputs();
+
+        if (playerOneWonRound == true)
+        {
+            playerOneWins++;
+
+            if (playerOneWins == Constants.WINS_NEEDED)
+            {
+                Debug.Log("Player One Wins it All!");
+                return;
+            }
+        }
+        else if (playerOneWonRound == false)
+        {
+            playerTwoWins++;
+            if (playerTwoWins == Constants.WINS_NEEDED)
+            {
+                Debug.Log("Player Two Wins it All!");
+                return;
+            }
+        }
+
+        
+        
+
+        Debug.Log("P1 Wins: " + playerOneWins);
+        Debug.Log("P2 Wins: " + playerTwoWins);
+
+        StartInitializeRound();
     }
 }

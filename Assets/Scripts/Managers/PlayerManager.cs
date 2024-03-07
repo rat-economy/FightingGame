@@ -94,6 +94,7 @@ public class PlayerManager : MonoBehaviour
         }
         m_player1.PlayerController.EnemyLayer = p2_layerMask;
         m_player2.PlayerController.EnemyLayer = p1_layerMask;
+        m_player2.PlayerController.isPlayerTwo = true;
         DisableInputs();
         StartCoroutine(_gameManager.C_StartRound());
     }
@@ -118,7 +119,7 @@ public class PlayerManager : MonoBehaviour
     private void Awake()
     {
         //SINGLETON CODE
-        DontDestroyOnLoad(this);
+        
         if (Instance == null)
         {
             Instance = this;
@@ -127,6 +128,8 @@ public class PlayerManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        DontDestroyOnLoad(this);
 
         _playerInputManager = GetComponent<PlayerInputManager>();
         m_player1 = ScriptableObject.CreateInstance<Actor>();

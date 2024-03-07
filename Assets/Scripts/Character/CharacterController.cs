@@ -24,6 +24,8 @@ public class CharacterController : MonoBehaviour
     private CharacterMovement m_characterMovement;
     private CharacterCombat m_characterCombat;
 
+    [HideInInspector] public bool isPlayerTwo = false;
+
     //Returns true if stance is broken
     //Returns false if stance is good
     public bool RecieveDamage(float damage)
@@ -40,7 +42,7 @@ public class CharacterController : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             m_animator.SetTrigger("Death");
-            GameManager.Instance.OnPlayerDeath();
+            GameManager.Instance.OnPlayerDeath(isPlayerTwo);
             return true;
         }
 
@@ -120,6 +122,7 @@ public class CharacterController : MonoBehaviour
 
         m_characterCombat = GetComponent<CharacterCombat>();
         m_characterMovement = GetComponent<CharacterMovement>();
+        Debug.Log(m_characterMovement);
 
         CurrentHealth = Attributes.MaxHealth;
     }

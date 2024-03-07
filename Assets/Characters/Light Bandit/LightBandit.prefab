@@ -233,6 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Attributes: {fileID: 11400000, guid: 941253a623ae941cbb28e76ab712c7e3, type: 2}
+  isPlayerTwo: 0
 --- !u!114 &994371238335634787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +246,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a42afc948417c49975e0fdcc7e0be3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_crouchCollider: {fileID: 0}
+  m_standCollider: {fileID: 0}
+  m_animator: {fileID: 1300372546728361985}
 --- !u!114 &-5579492959825272358
 MonoBehaviour:
   m_ObjectHideFlags: 0
