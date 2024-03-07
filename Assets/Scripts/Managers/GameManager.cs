@@ -115,7 +115,6 @@ public class GameManager : MonoBehaviour
 
             if (playerOneWins == Constants.WINS_NEEDED)
             {
-                Debug.Log("Player One Wins it All!");
                 return;
             }
         }
@@ -124,17 +123,9 @@ public class GameManager : MonoBehaviour
             playerTwoWins++;
             if (playerTwoWins == Constants.WINS_NEEDED)
             {
-                Debug.Log("Player Two Wins it All!");
                 return;
             }
         }
-
-        
-        
-
-        Debug.Log("P1 Wins: " + playerOneWins);
-        Debug.Log("P2 Wins: " + playerTwoWins);
-
         StartInitializeRound();
     }
 }
