@@ -20,8 +20,13 @@ public class AudioManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(this);
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        foreach (var sound in sounds)
+        {
+            sound.m_Source = gameObject.AddComponent<AudioSource>();
+            sound.m_Source.clip = sound.m_Clip;
+            sound.m_Source.volume = sound.m_Volume;
+        }
+        // SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -37,7 +42,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySoundOnce(Sound sound)
     {
-        if(sound == null)
+        if(sound == null || sound.m_Source == null)
         {
             return;
         }
@@ -46,7 +51,7 @@ public class AudioManager : MonoBehaviour
     }
     public void PlaySoundLooped(Sound sound)
     {
-        if(sound == null)
+        if(sound == null || sound.m_Source == null)
         {
             return;
         }
@@ -56,7 +61,7 @@ public class AudioManager : MonoBehaviour
 
     public void StopSound(Sound sound)
     {
-        if(sound == null)
+        if(sound == null || sound.m_Source == null)
         {
             return;
         }

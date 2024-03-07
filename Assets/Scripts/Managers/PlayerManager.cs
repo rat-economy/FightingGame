@@ -129,7 +129,7 @@ public class PlayerManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
 
         _playerInputManager = GetComponent<PlayerInputManager>();
         m_player1 = ScriptableObject.CreateInstance<Actor>();
@@ -143,30 +143,30 @@ public class PlayerManager : MonoBehaviour
 
     private void OnEnable()
     {
-        //_playerInputManager.onPlayerJoined += AddPlayer;
-        _playerInputManager.onPlayerLeft += RemovePlayer;
+        // //_playerInputManager.onPlayerJoined += AddPlayer;
+        // _playerInputManager.onPlayerLeft += RemovePlayer;
 
-        InputSystem.onDeviceChange +=
-        (device, change) =>
-        {
-            switch (change)
-            {
-                case InputDeviceChange.Added:
-                    Debug.Log("Device added: " + device);
-                    break;
-                case InputDeviceChange.Removed:
-                    Debug.Log("Device removed: " + device);
-                    break;
-                case InputDeviceChange.ConfigurationChanged:
-                    Debug.Log("Device configuration changed: " + device);
-                    break;
-            }
-        };
+        // InputSystem.onDeviceChange +=
+        // (device, change) =>
+        // {
+        //     switch (change)
+        //     {
+        //         case InputDeviceChange.Added:
+        //             Debug.Log("Device added: " + device);
+        //             break;
+        //         case InputDeviceChange.Removed:
+        //             Debug.Log("Device removed: " + device);
+        //             break;
+        //         case InputDeviceChange.ConfigurationChanged:
+        //             Debug.Log("Device configuration changed: " + device);
+        //             break;
+        //     }
+        // };
     }
     
     private void OnDisable()
     {
-        //_playerInputManager.onPlayerJoined -= AddPlayer;
-        _playerInputManager.onPlayerLeft -= RemovePlayer;
+        // //_playerInputManager.onPlayerJoined -= AddPlayer;
+        // _playerInputManager.onPlayerLeft -= RemovePlayer;
     }
 }
