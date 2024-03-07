@@ -117,7 +117,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1.5, y: 1.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -249,6 +249,7 @@ MonoBehaviour:
   m_crouchCollider: {fileID: 0}
   m_standCollider: {fileID: 0}
   m_animator: {fileID: 1300372546728361985}
+
 --- !u!114 &-5579492959825272358
 MonoBehaviour:
   m_ObjectHideFlags: 0

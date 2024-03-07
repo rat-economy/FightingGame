@@ -12,7 +12,6 @@ public class Attack : ScriptableObject
     public float WindupTime { get { return WindupFrames * Constant.SEC_PER_FRAME; }}
     public float CooldownTime { get { return CooldownFrames * Constant.SEC_PER_FRAME; }}
 
-
     public AttackType AttackType;
     public InputType InputType;
     public AnimationName AnimationName;

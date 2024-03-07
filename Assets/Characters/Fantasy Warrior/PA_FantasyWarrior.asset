@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 2.5
   JumpSpeed: 7
-  MaxHealth: 100
+  MaxHealth: 1000
   Light1: {fileID: 11400000, guid: 8ef55aee3ef4a4e2c9c94467b8d377bf, type: 2}
   Light2: {fileID: 11400000, guid: 9b7e204c336b84329a50b3cf232b0770, type: 2}
   Heavy1: {fileID: 0}
