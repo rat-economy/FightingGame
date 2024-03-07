@@ -105,4 +105,16 @@ public class GameManager : MonoBehaviour
         state = GameState.ROUNDEND;
         playerManager.DisableInputs();
     }
+
+    public void ResolveTie()
+    {
+        if (playerManager.m_player1.PlayerController.Attributes.MaxHealth > playerManager.m_player2.PlayerController.Attributes.MaxHealth)
+        {
+            //OnPlayerDeath(true);
+        }
+        else
+        {
+            //OnPlayerDeath(false);
+        }
+    }
 }

@@ -77,4 +77,7 @@ public class Constants
 
   //In-Game Audio Constants
   public static float ANNOUNCER_DELAY = 1f;
+
+  //Round Constants
+  public static float ROUND_LENGTH = 90f;
 }
