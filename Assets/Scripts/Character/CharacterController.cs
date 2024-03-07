@@ -8,7 +8,8 @@ public class CharacterController : MonoBehaviour
 {
     public CharacterAttribute Attributes;
 
-    [HideInInspector] public bool IsMoving { get; private set; }
+    [HideInInspector] public bool IsMoving { get; set; }
+    [HideInInspector] public bool IsBlocking { get; set; }
     [HideInInspector] public float CurrentHealth { get; private set; }
     [HideInInspector] public int EnemyLayer { get; set; }
     [HideInInspector] public MovementAxis MovementAxis { get; private set; }
@@ -16,7 +17,6 @@ public class CharacterController : MonoBehaviour
 
     private bool _isJumping;
     private bool _isCrouching;
-    private bool _isBlocking;
 
     private AudioManager audioManager;
     private Animator m_animator;
@@ -32,7 +32,7 @@ public class CharacterController : MonoBehaviour
         //Light - Doesn't break stance, takes minimal damage
         //Heavy - Breaks stance, takes minimal damage 
         //Combo Finisher - Breaks stance, takes moderate damage
-        if (_isBlocking) {
+        if (IsBlocking) {
             CurrentHealth -= 0.5f * damage;
         }
         else CurrentHealth -= damage;
@@ -40,10 +40,11 @@ public class CharacterController : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             m_animator.SetTrigger("Death");
-            DisableInput();
+            GameManager.Instance.OnPlayerDeath();
+            return true;
         }
 
-        if (_isBlocking)
+        if (IsBlocking)
         {
             return false;
         }
@@ -55,7 +56,7 @@ public class CharacterController : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             m_animator.SetTrigger("Death");
-            DisableInput();
+            DisableInputInGame();
         }
         else
         {
@@ -70,6 +71,22 @@ public class CharacterController : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && _isJumping)
         {
             _isJumping = false;
+        }
+    }
+
+    public void DisableInputInGame()
+    {
+        if(GameManager.state == GameState.INGAME)
+        {
+            m_player.Disable();
+        }
+    }
+
+    public void EnableInputInGame()
+    {
+        if (GameManager.state == GameState.INGAME)
+        {
+            m_player.Enable();
         }
     }
 
@@ -126,6 +143,7 @@ public class CharacterController : MonoBehaviour
         m_player.FindAction("Heavy").performed += m_characterCombat.Heavy;
         m_player.FindAction("Special").performed += m_characterCombat.Special;
         m_player.FindAction("Block").performed += m_characterCombat.Block;
+        m_player.FindAction("Block").canceled += m_characterCombat.Unblock;
 
         //Update Movement Vector
         i_move.performed += ctx =>
@@ -136,7 +154,7 @@ public class CharacterController : MonoBehaviour
         //Check if able to crouch
         i_move.performed += ctx =>
         {
-            if (MovementVect.y < -1 * Constant.CONTROLLER_DEADZONE && !_isCrouching && !_isJumping)
+            if (MovementVect.y < -1 * Constant.CONTROLLER_DEADZONE && !_isCrouching && !_isJumping && !IsBlocking)
             {
                 _isCrouching = true;
                 m_characterMovement.Crouch();
@@ -152,7 +170,7 @@ public class CharacterController : MonoBehaviour
         i_move.performed += ctx =>
         {
             //Check if already in the air
-            if (MovementVect.y > Constant.CONTROLLER_DEADZONE && !_isJumping && !_isCrouching)
+            if (MovementVect.y > Constant.CONTROLLER_DEADZONE && !_isJumping && !_isCrouching && !IsBlocking)
             {
                 _isJumping = true;
                 m_characterMovement.Jump();
@@ -162,7 +180,6 @@ public class CharacterController : MonoBehaviour
         //TODO: Make these into arrow functions so analog stick not constnatly called
         i_move.performed += ctx =>
         {
-            IsMoving = true;
             m_characterMovement.Move();
         };
 
@@ -182,7 +199,6 @@ public class CharacterController : MonoBehaviour
 
         i_move.canceled += ctx =>
         {
-            IsMoving = false;
             m_characterMovement.StopMove();
         };
 
