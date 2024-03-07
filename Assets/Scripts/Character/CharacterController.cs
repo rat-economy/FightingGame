@@ -9,6 +9,7 @@ public class CharacterController : MonoBehaviour
     public CharacterAttribute Attributes;
 
     [HideInInspector] public bool IsMoving { get; private set; }
+    [HideInInspector] public bool IsBlocking;
     [HideInInspector] public float CurrentHealth { get; private set; }
     [HideInInspector] public int EnemyLayer { get; set; }
     [HideInInspector] public MovementAxis MovementAxis { get; private set; }
@@ -126,6 +127,7 @@ public class CharacterController : MonoBehaviour
         m_player.FindAction("Heavy").performed += m_characterCombat.Heavy;
         m_player.FindAction("Special").performed += m_characterCombat.Special;
         m_player.FindAction("Block").performed += m_characterCombat.Block;
+        m_player.FindAction("Block").canceled += m_characterCombat.Unblock;
 
         //Update Movement Vector
         i_move.performed += ctx =>

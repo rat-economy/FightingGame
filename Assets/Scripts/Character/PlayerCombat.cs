@@ -68,6 +68,11 @@ public class PlayerCombat : CharacterCombat
     public override void Block(InputAction.CallbackContext context)
     {
         audioManager.PlaySoundOnce(M.S_Block);
-        Debug.Log("Block Attack Performed.");
+        Status.IsBlocking = true;
+    }
+
+    public override void Unblock(InputAction.CallbackContext context)
+    {
+        Status.IsBlocking = false;
     }
 }

@@ -119,6 +119,7 @@ public abstract class CharacterCombat : MonoBehaviour
     public abstract void Special(InputAction.CallbackContext context);
 
     public abstract void Block(InputAction.CallbackContext context);
+    public abstract void Unblock(InputAction.CallbackContext context);
 
     public abstract void Combo(InputType inputType);
 }

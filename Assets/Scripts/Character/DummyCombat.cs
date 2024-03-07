@@ -25,6 +25,11 @@ public class DummyCombat : CharacterCombat
 
     }
 
+    public override void Unblock(InputAction.CallbackContext context)
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void Combo(InputType inputType)
     {
         throw new System.NotImplementedException();
