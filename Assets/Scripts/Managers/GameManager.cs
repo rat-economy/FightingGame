@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour
     private PlayerManager playerManager;
     private LevelManager levelManager;
 
-    private int playerOneWins;
-    private int playerTwoWins;
+    private int playerOneWins = 0;
+    private int playerTwoWins = 0;
     
 
     private void Awake()
@@ -112,9 +112,11 @@ public class GameManager : MonoBehaviour
         if (playerOneWonRound == true)
         {
             playerOneWins++;
+            Debug.Log(playerOneWins);
 
             if (playerOneWins == Constants.WINS_NEEDED)
             {
+                EndMatch(true, false);
                 return;
             }
         }
@@ -123,9 +125,15 @@ public class GameManager : MonoBehaviour
             playerTwoWins++;
             if (playerTwoWins == Constants.WINS_NEEDED)
             {
+                EndMatch(true, true);
                 return;
             }
         }
         StartInitializeRound();
+    }
+
+    private void EndMatch(bool matchEndInWin, bool playerTwoWonMatch)
+    {
+        SceneManager.LoadScene("MainMenuScene");
     }
 }
