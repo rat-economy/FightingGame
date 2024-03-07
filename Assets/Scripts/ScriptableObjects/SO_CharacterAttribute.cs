@@ -15,6 +15,10 @@ public class CharacterAttribute : ScriptableObject
     public Attack Heavy1;
     public Attack Heavy2;
     public Attack[] Combos;
+
+    [Header("Animations")]
+    public int HurtFrames = 4;
+    public float HurtTime { get { return HurtFrames * Constant.SEC_PER_FRAME; }}
     
 
     [Header("Sound Effects")]

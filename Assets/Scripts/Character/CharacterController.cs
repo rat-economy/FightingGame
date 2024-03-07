@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -50,20 +51,23 @@ public class CharacterController : MonoBehaviour
         }
 
         //Code below is break stance code
-        
+        StartCoroutine(BreakStance());
         //Cancel what the player is doing when they recieve damage
-        StopAllCoroutines();
-        if (CurrentHealth <= 0)
-        {
-            m_animator.SetTrigger("Death");
-            DisableInputInGame();
-        }
-        else
-        {
-            m_animator.SetTrigger("Hurt");
-            audioManager.PlaySoundOnce(Attributes.S_Hurt);
-        }
+       
         return true;
+    }
+
+    private IEnumerator BreakStance()
+    {
+        DisableInputInGame();
+        m_characterCombat.StopAttack();
+        m_characterCombat.ClearInputBuffer();
+        
+        m_animator.SetTrigger("Hurt");
+        audioManager.PlaySoundOnce(Attributes.S_Hurt);
+        yield return new WaitForSeconds(Attributes.HurtTime);
+        EnableInputInGame();
+        yield return null;
     }
 
     void OnCollisionEnter2D(Collision2D collision)

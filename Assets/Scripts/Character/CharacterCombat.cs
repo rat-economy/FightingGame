@@ -88,7 +88,7 @@ public abstract class CharacterCombat : MonoBehaviour
         }
 
         //Reset input buffer
-        m_attackBuffer.Clear();
+        ClearInputBuffer();
         m_attackCoroutine = null;
 
         yield return null;
@@ -112,6 +112,11 @@ public abstract class CharacterCombat : MonoBehaviour
         }
         StopCoroutine(m_attackCoroutine);
         m_attackCoroutine = null;
+    }
+
+    public void ClearInputBuffer()
+    {
+        m_attackBuffer.Clear();
     }
 
     public abstract void Heavy(InputAction.CallbackContext context);
