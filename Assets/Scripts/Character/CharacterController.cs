@@ -50,19 +50,11 @@ public class CharacterController : MonoBehaviour
         }
 
         //Code below is break stance code
-        
+
         //Cancel what the player is doing when they recieve damage
-        StopAllCoroutines();
-        if (CurrentHealth <= 0)
-        {
-            m_animator.SetTrigger("Death");
-            DisableInputInGame();
-        }
-        else
-        {
+        m_characterCombat.StopAttack();
             m_animator.SetTrigger("Hurt");
             audioManager.PlaySoundOnce(Attributes.S_Hurt);
-        }
         return true;
     }
 
