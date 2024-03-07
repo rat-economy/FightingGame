@@ -77,4 +77,7 @@ public class Constants
 
   //In-Game Audio Constants
   public static float ANNOUNCER_DELAY = 1f;
+
+  //Game Round Constants
+  public static int WINS_NEEDED = 2;
 }

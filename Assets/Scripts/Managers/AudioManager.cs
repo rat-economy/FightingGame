@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
+
 
 public class AudioManager : MonoBehaviour
 {
@@ -8,9 +10,6 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private Sound vs_Sound;
     private void Awake()
     {
-
-        DontDestroyOnLoad(this);
-        
         if (Instance == null)
         {
             Instance = this;
@@ -20,6 +19,19 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        DontDestroyOnLoad(this);
+        foreach (var sound in sounds)
+        {
+            sound.m_Source = gameObject.AddComponent<AudioSource>();
+            sound.m_Source.clip = sound.m_Clip;
+            sound.m_Source.volume = sound.m_Volume;
+        }
+        // SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("loading scene!");
         foreach (var sound in sounds)
         {
             sound.m_Source = gameObject.AddComponent<AudioSource>();
@@ -30,7 +42,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySoundOnce(Sound sound)
     {
-        if(sound == null)
+        if(sound == null || sound.m_Source == null)
         {
             return;
         }
@@ -39,7 +51,7 @@ public class AudioManager : MonoBehaviour
     }
     public void PlaySoundLooped(Sound sound)
     {
-        if(sound == null)
+        if(sound == null || sound.m_Source == null)
         {
             return;
         }
@@ -49,7 +61,7 @@ public class AudioManager : MonoBehaviour
 
     public void StopSound(Sound sound)
     {
-        if(sound == null)
+        if(sound == null || sound.m_Source == null)
         {
             return;
         }

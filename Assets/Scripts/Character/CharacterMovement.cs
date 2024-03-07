@@ -20,13 +20,16 @@ public abstract class CharacterMovement : MonoBehaviour
 
     protected virtual void Awake()
     {
+        //Debug.Log("DONG!");
         m_rigidbody = GetComponent<Rigidbody2D>();
         m_animator = GetComponent<Animator>();
+
+        audioManager = AudioManager.Instance;
 
     }
 
     private void Start()
     {
-        audioManager = AudioManager.Instance;
+        
     }   
 }

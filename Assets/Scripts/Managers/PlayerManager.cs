@@ -94,6 +94,7 @@ public class PlayerManager : MonoBehaviour
         }
         m_player1.PlayerController.EnemyLayer = p2_layerMask;
         m_player2.PlayerController.EnemyLayer = p1_layerMask;
+        m_player2.PlayerController.isPlayerTwo = true;
         DisableInputs();
         StartCoroutine(_gameManager.C_StartRound());
     }
@@ -118,7 +119,7 @@ public class PlayerManager : MonoBehaviour
     private void Awake()
     {
         //SINGLETON CODE
-        DontDestroyOnLoad(this);
+        
         if (Instance == null)
         {
             Instance = this;
@@ -127,6 +128,8 @@ public class PlayerManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        //DontDestroyOnLoad(this);
 
         _playerInputManager = GetComponent<PlayerInputManager>();
         m_player1 = ScriptableObject.CreateInstance<Actor>();
@@ -140,30 +143,30 @@ public class PlayerManager : MonoBehaviour
 
     private void OnEnable()
     {
-        //_playerInputManager.onPlayerJoined += AddPlayer;
-        _playerInputManager.onPlayerLeft += RemovePlayer;
+        // //_playerInputManager.onPlayerJoined += AddPlayer;
+        // _playerInputManager.onPlayerLeft += RemovePlayer;
 
-        InputSystem.onDeviceChange +=
-        (device, change) =>
-        {
-            switch (change)
-            {
-                case InputDeviceChange.Added:
-                    Debug.Log("Device added: " + device);
-                    break;
-                case InputDeviceChange.Removed:
-                    Debug.Log("Device removed: " + device);
-                    break;
-                case InputDeviceChange.ConfigurationChanged:
-                    Debug.Log("Device configuration changed: " + device);
-                    break;
-            }
-        };
+        // InputSystem.onDeviceChange +=
+        // (device, change) =>
+        // {
+        //     switch (change)
+        //     {
+        //         case InputDeviceChange.Added:
+        //             Debug.Log("Device added: " + device);
+        //             break;
+        //         case InputDeviceChange.Removed:
+        //             Debug.Log("Device removed: " + device);
+        //             break;
+        //         case InputDeviceChange.ConfigurationChanged:
+        //             Debug.Log("Device configuration changed: " + device);
+        //             break;
+        //     }
+        // };
     }
     
     private void OnDisable()
     {
-        //_playerInputManager.onPlayerJoined -= AddPlayer;
-        _playerInputManager.onPlayerLeft -= RemovePlayer;
+        // //_playerInputManager.onPlayerJoined -= AddPlayer;
+        // _playerInputManager.onPlayerLeft -= RemovePlayer;
     }
 }

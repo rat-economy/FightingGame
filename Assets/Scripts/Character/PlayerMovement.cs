@@ -7,6 +7,7 @@ public class PlayerMovement : CharacterMovement
 
     protected override void Awake()
     {
+        //Debug.Log("DING!");
         base.Awake();
         Status = GetComponent<PlayerController>();
         M = Status.Attributes;

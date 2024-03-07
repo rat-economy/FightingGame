@@ -25,10 +25,13 @@ public class CharacterController : MonoBehaviour
     private CharacterMovement m_characterMovement;
     private CharacterCombat m_characterCombat;
 
+    [HideInInspector] public bool isPlayerTwo = false;
+
     //Returns true if stance is broken
     //Returns false if stance is good
     public bool RecieveDamage(float damage)
     {
+        Debug.Log("HELP ME JESUS");
         //Make a check for damage type
         //Light - Doesn't break stance, takes minimal damage
         //Heavy - Breaks stance, takes minimal damage 
@@ -41,7 +44,7 @@ public class CharacterController : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             m_animator.SetTrigger("Death");
-            GameManager.Instance.OnPlayerDeath();
+            GameManager.Instance.OnPlayerDeath(isPlayerTwo);
             return true;
         }
 
@@ -116,6 +119,7 @@ public class CharacterController : MonoBehaviour
 
     private void Awake()
     {
+        m_inputAsset = null;
         PlayerInput = GetComponent<PlayerInput>();
         m_inputAsset = PlayerInput.actions;
         m_rigidbody = GetComponent<Rigidbody2D>();
@@ -133,6 +137,41 @@ public class CharacterController : MonoBehaviour
      
     }
 
+    private void OnStartMove(InputAction.CallbackContext context)
+    {
+        MovementVect = i_move.ReadValue<Vector2>();
+
+        if (MovementVect.y < -1 * Constant.CONTROLLER_DEADZONE && !_isCrouching && !_isJumping && !IsBlocking)
+        {
+            _isCrouching = true;
+            m_characterMovement.Crouch();
+        }
+        else if (MovementVect.y > -1 * Constant.CONTROLLER_DEADZONE && _isCrouching)
+        {
+            _isCrouching = false;
+            m_characterMovement.Stand();
+        }
+
+        //Check if already in the air
+        if (MovementVect.y > Constant.CONTROLLER_DEADZONE && !_isJumping && !_isCrouching && !IsBlocking)
+        {
+            _isJumping = true;
+            m_characterMovement.Jump();
+        }
+        m_characterMovement.Move();
+    }
+
+    private void OnStopMove(InputAction.CallbackContext context)
+    {
+        MovementVect = Vector2.zero;
+        if(_isCrouching && !_isJumping)
+        {
+            _isCrouching = false;
+            m_characterMovement.Stand();
+        }
+        m_characterMovement.StopMove();
+    }
+
     private void Start()
     {
         audioManager = AudioManager.Instance;
@@ -148,66 +187,11 @@ public class CharacterController : MonoBehaviour
         m_player.FindAction("Special").performed += m_characterCombat.Special;
         m_player.FindAction("Block").performed += m_characterCombat.Block;
         m_player.FindAction("Block").canceled += m_characterCombat.Unblock;
-
-        //Update Movement Vector
-        i_move.performed += ctx =>
-        { 
-            MovementVect = i_move.ReadValue<Vector2>();
-        };
-
-        //Check if able to crouch
-        i_move.performed += ctx =>
-        {
-            if (MovementVect.y < -1 * Constant.CONTROLLER_DEADZONE && !_isCrouching && !_isJumping && !IsBlocking)
-            {
-                _isCrouching = true;
-                m_characterMovement.Crouch();
-            }
-            else if (MovementVect.y > -1 * Constant.CONTROLLER_DEADZONE && _isCrouching)
-            {
-                _isCrouching = false;
-                m_characterMovement.Stand();
-            }
-        };
-
-        //Check if able to jump
-        i_move.performed += ctx =>
-        {
-            //Check if already in the air
-            if (MovementVect.y > Constant.CONTROLLER_DEADZONE && !_isJumping && !_isCrouching && !IsBlocking)
-            {
-                _isJumping = true;
-                m_characterMovement.Jump();
-            }
-        };
-
-        //TODO: Make these into arrow functions so analog stick not constnatly called
-        i_move.performed += ctx =>
-        {
-            m_characterMovement.Move();
-        };
-
-        i_move.canceled += ctx =>
-        {
-            MovementVect = Vector2.zero;
-        };
-
-        i_move.canceled += ctx =>
-        {
-            if(_isCrouching && !_isJumping)
-            {
-                _isCrouching = false;
-                m_characterMovement.Stand();
-            }
-        };
-
-        i_move.canceled += ctx =>
-        {
-            m_characterMovement.StopMove();
-        };
-
+        
+        i_move.performed += OnStartMove;
         i_move.performed += UpdateMovementAxis;
-
+        i_move.canceled += OnStopMove;
+        i_move.Enable();
         m_player.Enable();
     }
 
@@ -217,6 +201,12 @@ public class CharacterController : MonoBehaviour
         m_player.FindAction("Heavy").performed -= m_characterCombat.Heavy;
         m_player.FindAction("Special").performed -= m_characterCombat.Special;
         m_player.FindAction("Block").performed -= m_characterCombat.Block;
+        m_player.FindAction("Block").canceled -= m_characterCombat.Unblock;
+
+        i_move.performed -= OnStartMove;
+        i_move.performed -= UpdateMovementAxis;
+        i_move.canceled -= OnStopMove;
+        i_move.Disable();
         m_player.Disable();
     }
 }
