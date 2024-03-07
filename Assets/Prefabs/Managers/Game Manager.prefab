@@ -58,7 +58,7 @@ MonoBehaviour:
     charSplash: {fileID: -72451387396073069, guid: f4f6cc5eceacd4d1a9935b101bf388aa, type: 3}
     announcerLine: {fileID: 0}
   m_levels:
-  - levelArt: {fileID: 21300000, guid: 7d7dc90d19c25204dbb1068f8e39b9ce, type: 3}
+  - levelArt: {fileID: 21300000, guid: 19d55a8180489a8499044333e7118ddc, type: 3}
     name: 0
   - levelArt: {fileID: 21300000, guid: 312d1199aa2593d46bdabb5623a5f89f, type: 3}
     name: 1

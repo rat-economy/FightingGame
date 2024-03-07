@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class UM_InGame : MonoBehaviour
@@ -38,7 +39,7 @@ public class UM_InGame : MonoBehaviour
 
     public void Quit()
     {
-        
+        SceneManager.LoadScene("MainMenuScene");
     }
 
     public void SetupGameUI()
