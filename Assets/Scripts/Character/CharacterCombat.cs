@@ -111,6 +111,7 @@ public abstract class CharacterCombat : MonoBehaviour
             return;
         }
         StopCoroutine(m_attackCoroutine);
+        m_attackBuffer.Clear();
         m_attackCoroutine = null;
     }
 
