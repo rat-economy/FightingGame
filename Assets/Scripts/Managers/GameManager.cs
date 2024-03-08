@@ -132,6 +132,8 @@ public class GameManager : MonoBehaviour
 
     private void EndMatch(bool matchEndInWin, bool playerTwoWonMatch)
     {
+        playerOneWins = 0;
+        playerTwoWins = 0;
         SceneManager.LoadScene("MainMenuScene");
     }
 }

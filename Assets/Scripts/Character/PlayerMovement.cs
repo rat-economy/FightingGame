@@ -10,8 +10,7 @@ public class PlayerMovement : CharacterMovement
         //Debug.Log("DING!");
         base.Awake();
         Status = GetComponent<PlayerController>();
-        M = Status.Attributes;
-       
+        M = Status.Attributes;    
     }
 
     private void Start()
