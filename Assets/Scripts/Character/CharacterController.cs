@@ -59,6 +59,8 @@ public class CharacterController : MonoBehaviour
             CurrentHealth -= attack.Damage;
         }
 
+        Debug.Log(CurrentHealth);
+
         if (CurrentHealth <= 0)
         {
             StopAllCoroutines();

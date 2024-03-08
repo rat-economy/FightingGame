@@ -9,7 +9,11 @@ public class FighterSelect : MonoBehaviour
     public static FighterSelect Instance;
 
     [SerializeField] private TextMeshProUGUI selectionText;
-    [SerializeField] private GameObject selectionFrame;
+    
+    [SerializeField] private GameObject currSelectionFrame;
+    [SerializeField] private GameObject p1SelectionFrame;
+    [SerializeField] private GameObject p2SelectionFrame;
+
     [SerializeField] private GameObject selectionButton;
 
     [SerializeField] private Image p1SelectionImage;
@@ -22,7 +26,7 @@ public class FighterSelect : MonoBehaviour
     bool currPlayer = false;
     int currentlySelectedFighter;
 
-    Vector2[] frameLocationPerCharacter = new Vector2[] {new Vector2(-450, 225), new Vector2(-150, 225), new Vector2(150, 225), new Vector2(450, 225), new Vector2(-450, -150), new Vector2(-150, -150), new Vector2(150, -150), new Vector2(450, -150)};
+    //Vector2[] frameLocationPerCharacter = new Vector2[] {new Vector2(-450, 225), new Vector2(-150, 225), new Vector2(150, 225), new Vector2(450, 225), new Vector2(-450, -150), new Vector2(-150, -150), new Vector2(150, -150), new Vector2(450, -150)};
 
     bool[] charSplashFlipped = {true, false};
     void Start()
@@ -75,7 +79,7 @@ public class FighterSelect : MonoBehaviour
             selectionPortrait.gameObject.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 0);
         }
 
-        //selectionFrame.GetComponent<RectTransform>().anchoredPosition = frameLocationPerCharacter[nameIndex];
+        //currSelectionFrame.GetComponent<RectTransform>().anchoredPosition = frameLocationPerCharacter[nameIndex];
     }
 
     public void FighterSelectButton()
@@ -95,9 +99,14 @@ public class FighterSelect : MonoBehaviour
             {
                 selectionText.text = "Player Two\nChoose Your Fighter!";
             }
+
+            //p1SelectionFrame.SetActive(false);
+            //p2SelectionFrame.SetActive(true);
         }
         else
         {
+            //p2SelectionFrame.SetActive(false);
+            //p1SelectionFrame.SetActive(true);
             MainMenuManager.Instance.MoveToLevelSelect();
         }
     }
@@ -153,7 +162,7 @@ public class FighterSelect : MonoBehaviour
 
     private void EnableSelectionObjs(bool status)
     {
-        //selectionFrame.SetActive(status);
+        //currSelectionFrame.SetActive(status);
         selectionButton.SetActive(status);
     }
 
