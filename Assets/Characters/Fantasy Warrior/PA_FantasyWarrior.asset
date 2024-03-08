@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 2.5
   JumpSpeed: 7
-  MaxHealth: 100
+  MaxHealth: 200
   Light1: {fileID: 11400000, guid: 8ef55aee3ef4a4e2c9c94467b8d377bf, type: 2}
   Light2: {fileID: 11400000, guid: 9b7e204c336b84329a50b3cf232b0770, type: 2}
-  Heavy1: {fileID: 0}
-  Heavy2: {fileID: 0}
+  Heavy1: {fileID: 11400000, guid: e7a03336222d54173ad545274789844a, type: 2}
+  Heavy2: {fileID: 11400000, guid: 1495bfa09750545eda0978daf3b4fe3b, type: 2}
   Combos:
   - {fileID: 11400000, guid: a27e58ba542724544ba1bb89fcf9705b, type: 2}
   HurtFrames: 4
