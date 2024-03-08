@@ -11,6 +11,7 @@ public class PlayerMovement : CharacterMovement
         base.Awake();
         Status = GetComponent<PlayerController>();
         M = Status.Attributes;
+        Stand();
     }
 
     public override void Jump() //W - Keyboard, Analog Stick Up - Controller 
