@@ -12,9 +12,30 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject optionsObj;
     [SerializeField] private GameObject creditsObj;
 
+    [SerializeField] private GameObject redSpray;
+    [SerializeField] private GameObject blueSpray;
+
     void Start()
     {
         Instance = this;
+    }
+
+    public void ShowSpray(bool showRed)
+    {
+        if (showRed)
+        {
+            redSpray.SetActive(true);
+        }
+        else
+        {
+            blueSpray.SetActive(true);
+        }
+    }
+
+    public void HideSpray()
+    {
+        redSpray.SetActive(false);
+        blueSpray.SetActive(false);
     }
 
     public void EnterFighterSelect(bool twoPlayer)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class FighterSelect : MonoBehaviour
@@ -11,12 +12,19 @@ public class FighterSelect : MonoBehaviour
     [SerializeField] private GameObject selectionFrame;
     [SerializeField] private GameObject selectionButton;
 
+    [SerializeField] private Image p1SelectionImage;
+    [SerializeField] private GameObject[] p1Namecards;
+    [SerializeField] private Image p2SelectionImage;
+    [SerializeField] private GameObject[] p2Namecards;
+    
+
 
     bool currPlayer = false;
     int currentlySelectedFighter;
 
     Vector2[] frameLocationPerCharacter = new Vector2[] {new Vector2(-450, 225), new Vector2(-150, 225), new Vector2(150, 225), new Vector2(450, 225), new Vector2(-450, -150), new Vector2(-150, -150), new Vector2(150, -150), new Vector2(450, -150)};
 
+    bool[] charSplashFlipped = {true, false};
     void Start()
     {
         Instance = this;
@@ -28,7 +36,46 @@ public class FighterSelect : MonoBehaviour
 
         EnableSelectionObjs(true);
 
-        selectionFrame.GetComponent<RectTransform>().anchoredPosition = frameLocationPerCharacter[nameIndex];
+        
+
+        Image selectionPortrait;
+        
+        if (currPlayer == false)
+        {
+           selectionPortrait = p1SelectionImage; 
+           foreach (GameObject namecard in p1Namecards)
+            {
+                namecard.SetActive(false);
+            }
+           p1Namecards[nameIndex].SetActive(true);
+        }
+        else
+        {
+            selectionPortrait = p2SelectionImage;
+            foreach (GameObject namecard in p2Namecards)
+            {
+                namecard.SetActive(false);
+            }
+           p2Namecards[nameIndex].SetActive(true);
+        }
+
+        if (selectionPortrait.gameObject.activeSelf == false)
+        {
+            selectionPortrait.gameObject.SetActive(true);
+        }
+
+        selectionPortrait.sprite = FindCharacter((CharacterName)nameIndex).charSplashCrop;
+
+        if (charSplashFlipped[nameIndex])
+        {
+            selectionPortrait.gameObject.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 180, 0);
+        }
+        else
+        {
+            selectionPortrait.gameObject.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 0);
+        }
+
+        //selectionFrame.GetComponent<RectTransform>().anchoredPosition = frameLocationPerCharacter[nameIndex];
     }
 
     public void FighterSelectButton()
@@ -106,7 +153,7 @@ public class FighterSelect : MonoBehaviour
 
     private void EnableSelectionObjs(bool status)
     {
-        selectionFrame.SetActive(status);
+        //selectionFrame.SetActive(status);
         selectionButton.SetActive(status);
     }
 

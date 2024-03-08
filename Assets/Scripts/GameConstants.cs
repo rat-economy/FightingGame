@@ -53,6 +53,8 @@ public struct Character {
   public GameObject prefab;
   public CharacterName name;
   public Sprite charSplash;
+  public Sprite charSplashCrop;
+  public Sprite doodle;
   public Sound announcerLine;
 }
 

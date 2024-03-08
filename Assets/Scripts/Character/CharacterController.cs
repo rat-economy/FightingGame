@@ -31,7 +31,6 @@ public class CharacterController : MonoBehaviour
     //Returns false if stance is good
     public bool RecieveDamage(float damage)
     {
-        Debug.Log("HELP ME JESUS");
         //Make a check for damage type
         //Light - Doesn't break stance, takes minimal damage
         //Heavy - Breaks stance, takes minimal damage 

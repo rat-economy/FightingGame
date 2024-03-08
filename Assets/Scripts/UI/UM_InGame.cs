@@ -15,6 +15,8 @@ public class UM_InGame : MonoBehaviour
 
     [SerializeField] private PlayerManager playerManager;
 
+    [SerializeField] private Image player1Doodle;
+    [SerializeField] private Image player2Doodle;
     [SerializeField] private Image player1HealthBar;
     [SerializeField] private Image player2HealthBar;
     [SerializeField] private TextMeshProUGUI timerText;
@@ -39,12 +41,11 @@ public class UM_InGame : MonoBehaviour
 
     public void Quit()
     {
-        SceneManager.LoadScene("MainMenuScene");
+        GameManager.Instance.EndMatch(false, false);
     }
 
     public void SetupGameUI()
     {
-        StartCoroutine(Countdown());
         StartCoroutine(VSText());
     }
 
@@ -62,11 +63,12 @@ public class UM_InGame : MonoBehaviour
         m_coundownGraphics[2].SetActive(true);
         yield return new WaitForSeconds(1);
         //FIGHT
-        m_coundownGraphics[2].SetActive(false);
-        m_coundownGraphics[3].SetActive(true);
+        
         yield return new WaitForSeconds(1);
-        m_coundownGraphics[3].SetActive(false);
+        m_coundownGraphics[2].SetActive(false);
         yield return null;
+
+        SetupStatusUI();
     }
 
     private IEnumerator VSText()
@@ -77,7 +79,8 @@ public class UM_InGame : MonoBehaviour
 
         yield return new WaitForSeconds(Constants.SPLASH_COUNTDOWN);
         splashScreen.SetActive(false);
-        SetupStatusUI();
+        StartCoroutine(Countdown());
+        
     }
 
     public void SetupStatusUI()
@@ -85,6 +88,10 @@ public class UM_InGame : MonoBehaviour
         statusUI.SetActive(true);
         timeRemaining = Constants.ROUND_LENGTH;
         timerRunning = true;
+
+
+        player1Doodle.sprite = GameManager.p1_selectedCharacter.doodle;
+        player2Doodle.sprite = GameManager.p2_selectedCharacter.doodle;
     }
 
     public void UpdateHealthBar(float health, bool isPlayerTwo)
