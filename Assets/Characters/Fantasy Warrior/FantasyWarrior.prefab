@@ -273,7 +273,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 951bb3b77cb5f45f7b93067adee582b1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -332,7 +332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Attributes: {fileID: 11400000, guid: dd483eea1e11a944bb160a6f1a269e24, type: 2}
-  IsBlocking: 0
+  isPlayerTwo: 0
 --- !u!114 &9187270984927727785
 MonoBehaviour:
   m_ObjectHideFlags: 0

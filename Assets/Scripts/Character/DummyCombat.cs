@@ -22,7 +22,7 @@ public class DummyCombat : CharacterCombat
 
     public override void Block(InputAction.CallbackContext context)
     {
-
+        
     }
 
     public override void Unblock(InputAction.CallbackContext context)

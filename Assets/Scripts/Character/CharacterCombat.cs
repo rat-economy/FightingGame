@@ -57,7 +57,7 @@ public abstract class CharacterCombat : MonoBehaviour
             
             foreach (Collider2D enemy in hitEnemies)
             {
-                isHit = enemy.transform.GetComponentInParent<CharacterController>().RecieveDamage(attack.Damage);
+                isHit = enemy.transform.GetComponentInParent<CharacterController>().RecieveDamage(attack);
             }
         }
         

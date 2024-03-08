@@ -112,8 +112,6 @@ public class GameManager : MonoBehaviour
         if (playerOneWonRound == true)
         {
             playerOneWins++;
-            Debug.Log(playerOneWins);
-
             if (playerOneWins == Constants.WINS_NEEDED)
             {
                 EndMatch(true, false);

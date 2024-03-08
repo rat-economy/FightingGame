@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -12,12 +13,14 @@ public class CharacterController : MonoBehaviour
     [HideInInspector] public bool IsMoving { get; set; }
     [HideInInspector] public bool IsBlocking { get; set; }
     [HideInInspector] public float CurrentHealth { get; private set; }
+    [HideInInspector] public Vector3 Direction {get; set;}
     [HideInInspector] public int EnemyLayer { get; set; }
     [HideInInspector] public MovementAxis MovementAxis { get; private set; }
     [HideInInspector] public Vector2 MovementVect { get; private set; }
+    [HideInInspector] public PlayerManager PlayerManager{ get; set; }
 
-    private bool _isJumping;
-    private bool _isCrouching;
+    [HideInInspector] public bool IsJumping {get; set;}
+    [HideInInspector] public bool IsCrouching {get; set;}
 
     private AudioManager audioManager;
     private Animator m_animator;
@@ -29,40 +32,74 @@ public class CharacterController : MonoBehaviour
 
     //Returns true if stance is broken
     //Returns false if stance is good
-    public bool RecieveDamage(float damage)
+    public bool RecieveDamage(Attack attack)
     {
-        Debug.Log("HELP ME JESUS");
+        PlayerManager.SetDirection();
         //Make a check for damage type
         //Light - Doesn't break stance, takes minimal damage
         //Heavy - Breaks stance, takes minimal damage 
         //Combo Finisher - Breaks stance, takes moderate damage
-        if (IsBlocking) {
-            CurrentHealth -= 0.5f * damage;
+        if (IsBlocking)
+        {
+            if (attack.isComboFinisher)
+            {
+                CurrentHealth -= attack.Damage * Constant.COMBO_BLOCK_DAMAGE_MULTIPLIER;
+            }
+            else if (attack.InputType == InputType.L)
+            {
+                CurrentHealth -= attack.Damage * Constant.LIGHT_BLOCK_DAMAGE_MULTIPLIER;
+            }
+            else if (attack.InputType == InputType.H)
+            {
+                CurrentHealth -= attack.Damage * Constant.HEAVY_BLOCK_DAMAGE_MULTIPLIER;
+            }
         }
-        else CurrentHealth -= damage;
+        else 
+        {
+            CurrentHealth -= attack.Damage;
+        }
 
         if (CurrentHealth <= 0)
         {
+            StopAllCoroutines();
             m_animator.SetTrigger("Death");
             GameManager.Instance.OnPlayerDeath(isPlayerTwo);
             return true;
+        }
+
+        if (attack.isComboFinisher)
+        {
+            StartCoroutine(BreakStance(Constant.COMBO_KNOCKBACK_FORCE, Direction, Constant.COMBO_KNOCKBACK_DURATION));
+        }
+        else if (attack.InputType == InputType.L)
+        {
+            if(IsBlocking)
+            {
+                Knockback(Constant.LIGHT_KNOCKBACK_FORCE, Direction);
+            }
+            else
+            {
+                StartCoroutine(BreakStance(Constant.LIGHT_KNOCKBACK_FORCE, Direction, Constant.LIGHT_KNOCKBACK_DURATION));
+            }
+        }
+        else if (attack.InputType == InputType.H)
+        {
+            StartCoroutine(BreakStance(Constant.HEAVY_KNOCKBACK_FORCE, Direction, Constant.HEAVY_KNOCKBACK_DURATION));
         }
 
         if (IsBlocking)
         {
             return false;
         }
-
-        //Code below is break stance code
-        StartCoroutine(BreakStance());
-        //Cancel what the player is doing when they recieve damage
-       
         return true;
     }
 
-    private IEnumerator BreakStance()
+    private IEnumerator BreakStance(float knockbackForce, Vector3 direction, float duration)
     {
         DisableInputInGame();
+        m_characterMovement.Stand();
+        m_characterMovement.StopMove();
+        Knockback(knockbackForce, direction);
         m_characterCombat.StopAttack();
         m_characterCombat.ClearInputBuffer();
         
@@ -73,11 +110,16 @@ public class CharacterController : MonoBehaviour
         yield return null;
     }
 
+    private void Knockback(float knockbackForce, Vector3 direction)
+    {
+        m_rigidbody.AddForce(knockbackForce * direction);
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && _isJumping)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && IsJumping)
         {
-            _isJumping = false;
+            IsJumping = false;
         }
     }
 
@@ -141,21 +183,21 @@ public class CharacterController : MonoBehaviour
     {
         MovementVect = i_move.ReadValue<Vector2>();
 
-        if (MovementVect.y < -1 * Constant.CONTROLLER_DEADZONE && !_isCrouching && !_isJumping && !IsBlocking)
+        if (MovementVect.y < -1 * Constant.CONTROLLER_DEADZONE && !IsCrouching && !IsJumping && !IsBlocking)
         {
-            _isCrouching = true;
+            IsCrouching = true;
             m_characterMovement.Crouch();
         }
-        else if (MovementVect.y > -1 * Constant.CONTROLLER_DEADZONE && _isCrouching)
+        else if (MovementVect.y > -1 * Constant.CONTROLLER_DEADZONE && IsCrouching)
         {
-            _isCrouching = false;
+            IsCrouching = false;
             m_characterMovement.Stand();
         }
 
         //Check if already in the air
-        if (MovementVect.y > Constant.CONTROLLER_DEADZONE && !_isJumping && !_isCrouching && !IsBlocking)
+        if (MovementVect.y > Constant.CONTROLLER_DEADZONE && !IsJumping && !IsCrouching && !IsBlocking)
         {
-            _isJumping = true;
+            IsJumping = true;
             m_characterMovement.Jump();
         }
         m_characterMovement.Move();
@@ -164,9 +206,9 @@ public class CharacterController : MonoBehaviour
     private void OnStopMove(InputAction.CallbackContext context)
     {
         MovementVect = Vector2.zero;
-        if(_isCrouching && !_isJumping)
+        if(IsCrouching && !IsJumping)
         {
-            _isCrouching = false;
+            IsCrouching = false;
             m_characterMovement.Stand();
         }
         m_characterMovement.StopMove();
