@@ -54,7 +54,10 @@ public class CharacterController : MonoBehaviour
                 CurrentHealth -= attack.Damage * Constant.HEAVY_BLOCK_DAMAGE_MULTIPLIER;
             }
         }
-        else CurrentHealth -= damage;
+        else 
+        {
+            CurrentHealth -= attack.Damage;
+        }
 
         if (CurrentHealth <= 0)
         {
