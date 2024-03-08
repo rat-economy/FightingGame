@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
         }
         audioManager.BeginGameStart_Announcer(p1_selectedCharacter.announcerLine, p2_selectedCharacter.announcerLine);
 
-        yield return new WaitForSeconds(Constants.SPLASH_COUNTDOWN);
+        yield return new WaitForSeconds(Constants.SPLASH_COUNTDOWN + 4);
 
         state = GameState.INGAME;
         playerManager.EnableInputs();
@@ -130,10 +130,22 @@ public class GameManager : MonoBehaviour
         StartInitializeRound();
     }
 
-    private void EndMatch(bool matchEndInWin, bool playerTwoWonMatch)
+    public void EndMatch(bool matchEndInWin, bool playerTwoWonMatch)
     {
         playerOneWins = 0;
         playerTwoWins = 0;
         SceneManager.LoadScene("MainMenuScene");
+    }
+
+    public void ResolveTie()
+    {
+        if (playerManager.m_player1.PlayerController.Attributes.MaxHealth > playerManager.m_player2.PlayerController.Attributes.MaxHealth)
+        {
+            OnPlayerDeath(true);
+        }
+        else
+        {
+            OnPlayerDeath(false);
+        }
     }
 }

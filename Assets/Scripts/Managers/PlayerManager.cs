@@ -9,8 +9,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Transform p1_startingPoint;
     [SerializeField] private LayerMask p1_layerMask;
     [SerializeField] private GameObject p1_prefab;
-    private Actor m_player1;
-    private Actor m_player2;
+    [HideInInspector] public Actor m_player1;
+    [HideInInspector] public Actor m_player2;
 
     [Header("Player 2")]
     [SerializeField] private Transform p2_startingPoint;

@@ -62,6 +62,8 @@ public struct Character {
   public GameObject prefab;
   public CharacterName name;
   public Sprite charSplash;
+  public Sprite charSplashCrop;
+  public Sprite doodle;
   public Sound announcerLine;
 }
 
@@ -89,4 +91,5 @@ public class Constants
 
   //Game Round Constants
   public static int WINS_NEEDED = 2;
+  public static float ROUND_LENGTH = 90f;
 }

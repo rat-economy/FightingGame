@@ -49,4 +49,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
+  splashScreen: {fileID: 0}
+  statusUI: {fileID: 0}
+  player1Image: {fileID: 0}
+  player2Image: {fileID: 0}
+  playerManager: {fileID: 0}
+  player1Doodle: {fileID: 0}
+  player2Doodle: {fileID: 0}
+  player1HealthBar: {fileID: 0}
+  player2HealthBar: {fileID: 0}
+  timerText: {fileID: 0}
