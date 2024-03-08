@@ -143,11 +143,11 @@ public class GameManager : MonoBehaviour
     {
         if (playerManager.m_player1.PlayerController.Attributes.MaxHealth > playerManager.m_player2.PlayerController.Attributes.MaxHealth)
         {
-            //OnPlayerDeath(true);
+            OnPlayerDeath(true);
         }
         else
         {
-            //OnPlayerDeath(false);
+            OnPlayerDeath(false);
         }
     }
 }

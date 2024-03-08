@@ -77,6 +77,7 @@ public class UM_InGame : MonoBehaviour
 
         yield return new WaitForSeconds(Constants.SPLASH_COUNTDOWN);
         splashScreen.SetActive(false);
+        SetupStatusUI();
     }
 
     public void SetupStatusUI()
