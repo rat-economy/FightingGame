@@ -10,7 +10,11 @@ public class PlayerMovement : CharacterMovement
         //Debug.Log("DING!");
         base.Awake();
         Status = GetComponent<PlayerController>();
-        M = Status.Attributes;
+        M = Status.Attributes;    
+    }
+
+    private void Start()
+    {
         Stand();
     }
 
@@ -28,30 +32,31 @@ public class PlayerMovement : CharacterMovement
 
     public override void Crouch() //S - Keyboard, Analog Stick Down - Controller 
     {
+        if (Status.IsJumping || Status.IsMoving || Status.IsBlocking) return;
+        Status.IsCrouching = true;
+        m_animator.SetBool("isCrouching", Status.IsCrouching);
         m_standCollider.enabled = false;
         m_crouchCollider.enabled = true;
         audioManager.PlaySoundOnce(M.S_Crouch);
-        transform.localScale = new Vector3(1f, 0.5f, 1f);
-        transform.localPosition -= new Vector3(0f, 0.1f, 0f);
     }
 
     public override void Stand()
     {
+        Status.IsCrouching = false;
+        m_animator.SetBool("isCrouching", Status.IsCrouching);
         m_standCollider.enabled = true;
         m_crouchCollider.enabled = false;
-        transform.localScale = new Vector3(1f, 1f, 1f);
-        transform.localPosition += new Vector3(0f, 0.1f, 0f);
     }
 
     //TODO: FIND A WAY TO MOVE THIS INTO Move()
     private void Update()
     {
-        m_rigidbody.velocity = new Vector2(Status.MovementVect.x * M.MoveSpeed, m_rigidbody.velocity.y);
+        if( Status.IsMoving )   m_rigidbody.velocity = new Vector2(Status.MovementVect.x * M.MoveSpeed, m_rigidbody.velocity.y);
     }
 
     public override void Move()
     {
-        if (Status.MovementVect.x == 0) return;
+        if (Status.MovementVect.x == 0 || Status.IsBlocking || Status.IsCrouching) return;
         Status.IsMoving = true;
         m_animator.SetBool("isMoving", Status.IsMoving);
         audioManager.PlaySoundLooped(M.S_Moving);

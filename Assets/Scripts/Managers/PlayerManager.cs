@@ -57,6 +57,20 @@ public class PlayerManager : MonoBehaviour
         }
         SetTwoPlayerInput(Keyboard.current, Gamepad.all[0]);
     }
+
+    public void SetDirection()
+    {
+        if(m_player1.MyTransform.position.x >= m_player2.MyTransform.position.x)
+        {
+            m_player1.PlayerController.Direction = transform.right;
+            m_player2.PlayerController.Direction = transform.right * -1;
+        }
+        else
+        {
+            m_player1.PlayerController.Direction = transform.right * -1;
+            m_player2.PlayerController.Direction = transform.right;
+        }
+    }
     //----------------
 
     //Called when player locks in and starts the game
@@ -94,6 +108,8 @@ public class PlayerManager : MonoBehaviour
         }
         m_player1.PlayerController.EnemyLayer = p2_layerMask;
         m_player2.PlayerController.EnemyLayer = p1_layerMask;
+        m_player1.PlayerController.PlayerManager = this;
+        m_player2.PlayerController.PlayerManager = this;
         m_player2.PlayerController.isPlayerTwo = true;
         DisableInputs();
         StartCoroutine(_gameManager.C_StartRound());

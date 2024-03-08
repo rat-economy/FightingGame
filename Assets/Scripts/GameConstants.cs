@@ -26,6 +26,15 @@ public struct Constant
   public const float INPUT_BUFFER_LENGTH = 0.3f;
   public const float SEC_PER_FRAME = 0.08333333333f;
   public const float CONTROLLER_DEADZONE = 0.70f;
+  public const float LIGHT_BLOCK_DAMAGE_MULTIPLIER = 0.8f;
+  public const float HEAVY_BLOCK_DAMAGE_MULTIPLIER = 0.4f;
+  public const float COMBO_BLOCK_DAMAGE_MULTIPLIER = 0.4f;
+  public const float LIGHT_KNOCKBACK_FORCE = 50f;
+  public const float HEAVY_KNOCKBACK_FORCE = 80f;
+  public const float COMBO_KNOCKBACK_FORCE = 160f;
+  public const float LIGHT_KNOCKBACK_DURATION = .5f;
+  public const float HEAVY_KNOCKBACK_DURATION = .9f;
+  public const float COMBO_KNOCKBACK_DURATION = 2f;
 }
 
 public enum MovementAxis { N, NE, E, SE, S, SW, W, NW }
