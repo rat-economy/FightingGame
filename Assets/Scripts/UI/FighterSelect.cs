@@ -15,7 +15,7 @@ public class FighterSelect : MonoBehaviour
     bool currPlayer = false;
     int currentlySelectedFighter;
 
-    Vector2[] frameLocationPerCharacter = new Vector2[] {new Vector2(-375, 125), new Vector2(-125, 125), new Vector2(125, 125), new Vector2(375, 125), new Vector2(-375, -125), new Vector2(-125, -125), new Vector2(125, -125), new Vector2(375, -125)};
+    Vector2[] frameLocationPerCharacter = new Vector2[] {new Vector2(-450, 225), new Vector2(-150, 225), new Vector2(150, 225), new Vector2(450, 225), new Vector2(-450, -150), new Vector2(-150, -150), new Vector2(150, -150), new Vector2(450, -150)};
 
     void Start()
     {

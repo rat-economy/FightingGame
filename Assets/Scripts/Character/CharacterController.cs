@@ -41,6 +41,8 @@ public class CharacterController : MonoBehaviour
         }
         else CurrentHealth -= damage;
 
+        //UI_InGame.Instance.UpdateHealthBar(CurrentHealth, isPlayerTwo);
+
         if (CurrentHealth <= 0)
         {
             m_animator.SetTrigger("Death");

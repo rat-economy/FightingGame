@@ -1,17 +1,27 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class UM_InGame : MonoBehaviour
 {
     [SerializeField] private GameObject m_pauseMenu;
     [SerializeField] private GameObject[] m_coundownGraphics;
     [SerializeField] private GameObject splashScreen;
+    [SerializeField] private GameObject statusUI;
     [SerializeField] private Image player1Image;
     [SerializeField] private Image player2Image;
 
     [SerializeField] private PlayerManager playerManager;
+
+    [SerializeField] private Image player1HealthBar;
+    [SerializeField] private Image player2HealthBar;
+    [SerializeField] private TextMeshProUGUI timerText;
     public static UM_InGame Instance {get; private set;}
+
+    private float timeRemaining;
+    private bool timerRunning = false;
 
     public void Pause()
     {
@@ -29,7 +39,7 @@ public class UM_InGame : MonoBehaviour
 
     public void Quit()
     {
-        
+        SceneManager.LoadScene("MainMenuScene");
     }
 
     public void SetupGameUI()
@@ -69,6 +79,25 @@ public class UM_InGame : MonoBehaviour
         splashScreen.SetActive(false);
     }
 
+    public void SetupStatusUI()
+    {
+        statusUI.SetActive(true);
+        timeRemaining = Constants.ROUND_LENGTH;
+        timerRunning = true;
+    }
+
+    public void UpdateHealthBar(float health, bool isPlayerTwo)
+    {
+        if (isPlayerTwo == false)
+        {
+            player1HealthBar.fillAmount = health / playerManager.m_player1.PlayerController.Attributes.MaxHealth;
+        }
+        else
+        {
+            player2HealthBar.fillAmount = health / playerManager.m_player1.PlayerController.Attributes.MaxHealth;
+        }
+    }
+
     private void Start()
     {
         //playerManager = PlayerManager.Instance;
@@ -86,13 +115,24 @@ public class UM_InGame : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        Instance = this;
+
+        
+    }
+
+    void Update()
+    {
+        if (timerRunning)
         {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
+            timeRemaining -= Time.deltaTime;
+            timerText.text = Mathf.FloorToInt(timeRemaining).ToString();
+
+            if (timeRemaining <= 0)
+            {
+                timerRunning = false;
+                Debug.Log("Times up!");
+                GameManager.Instance.ResolveTie();
+            }
         }
     }
     

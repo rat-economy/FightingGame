@@ -80,4 +80,5 @@ public class Constants
 
   //Game Round Constants
   public static int WINS_NEEDED = 2;
+  public static float ROUND_LENGTH = 90f;
 }
