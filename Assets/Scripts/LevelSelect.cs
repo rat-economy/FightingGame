@@ -8,7 +8,7 @@ public class LevelSelect : MonoBehaviour
     [SerializeField] private GameObject selectionButton;
     int currentlySelectedLevel;
 
-    Vector2[] frameLocationPerLevel = new Vector2[] {new Vector2(-600, 0), new Vector2(0, 0), new Vector2(600, 0)};
+    Vector2[] frameLocationPerLevel = new Vector2[] {new Vector2(-650, 0), new Vector2(0, 0), new Vector2(650, 0)};
 
     public void ClickLevel(int levelIndex)
     {
