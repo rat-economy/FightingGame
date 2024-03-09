@@ -9,9 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61cd71a73dc734926b6aaeb18d9d371f, type: 3}
-  m_Name: J_Voiceline1 2
+  m_Script: {fileID: 11500000, guid: 3e08fb75450ab4bd8a6e6dec692e4c6b, type: 3}
+  m_Name: Light2
   m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: d1abdee7eafb54e77ba90a11f3e5abbc, type: 3}
-  m_Volume: 1
-  m_Source: {fileID: 0}
+  Damage: 4
+  WindupFrames: 2
+  CooldownFrames: 2
+  AttackType: 0
+  InputType: 0
+  AnimationName: 1
+  isComboFinisher: 0
+  ComboInput: 
+  Sound: {fileID: 0}

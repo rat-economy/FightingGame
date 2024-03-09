@@ -96,6 +96,7 @@ public class UM_InGame : MonoBehaviour
 
     public void UpdateHealthBar(float health, bool isPlayerTwo)
     {
+        Debug.Log("Updating Health Bar");
         if (isPlayerTwo == false)
         {
             player1HealthBar.fillAmount = health / playerManager.m_player1.PlayerController.Attributes.MaxHealth;

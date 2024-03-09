@@ -61,6 +61,10 @@ public class CharacterController : MonoBehaviour
         Debug.Log("Current Health: " + CurrentHealth);
         UM_InGame.Instance.UpdateHealthBar(CurrentHealth, isPlayerTwo);
 
+        UM_InGame.Instance.UpdateHealthBar(CurrentHealth, isPlayerTwo);
+
+        Debug.Log(CurrentHealth);
+
         if (CurrentHealth <= 0)
         {
             StopAllCoroutines();
