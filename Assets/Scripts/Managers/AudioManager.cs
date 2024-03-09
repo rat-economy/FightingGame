@@ -6,8 +6,19 @@ using UnityEngine.SceneManagement;
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
+    public Sound[] menuSongs;
+    public Sound[] fightSongs;
     public static AudioManager Instance;
     [SerializeField] private Sound vs_Sound;
+    private void Start()
+    {
+        foreach (var sound in sounds)
+        {
+            sound.m_Source = gameObject.AddComponent<AudioSource>();
+            sound.m_Source.clip = sound.m_Clip;
+            sound.m_Source.volume = sound.m_Volume;
+        }
+    }
     private void Awake()
     {
         if (Instance == null)
@@ -20,16 +31,13 @@ public class AudioManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(this);
-        foreach (var sound in sounds)
-        {
-            sound.m_Source = gameObject.AddComponent<AudioSource>();
-            sound.m_Source.clip = sound.m_Clip;
-            sound.m_Source.volume = sound.m_Volume;
-        }
+
+        
+        
         // SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    /*void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("loading scene!");
         foreach (var sound in sounds)
@@ -38,7 +46,7 @@ public class AudioManager : MonoBehaviour
             sound.m_Source.clip = sound.m_Clip;
             sound.m_Source.volume = sound.m_Volume;
         }
-    }
+    }*/
 
     public void PlaySoundOnce(Sound sound)
     {
@@ -53,8 +61,12 @@ public class AudioManager : MonoBehaviour
     {
         if(sound == null || sound.m_Source == null)
         {
+            Debug.Log("Sound broken");
+            Debug.Log("Sound: " + sound);
+            Debug.Log("Source: " + sound.m_Source);
             return;
         }
+        Debug.Log("Playing sound");
         sound.m_Source.loop = true;
         sound.m_Source.Play();
     }
@@ -96,5 +108,19 @@ public class AudioManager : MonoBehaviour
         yield return new WaitForSeconds(Constants.ANNOUNCER_DELAY);
         PlaySoundOnce(p2);
         
+    }
+
+    public void PickFightSong()//This is shit and i will not hardcode in next version but need to fly now
+    {
+        Debug.Log("Picking fight song");
+        int index = Random.Range(4, 6);
+        Debug.Log(index);
+        PlaySoundLooped(sounds[index]);
+    }
+    
+    public void StopFightMusic() //Fuck you roosevelt
+    {
+        StopSound(sounds[4]);
+        StopSound(sounds[5]);
     }
 }

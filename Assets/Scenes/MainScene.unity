@@ -2234,7 +2234,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1291510277
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3965,22 +3965,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4549001522548043129, guid: d383ee8efd34f4b45a655d38596b6ff1, type: 3}
-      propertyPath: sounds.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4549001522548043129, guid: d383ee8efd34f4b45a655d38596b6ff1, type: 3}
-      propertyPath: sounds.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
-    - target: {fileID: 4549001522548043129, guid: d383ee8efd34f4b45a655d38596b6ff1, type: 3}
-      propertyPath: sounds.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
-    - target: {fileID: 4549001522548043129, guid: d383ee8efd34f4b45a655d38596b6ff1, type: 3}
-      propertyPath: sounds.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

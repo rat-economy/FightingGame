@@ -80,6 +80,8 @@ public class GameManager : MonoBehaviour
             playerManager.SpawnPlayers();
         }
 
+        
+
         //Call spawnsingleplayer() / spawnbothplayers()
         levelManager.SetupBackground();
 
@@ -96,6 +98,7 @@ public class GameManager : MonoBehaviour
         {
             audioManager = AudioManager.Instance;
         }
+        AudioManager.Instance.PickFightSong();
         audioManager.BeginGameStart_Announcer(p1_selectedCharacter.announcerLine, p2_selectedCharacter.announcerLine);
 
         yield return new WaitForSeconds(Constants.SPLASH_COUNTDOWN + 4);
@@ -134,6 +137,7 @@ public class GameManager : MonoBehaviour
     {
         playerOneWins = 0;
         playerTwoWins = 0;
+        AudioManager.Instance.StopFightMusic();
         SceneManager.LoadScene("MainMenuScene");
     }
 

@@ -24,6 +24,8 @@ public class LevelSelect : MonoBehaviour
         LevelName level = (LevelName)currentlySelectedLevel;
         SelectLevel(level);
 
+        AudioManager.Instance.StopSound(AudioManager.Instance.menuSongs[0]);
+
         GameManager.Instance.StartInitializeRound();
     }
     //Move to playerselect script

@@ -18,6 +18,7 @@ public class MainMenuManager : MonoBehaviour
     void Start()
     {
         Instance = this;
+        AudioManager.Instance.PlaySoundLooped(AudioManager.Instance.menuSongs[0]);
     }
 
     public void ShowSpray(bool showRed)
@@ -81,16 +82,20 @@ public class MainMenuManager : MonoBehaviour
 
     public void EnterCredits()
     {
+        AudioManager.Instance.StopSound(AudioManager.Instance.menuSongs[0]);
         mainMenuObj.SetActive(false);
         creditsObj.SetActive(true);
+        AudioManager.Instance.PlaySoundLooped(AudioManager.Instance.menuSongs[1]);
     }
 
     public void ExitCredits()
     {
+        AudioManager.Instance.StopSound(AudioManager.Instance.menuSongs[1]);
         creditsObj.SetActive(false);
         mainMenuObj.SetActive(true);
 
         creditsObj.GetComponent<Credits>().ResetCredits();
+        AudioManager.Instance.PlaySoundLooped(AudioManager.Instance.menuSongs[0]);
     }
 
     public void Quit()

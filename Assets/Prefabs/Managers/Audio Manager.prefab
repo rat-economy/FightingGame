@@ -46,3 +46,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  - {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  - {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  - {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  - {fileID: 11400000, guid: 78eb53435544cb74da066f52705fdbd5, type: 2}
+  - {fileID: 11400000, guid: 0223df856c354af4bb6c54ab445358ba, type: 2}
+  - {fileID: 11400000, guid: 1d7b499231fdd4ad3b565579c1f2b242, type: 2}
+  - {fileID: 11400000, guid: 11df1b34871140a4a9c7896f1dde796d, type: 2}
+  menuSongs:
+  - {fileID: 11400000, guid: 1d7b499231fdd4ad3b565579c1f2b242, type: 2}
+  - {fileID: 11400000, guid: 11df1b34871140a4a9c7896f1dde796d, type: 2}
+  fightSongs:
+  - {fileID: 11400000, guid: 78eb53435544cb74da066f52705fdbd5, type: 2}
+  - {fileID: 11400000, guid: 0223df856c354af4bb6c54ab445358ba, type: 2}
+  vs_Sound: {fileID: 0}
