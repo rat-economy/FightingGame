@@ -75,7 +75,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            playerManager.SetTwoPlayerInputToKeyboardAndController();
+            playerManager.SetTwoPlayerInputToTwoControllers();
+            //playerManager.SetTwoPlayerInputToKeyboardAndController();
             playerManager.SetPlayerPrefabs(p1_selectedCharacter.prefab, p2_selectedCharacter.prefab);
             playerManager.SpawnPlayers();
         }

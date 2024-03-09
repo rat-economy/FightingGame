@@ -50,12 +50,22 @@ public class PlayerManager : MonoBehaviour
     }
     public void SetTwoPlayerInputToKeyboardAndController()
     {
-        if(Gamepad.all.Count == 0 || Keyboard.current == null)
+        if(Gamepad.all.Count <= 1 || Keyboard.current == null)
         {
             Debug.LogError("Controller not connected! Two players isn't possible");
             return;
         }
         SetTwoPlayerInput(Keyboard.current, Gamepad.all[0]);
+    }
+
+     public void SetTwoPlayerInputToTwoControllers()
+    {
+        if(Gamepad.all.Count < 2)
+        {
+            Debug.LogError("Controller not connected! Two players isn't possible");
+            return;
+        }
+        SetTwoPlayerInput(Gamepad.all[0], Gamepad.all[1]);
     }
 
     public void SetDirection()
