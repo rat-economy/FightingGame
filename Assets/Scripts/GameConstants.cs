@@ -64,7 +64,8 @@ public struct Character {
   public Sprite charSplash;
   public Sprite charSplashCrop;
   public Sprite doodle;
-  public Sound announcerLine;
+  public Sound announcerLine1;
+  public Sound announcerLine2;
 }
 
 

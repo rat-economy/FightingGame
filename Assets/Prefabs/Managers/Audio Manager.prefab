@@ -48,15 +48,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
   - {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
   - {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
-  - {fileID: 11400000, guid: d6405765828924f7b8aae76b0c99cb53, type: 2}
+  - {fileID: 11400000, guid: 28f6a593e1fff9a47b71318b46d59b1b, type: 2}
   - {fileID: 11400000, guid: 78eb53435544cb74da066f52705fdbd5, type: 2}
   - {fileID: 11400000, guid: 0223df856c354af4bb6c54ab445358ba, type: 2}
   - {fileID: 11400000, guid: 1d7b499231fdd4ad3b565579c1f2b242, type: 2}
   - {fileID: 11400000, guid: 11df1b34871140a4a9c7896f1dde796d, type: 2}
+  - {fileID: 11400000, guid: 3a601f04cd675484e8866a3a79580881, type: 2}
+  - {fileID: 11400000, guid: 8d3d5556c114b4450992bce8d84e3b8a, type: 2}
+  - {fileID: 11400000, guid: df637ee35e4b04a9cb9ee07cfb6522bd, type: 2}
+  - {fileID: 11400000, guid: ad00b87c218f945e0a558dda714a0443, type: 2}
+  - {fileID: 11400000, guid: 4b2073a8dc56240dba28e1ed962a0453, type: 2}
   menuSongs:
   - {fileID: 11400000, guid: 1d7b499231fdd4ad3b565579c1f2b242, type: 2}
   - {fileID: 11400000, guid: 11df1b34871140a4a9c7896f1dde796d, type: 2}
   fightSongs:
   - {fileID: 11400000, guid: 78eb53435544cb74da066f52705fdbd5, type: 2}
   - {fileID: 11400000, guid: 0223df856c354af4bb6c54ab445358ba, type: 2}
-  vs_Sound: {fileID: 0}
+  vs_Sound: {fileID: 11400000, guid: 3a601f04cd675484e8866a3a79580881, type: 2}

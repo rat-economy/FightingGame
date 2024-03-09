@@ -113,14 +113,16 @@ public class AudioManager : MonoBehaviour
     public void PickFightSong()//This is shit and i will not hardcode in next version but need to fly now
     {
         Debug.Log("Picking fight song");
-        int index = Random.Range(4, 6);
+        /*int index = Random.Range(4, 6);
         Debug.Log(index);
-        PlaySoundLooped(sounds[index]);
+        PlaySoundLooped(sounds[index]);*/
+        int index = Random.Range(0, fightSongs.Length);
+        PlaySoundLooped(fightSongs[index]);
     }
     
     public void StopFightMusic() //Fuck you roosevelt
     {
-        StopSound(sounds[4]);
-        StopSound(sounds[5]);
+        StopSound(fightSongs[0]);
+        StopSound(fightSongs[1]);
     }
 }
