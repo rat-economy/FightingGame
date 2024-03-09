@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Jay
   m_EditorClassIdentifier: 
   MoveSpeed: 3
-  JumpSpeed: 5
+  JumpSpeed: 8
   MaxHealth: 110
   Light1: {fileID: 11400000, guid: a6babfddbdea440c3a7201c696cf71bc, type: 2}
   Light2: {fileID: 11400000, guid: 64f928905faf840819c3eb3337fa8e6a, type: 2}
   Heavy1: {fileID: 11400000, guid: 979583161e0754a12be73c3d5652e0c1, type: 2}
-  Heavy2: {fileID: 11400000, guid: 2461ca87e19ff4c8d86b25cd99a6a496, type: 2}
+  Heavy2: {fileID: 11400000, guid: 47d82085dd1dc4c20bac573a548fc85b, type: 2}
   Combos: []
   HurtFrames: 4
   S_Jump: {fileID: 11400000, guid: 58eede9f558b44c81a37ebb84c5240b5, type: 2}

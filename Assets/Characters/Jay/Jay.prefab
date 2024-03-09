@@ -166,7 +166,7 @@ Transform:
   m_GameObject: {fileID: 6953301460390023672}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.345, y: -0.19, z: 0}
+  m_LocalPosition: {x: -2.321, y: -0.142, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -272,7 +272,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: 951bb3b77cb5f45f7b93067adee582b1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -318,7 +318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_attackPoint: {fileID: 7944021923251193040}
-  m_attackRadius: 0.19
+  m_attackRadius: 0.32
 --- !u!114 &6589046721288757563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,6 +332,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Attributes: {fileID: 11400000, guid: 4bdec73755d0e418e98f655372b7d2a3, type: 2}
+  m_characterMovement: {fileID: 0}
+  m_characterCombat: {fileID: 0}
   isPlayerTwo: 0
 --- !u!114 &9187270984927727785
 MonoBehaviour:
@@ -372,7 +374,7 @@ Transform:
   m_GameObject: {fileID: 7871145070957327553}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4, y: 0.01, z: 0}
+  m_LocalPosition: {x: -0.408, y: 0.063, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

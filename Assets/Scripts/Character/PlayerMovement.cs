@@ -20,7 +20,8 @@ public class PlayerMovement : CharacterMovement
 
     public override void Jump() //W - Keyboard, Analog Stick Up - Controller 
     {
-        m_animator.SetTrigger("Jump");
+        Status.IsJumping = true;
+        m_animator.SetBool("isJumping", Status.IsJumping);
         audioManager.PlaySoundOnce(M.S_Jump);
         m_rigidbody.velocity += new Vector2(0, M.JumpSpeed);
     }
@@ -32,7 +33,7 @@ public class PlayerMovement : CharacterMovement
 
     public override void Crouch() //S - Keyboard, Analog Stick Down - Controller 
     {
-        if (Status.IsJumping || Status.IsMoving || Status.IsBlocking) return;
+        if (Status.IsJumping || Status.IsBlocking) return;
         Status.IsCrouching = true;
         m_animator.SetBool("isCrouching", Status.IsCrouching);
         m_standCollider.enabled = false;
@@ -58,7 +59,16 @@ public class PlayerMovement : CharacterMovement
     {
         if (Status.MovementVect.x == 0 || Status.IsBlocking || Status.IsCrouching) return;
         Status.IsMoving = true;
-        m_animator.SetBool("isMoving", Status.IsMoving);
+
+        if (Status.IsJumping)
+        {
+            m_animator.SetBool("isJumping", Status.IsJumping);
+        }
+        else
+        {
+            m_animator.SetBool("isMoving", Status.IsMoving);
+        }
+        
         audioManager.PlaySoundLooped(M.S_Moving);
 
         //Flips the player if they turn

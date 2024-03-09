@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e08fb75450ab4bd8a6e6dec692e4c6b, type: 3}
   m_Name: Heavy2
   m_EditorClassIdentifier: 
-  Damage: 7
-  WindupFrames: 8
-  CooldownFrames: 4
+  Damage: 8
+  WindupFrames: 7
+  CooldownFrames: 7
   AttackType: 0
   InputType: 1
-  AnimationName: 3
+  AnimationName: 2
   isComboFinisher: 0
   ComboInput: 
   Sound: {fileID: 0}

@@ -32,6 +32,7 @@ public class PlayerCombat : CharacterCombat
                 m_attackCoroutine = StartCoroutine(C_Attack(M.Light1));
                 break;
             case 2:
+                
                 m_animator.SetTrigger(M.Light2.AnimationName.ToString());
                 m_attackCoroutine = StartCoroutine(C_Attack(M.Light2));
                 break;
@@ -64,7 +65,6 @@ public class PlayerCombat : CharacterCombat
                 m_attackCoroutine = StartCoroutine(C_Attack(M.Heavy1));
                 break;
             case 2:
-                m_animator.SetTrigger(M.Heavy2.AnimationName.ToString());
                 m_attackCoroutine = StartCoroutine(C_Attack(M.Heavy2));
                 break;
         }
@@ -90,12 +90,15 @@ public class PlayerCombat : CharacterCombat
                 m_attackCoroutine = StartCoroutine(C_Attack(a));
             }
         }
-
     }
 
     public override void Block(InputAction.CallbackContext context)
     {
-        if (Status.IsJumping || Status.IsMoving || Status.IsCrouching) return;
+        if (Status.IsJumping || Status.IsCrouching) return;
+        if (Status.IsMoving)
+        {
+            Status.m_characterMovement.StopMove();
+        }
         audioManager.PlaySoundOnce(M.S_Block);
         Status.IsBlocking = true;
         m_animator.SetBool("isBlocking", Status.IsBlocking);
@@ -103,7 +106,6 @@ public class PlayerCombat : CharacterCombat
 
     public override void Unblock(InputAction.CallbackContext context)
     {
-        if (Status.IsJumping || Status.IsMoving || Status.IsCrouching) return;
         Status.IsBlocking = false;
         m_animator.SetBool("isBlocking", Status.IsBlocking);
     }

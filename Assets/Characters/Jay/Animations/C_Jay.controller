@@ -131,7 +131,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Jump
+    m_ConditionEvent: isJumping
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2502501119133726900}
@@ -168,7 +168,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 0cf4de23959fb45be800c42fe9d8c89b, type: 2}
+  m_Motion: {fileID: 7400000, guid: bac6b9a38727d4d9dbc140fea0912880, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -225,7 +225,7 @@ AnimatorStateMachine:
     m_Position: {x: 680, y: 690, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2502501119133726900}
-    m_Position: {x: 460, y: 610, z: 0}
+    m_Position: {x: 420, y: 560, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -609508426516629894}
     m_Position: {x: 80, y: -270, z: 0}
@@ -237,7 +237,7 @@ AnimatorStateMachine:
     m_Position: {x: -200, y: -140, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8607044488011299476}
-    m_Position: {x: 100, y: -140, z: 0}
+    m_Position: {x: 100, y: -130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8437651531362692788}
     m_Position: {x: 370, y: -170, z: 0}
@@ -478,7 +478,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Jump
+    m_ConditionEvent: isJumping
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2502501119133726900}
@@ -566,7 +566,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: f02700dc35cd346d3970d223c061c657, type: 2}
+  m_Motion: {fileID: 7400000, guid: 0cf4de23959fb45be800c42fe9d8c89b, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -959,7 +959,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Jump
+    m_ConditionEvent: isJumping
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2502501119133726900}
@@ -1146,7 +1146,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 0d839000c301a4e698022b08254fc80b, type: 2}
+  m_Motion: {fileID: 0}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

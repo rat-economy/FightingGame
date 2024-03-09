@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e08fb75450ab4bd8a6e6dec692e4c6b, type: 3}
   m_Name: Light2
   m_EditorClassIdentifier: 
-  Damage: 5
+  Damage: 7
   WindupFrames: 4
-  CooldownFrames: 5
+  CooldownFrames: 7
   AttackType: 0
   InputType: 0
   AnimationName: 1

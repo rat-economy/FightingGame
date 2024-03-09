@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Combo1
   m_EditorClassIdentifier: 
   Damage: 10
-  WindupFrames: 6
-  CooldownFrames: 6
+  WindupFrames: 4
+  CooldownFrames: 7
   AttackType: 0
   InputType: 1
   AnimationName: 4
