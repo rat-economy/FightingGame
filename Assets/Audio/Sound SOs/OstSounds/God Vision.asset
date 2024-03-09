@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: God Vision
   m_EditorClassIdentifier: 
   m_Clip: {fileID: 8300000, guid: ea94a7d9b2c8c6947b7f4bf569545108, type: 3}
-  m_Volume: 1
+  m_Volume: 0.8
   m_Source: {fileID: 0}

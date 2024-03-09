@@ -20,4 +20,4 @@ MonoBehaviour:
   AnimationName: 0
   isComboFinisher: 0
   ComboInput: 
-  Sound: {fileID: 0}
+  Sound: {fileID: 11400000, guid: 0ffc58ff4f19e40c485f7fa1d5d5cbe2, type: 2}

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MainMenuTrack
   m_EditorClassIdentifier: 
   m_Clip: {fileID: 8300000, guid: 7e6d3091cd4576a49a64582ad1e8bdc4, type: 3}
-  m_Volume: 1
+  m_Volume: 0.8
   m_Source: {fileID: 0}

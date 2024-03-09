@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e08fb75450ab4bd8a6e6dec692e4c6b, type: 3}
   m_Name: Light1
   m_EditorClassIdentifier: 
-  Damage: 5
+  Damage: 7
   WindupFrames: 4
   CooldownFrames: 4
   AttackType: 0
@@ -20,4 +20,4 @@ MonoBehaviour:
   AnimationName: 0
   isComboFinisher: 0
   ComboInput: 
-  Sound: {fileID: 0}
+  Sound: {fileID: 11400000, guid: 0ffc58ff4f19e40c485f7fa1d5d5cbe2, type: 2}

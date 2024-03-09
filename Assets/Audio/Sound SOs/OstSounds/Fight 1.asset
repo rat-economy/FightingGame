@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Fight 1
   m_EditorClassIdentifier: 
   m_Clip: {fileID: 8300000, guid: 10ad052f98d033a4ea8f66e9910bb632, type: 3}
-  m_Volume: 1
+  m_Volume: 0.8
   m_Source: {fileID: 0}
