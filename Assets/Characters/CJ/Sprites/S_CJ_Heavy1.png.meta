@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e22513313a80f4612809c18960d3836d
+guid: ba0eaeb15d81f42f3b675f5cab832821
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,274 +110,274 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: JayIdle_0
+      name: S_CJ_Heavy1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 128
+        height: 138
+      alignment: 9
+      pivot: {x: 0.4, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e4c1ddfce9f3c4f4ead906f114df2a47
-      internalID: 1145495791
+      spriteID: b534f77378bdf4c3eb304d2010e2ceac
+      internalID: 987454543
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JayIdle_1
+      name: S_CJ_Heavy1_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 128
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a58609f2f3ac497f8e6724975101b46
+      internalID: 1701406053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: S_CJ_Heavy1_2
       rect:
         serializedVersion: 2
         x: 256
         y: 0
-        width: 256
-        height: 128
+        width: 128
+        height: 138
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6682fa2c23da54d74be692e48f0b3d65
-      internalID: 1582047744
+      spriteID: bc96daaed47f2428081d63b762dcbfbb
+      internalID: -364849804
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JayIdle_2
+      name: S_CJ_Heavy1_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 128
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90ac2c10e0737409bb579370bea514e7
+      internalID: -1942499745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: S_CJ_Heavy1_4
       rect:
         serializedVersion: 2
         x: 512
         y: 0
-        width: 256
-        height: 128
+        width: 128
+        height: 138
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d598225b57769429f8d299e5cba78fd0
-      internalID: -1696489461
+      spriteID: 93768ed0b83db457ca3b121f6b7a4abb
+      internalID: -937091644
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JayIdle_3
+      name: S_CJ_Heavy1_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 128
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17d277386568b49bba9983bc803811e8
+      internalID: 1646383228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: S_CJ_Heavy1_6
       rect:
         serializedVersion: 2
         x: 768
         y: 0
-        width: 256
-        height: 128
+        width: 128
+        height: 138
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 932bdb9c2f13f4ee293ab15331c14ebb
-      internalID: -620747530
+      spriteID: 442c0a2df463742538eb5088022c0a4c
+      internalID: -1952673044
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JayIdle_4
+      name: S_CJ_Heavy1_7
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 128
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 733981584c259415daa6a45a5d60f755
+      internalID: -122709693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: S_CJ_Heavy1_8
       rect:
         serializedVersion: 2
         x: 1024
         y: 0
-        width: 256
-        height: 128
+        width: 128
+        height: 138
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 185fbbca64bcd46f58a4d54cfdea7d41
-      internalID: 65581981
+      spriteID: 769915bbe55d748a296eb0b6b7b302e6
+      internalID: -1656104724
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JayIdle_5
+      name: S_CJ_Heavy1_9
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 128
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0580df056999b4c519cf21e18586fd45
+      internalID: -1629765877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: S_CJ_Heavy1_10
       rect:
         serializedVersion: 2
         x: 1280
         y: 0
-        width: 256
-        height: 128
+        width: 128
+        height: 138
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e24c4c9d641d4a42ac568fc028d4a98
-      internalID: 150695547
+      spriteID: 0659a4c3f43bf4693ac5e27a0199630b
+      internalID: -1575616560
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: JayIdle_6
+      name: S_CJ_Heavy1_11
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 0
+        width: 128
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3aeb83f0b903b4554a5bb6c1d08a37ed
+      internalID: 1525931365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: S_CJ_Heavy1_12
       rect:
         serializedVersion: 2
         x: 1536
         y: 0
-        width: 256
-        height: 128
+        width: 128
+        height: 138
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04013001e561248c381a6e8e35c9e3f0
-      internalID: 71745938
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JayIdle_7
-      rect:
-        serializedVersion: 2
-        x: 1792
-        y: 0
-        width: 256
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9cec4cea3364d4ff196355a7ea425899
-      internalID: -928849923
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JayIdle_8
-      rect:
-        serializedVersion: 2
-        x: 2048
-        y: 0
-        width: 256
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 68430f7dcfb33423d9d731eba43a20cc
-      internalID: 946317537
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JayIdle_9
-      rect:
-        serializedVersion: 2
-        x: 2304
-        y: 0
-        width: 256
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bea227ec464a94eb5874bb012796ae6a
-      internalID: 70505328
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JayIdle_10
-      rect:
-        serializedVersion: 2
-        x: 2560
-        y: 0
-        width: 256
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 135c0273d48064ba3bf7ec7b79e913cc
-      internalID: -2061977488
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JayIdle_11
-      rect:
-        serializedVersion: 2
-        x: 2816
-        y: 0
-        width: 256
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 498d11b8927574f008f4c38b06121bed
-      internalID: -450288171
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JayIdle_12
-      rect:
-        serializedVersion: 2
-        x: 3072
-        y: 0
-        width: 256
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 677d5ca918f5b45f791a85dcd1a19f12
-      internalID: 1820405769
+      spriteID: 4f35cf499e43e48dd8d8f87bedf87261
+      internalID: 1197136394
       vertices: []
       indices: 
       edges: []
@@ -393,19 +393,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      JayIdle_0: 1145495791
-      JayIdle_1: 1582047744
-      JayIdle_10: -2061977488
-      JayIdle_11: -450288171
-      JayIdle_12: 1820405769
-      JayIdle_2: -1696489461
-      JayIdle_3: -620747530
-      JayIdle_4: 65581981
-      JayIdle_5: 150695547
-      JayIdle_6: 71745938
-      JayIdle_7: -928849923
-      JayIdle_8: 946317537
-      JayIdle_9: 70505328
+      S_CJ_Heavy1_0: 987454543
+      S_CJ_Heavy1_1: 1701406053
+      S_CJ_Heavy1_10: -1575616560
+      S_CJ_Heavy1_11: 1525931365
+      S_CJ_Heavy1_12: 1197136394
+      S_CJ_Heavy1_2: -364849804
+      S_CJ_Heavy1_3: -1942499745
+      S_CJ_Heavy1_4: -937091644
+      S_CJ_Heavy1_5: 1646383228
+      S_CJ_Heavy1_6: -1952673044
+      S_CJ_Heavy1_7: -122709693
+      S_CJ_Heavy1_8: -1656104724
+      S_CJ_Heavy1_9: -1629765877
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
