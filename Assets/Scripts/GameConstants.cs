@@ -88,7 +88,7 @@ public class Constants
   public static float SPLASH_COUNTDOWN = 4f;
 
   //In-Game Audio Constants
-  public static float ANNOUNCER_DELAY = 1f;
+  public static float ANNOUNCER_DELAY = 1.2f;
 
   //Game Round Constants
   public static int WINS_NEEDED = 2;

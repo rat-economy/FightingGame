@@ -44,12 +44,7 @@ public class UM_InGame : MonoBehaviour
         GameManager.Instance.EndMatch(false, false);
     }
 
-    public void SetupGameUI()
-    {
-        StartCoroutine(VSText());
-    }
-
-    private IEnumerator Countdown()
+    public IEnumerator C_Countdown()
     {
         //3
         m_coundownGraphics[0].SetActive(true);
@@ -64,24 +59,24 @@ public class UM_InGame : MonoBehaviour
         yield return new WaitForSeconds(1);
         //FIGHT
         
-        yield return new WaitForSeconds(1);
         m_coundownGraphics[2].SetActive(false);
         yield return null;
 
         SetupStatusUI();
     }
 
-    private IEnumerator VSText()
+    public void ShowVersusScreen()
     {
         splashScreen.SetActive(true);
         player1Image.sprite = GameManager.p1_selectedCharacter.charSplash;
         player2Image.sprite = GameManager.p2_selectedCharacter.charSplash;
-
-        yield return new WaitForSeconds(Constants.SPLASH_COUNTDOWN);
-        splashScreen.SetActive(false);
-        StartCoroutine(Countdown());
-        
     }
+
+    public void HideVersusScreen()
+    {
+        splashScreen.SetActive(false);
+    }
+    
 
     public void SetupStatusUI()
     {
@@ -96,7 +91,6 @@ public class UM_InGame : MonoBehaviour
 
     public void UpdateHealthBar(float health, bool isPlayerTwo)
     {
-        Debug.Log("Updating Health Bar");
         if (isPlayerTwo == false)
         {
             player1HealthBar.fillAmount = health / playerManager.m_player1.PlayerController.Attributes.MaxHealth;
@@ -107,26 +101,9 @@ public class UM_InGame : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        //playerManager = PlayerManager.Instance;
-    }
-
-    private void OnEnable()
-    {
-
-    }
-
-    private void OnDisable()
-    {
-
-    }
-
     private void Awake()
     {
         Instance = this;
-
-        
     }
 
     void Update()

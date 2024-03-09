@@ -22,14 +22,11 @@ public class GameManager : MonoBehaviour
     private PlayerManager playerManager;
     private LevelManager levelManager;
 
-    [SerializeField] Sound m_announcerStart;
+    [SerializeField] Sound m_announcerCountdown;
+    [SerializeField] Sound m_announcerVersus;
 
     private int playerOneWins = 0;
-    private int playerTwoWins = 0;
-
-    [SerializeField] private Animator m_transition;
-    
-    
+    private int playerTwoWins = 0;    
 
     private void Awake()
     {
@@ -97,16 +94,31 @@ public class GameManager : MonoBehaviour
     //Called once in game scene
     public IEnumerator C_StartRound()
     {
-        uiManager.SetupGameUI();
-
         if (audioManager == null)
         {
+            Debug.Log("This is needed");
             audioManager = AudioManager.Instance;
         }
         AudioManager.Instance.PickFightSong();
-        audioManager.BeginGameStart_Announcer(p1_selectedCharacter.announcerLine1, p2_selectedCharacter.announcerLine2, m_announcerStart);
 
-        yield return new WaitForSeconds(Constants.SPLASH_COUNTDOWN + 4);
+        //Character Splash Screen
+        uiManager.ShowVersusScreen();
+
+        //Delay to Initialze stuff in scene
+        yield return new WaitForSeconds(Constants.ANNOUNCER_DELAY); //TODO: REFACTOR
+
+        //TODO: REFACTOR PLAY AUDIO IN UI MANAGER
+        yield return StartCoroutine(audioManager.C_PlaySoundAndWait(p1_selectedCharacter.announcerLine1));
+        yield return StartCoroutine(audioManager.C_PlaySoundAndWait(m_announcerVersus));
+        yield return StartCoroutine(audioManager.C_PlaySoundAndWait(p2_selectedCharacter.announcerLine2));
+        uiManager.HideVersusScreen();
+
+        //Delay between Versus and Countdown
+        yield return new WaitForSeconds(Constants.ANNOUNCER_DELAY*0.5f);
+
+        //Countdown Timer
+        StartCoroutine(audioManager.C_PlaySoundAndWait(m_announcerCountdown));
+        yield return StartCoroutine(uiManager.C_Countdown());
 
         state = GameState.INGAME;
         playerManager.EnableInputs();
@@ -135,6 +147,7 @@ public class GameManager : MonoBehaviour
                 return;
             }
         }
+        audioManager.StopFightMusic(); //TODO: STOP
         StartInitializeRound();
     }
 

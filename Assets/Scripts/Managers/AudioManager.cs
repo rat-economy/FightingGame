@@ -9,8 +9,9 @@ public class AudioManager : MonoBehaviour
     public Sound[] menuSongs;
     public Sound[] fightSongs;
     public static AudioManager Instance;
-    [SerializeField] private Sound vs_Sound;
-    private void Start()
+
+    private Sound currentFightSong;
+    private void OnEnable()
     {
         foreach (var sound in sounds)
         {
@@ -31,9 +32,6 @@ public class AudioManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(this);
-
-        
-        
         // SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -48,79 +46,70 @@ public class AudioManager : MonoBehaviour
         }
     }*/
 
+    private bool IsSoundNull(Sound sound)
+    {
+        if(sound == null)
+        {
+            Debug.LogError("Sound is null");
+            return true;
+        }
+        else if (sound.m_Source == null)
+        {
+            Debug.LogError("Sound's audio source is null");
+            return true;
+        }
+        return false;
+    }
+
     public void PlaySoundOnce(Sound sound)
     {
-        if(sound == null || sound.m_Source == null)
+        if( IsSoundNull(sound) )
         {
             return;
         }
         sound.m_Source.loop = false;
         sound.m_Source.Play();
     }
+
+    public IEnumerator C_PlaySoundAndWait(Sound sound)
+    {
+        if( IsSoundNull(sound) )
+        {
+            yield return 0;
+        }
+        sound.m_Source.loop = false;
+        sound.m_Source.Play();
+        yield return new WaitForSeconds(sound.m_Source.clip.length);
+    }
+
     public void PlaySoundLooped(Sound sound)
     {
-        if(sound == null || sound.m_Source == null)
+        if( IsSoundNull(sound) )
         {
-            Debug.Log("Sound broken");
-            Debug.Log("Sound: " + sound);
-            Debug.Log("Source: " + sound.m_Source);
             return;
         }
-        Debug.Log("Playing sound");
         sound.m_Source.loop = true;
         sound.m_Source.Play();
     }
 
     public void StopSound(Sound sound)
     {
-        if(sound == null || sound.m_Source == null)
+        if( IsSoundNull(sound) )
         {
             return;
         }
         sound.m_Source.Stop();
     }
 
-    public void StopSound(string soundName)
-    {
-        GetAudioSource(soundName).Stop();
-    }
-
-    private AudioSource GetAudioSource(string soundName)
-    {
-        foreach (Sound sound in sounds)
-        {
-            if(sound.name == soundName) return sound.m_Source;
-        }
-        Debug.LogError("Sound Name Not Found!");
-        return null;
-    }
-
-    public void BeginGameStart_Announcer(Sound p1, Sound p2, Sound start)
-    {
-        StartCoroutine(GameStart_Announcer(p1, p2, start));
-    }
-
-    private IEnumerator GameStart_Announcer(Sound p1, Sound p2, Sound start)
-    {
-        PlaySoundOnce(p1);
-        yield return new WaitForSeconds(Constants.ANNOUNCER_DELAY);
-        PlaySoundOnce(vs_Sound);
-        yield return new WaitForSeconds(Constants.ANNOUNCER_DELAY);
-        PlaySoundOnce(p2);
-        yield return new WaitForSeconds(Constants.ANNOUNCER_DELAY*2);
-        PlaySoundOnce(start);
-        
-        
-    }
-
     public void PickFightSong()//This is shit and i will not hardcode in next version but need to fly now
     {
-        Debug.Log("Picking fight song");
-        /*int index = Random.Range(4, 6);
-        Debug.Log(index);
-        PlaySoundLooped(sounds[index]);*/
         int index = Random.Range(0, fightSongs.Length);
-        PlaySoundLooped(fightSongs[index]);
+        PlaySoundOnce(fightSongs[index]);
+    }
+
+    public void PlaySoundOnce(Sound[] sound)
+    {
+
     }
     
     public void StopFightMusic() //Fuck you roosevelt

@@ -122,7 +122,6 @@ public class PlayerManager : MonoBehaviour
         m_player2.PlayerController.PlayerManager = this;
         m_player2.PlayerController.isPlayerTwo = true;
         DisableInputs();
-        StartCoroutine(_gameManager.C_StartRound());
     }
 
     public void DisableInputs()
