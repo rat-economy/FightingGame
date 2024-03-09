@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
             audioManager = AudioManager.Instance;
         }
         AudioManager.Instance.PickFightSong();
-        audioManager.BeginGameStart_Announcer(p1_selectedCharacter.announcerLine, p2_selectedCharacter.announcerLine);
+        audioManager.BeginGameStart_Announcer(p1_selectedCharacter.announcerLine1, p2_selectedCharacter.announcerLine2);
 
         yield return new WaitForSeconds(Constants.SPLASH_COUNTDOWN + 4);
 

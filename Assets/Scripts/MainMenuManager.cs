@@ -94,7 +94,6 @@ public class MainMenuManager : MonoBehaviour
         creditsObj.SetActive(false);
         mainMenuObj.SetActive(true);
 
-        creditsObj.GetComponent<Credits>().ResetCredits();
         AudioManager.Instance.PlaySoundLooped(AudioManager.Instance.menuSongs[0]);
     }
 
