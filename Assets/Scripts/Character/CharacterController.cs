@@ -12,6 +12,7 @@ public class CharacterController : MonoBehaviour
 
     [HideInInspector] public bool IsMoving { get; set; }
     [HideInInspector] public bool IsBlocking { get; set; }
+    [HideInInspector] public bool IsTouching {get; set;}
     [HideInInspector] public float CurrentHealth { get; private set; }
     [HideInInspector] public Vector3 Direction {get; set;}
     [HideInInspector] public int EnemyLayer { get; set; }
@@ -25,8 +26,8 @@ public class CharacterController : MonoBehaviour
     private AudioManager audioManager;
     private Animator m_animator;
     private Rigidbody2D m_rigidbody;
-    private CharacterMovement m_characterMovement;
-    private CharacterCombat m_characterCombat;
+    public CharacterMovement m_characterMovement;
+    public CharacterCombat m_characterCombat;
 
     [HideInInspector] public bool isPlayerTwo = false;
 
@@ -126,6 +127,20 @@ public class CharacterController : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && IsJumping)
         {
             IsJumping = false;
+            m_animator.SetBool("isJumping", IsJumping);
+        }
+
+        if (collision.transform.CompareTag("Player"))
+        {
+            IsTouching = true;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Player"))
+        {
+            IsTouching = false;
         }
     }
 

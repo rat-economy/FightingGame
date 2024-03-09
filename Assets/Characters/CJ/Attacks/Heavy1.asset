@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e08fb75450ab4bd8a6e6dec692e4c6b, type: 3}
   m_Name: Heavy1
   m_EditorClassIdentifier: 
-  Damage: 5
+  Damage: 8
   WindupFrames: 6
   CooldownFrames: 6
   AttackType: 0

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43cab630ed1ad46ca92e024d43e31ed8, type: 3}
   m_Name: CJ
   m_EditorClassIdentifier: 
-  MoveSpeed: 5
-  JumpSpeed: 6
+  MoveSpeed: 4
+  JumpSpeed: 8
   MaxHealth: 90
   Light1: {fileID: 11400000, guid: 3dd8ab674093a401db1fa1c1fc1b5545, type: 2}
   Light2: {fileID: 11400000, guid: 39c42f31aab2e4f1f94e140091a83bd9, type: 2}
