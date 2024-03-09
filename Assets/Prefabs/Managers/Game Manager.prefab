@@ -66,3 +66,4 @@ MonoBehaviour:
     name: 1
   - levelArt: {fileID: 21300000, guid: c5d38f1d5c4941d4d9e349c741526ac8, type: 3}
     name: 2
+  m_transition: {fileID: 0}

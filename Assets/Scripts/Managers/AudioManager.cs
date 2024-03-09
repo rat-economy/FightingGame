@@ -95,18 +95,21 @@ public class AudioManager : MonoBehaviour
         return null;
     }
 
-    public void BeginGameStart_Announcer(Sound p1, Sound p2)
+    public void BeginGameStart_Announcer(Sound p1, Sound p2, Sound start)
     {
-        StartCoroutine(GameStart_Announcer(p1, p2));
+        StartCoroutine(GameStart_Announcer(p1, p2, start));
     }
 
-    private IEnumerator GameStart_Announcer(Sound p1, Sound p2)
+    private IEnumerator GameStart_Announcer(Sound p1, Sound p2, Sound start)
     {
         PlaySoundOnce(p1);
         yield return new WaitForSeconds(Constants.ANNOUNCER_DELAY);
         PlaySoundOnce(vs_Sound);
         yield return new WaitForSeconds(Constants.ANNOUNCER_DELAY);
         PlaySoundOnce(p2);
+        yield return new WaitForSeconds(Constants.ANNOUNCER_DELAY*2);
+        PlaySoundOnce(start);
+        
         
     }
 

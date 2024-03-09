@@ -22,8 +22,13 @@ public class GameManager : MonoBehaviour
     private PlayerManager playerManager;
     private LevelManager levelManager;
 
+    [SerializeField] Sound m_announcerStart;
+
     private int playerOneWins = 0;
     private int playerTwoWins = 0;
+
+    [SerializeField] private Animator m_transition;
+    
     
 
     private void Awake()
@@ -57,11 +62,10 @@ public class GameManager : MonoBehaviour
     private IEnumerator InitializeRound()
     {
         //Transition to ingame scene
-        SceneManager.LoadScene("MainScene");
+        
 
         //TODO: Setup loading screen
-
-        yield return new WaitForSeconds(0.2f);
+        yield return StartCoroutine(FindObjectOfType<Transition>().LoadGame());
 
         //Initialize the player prefabs into player manager
         playerManager = FindObjectOfType<PlayerManager>();
@@ -100,7 +104,7 @@ public class GameManager : MonoBehaviour
             audioManager = AudioManager.Instance;
         }
         AudioManager.Instance.PickFightSong();
-        audioManager.BeginGameStart_Announcer(p1_selectedCharacter.announcerLine1, p2_selectedCharacter.announcerLine2);
+        audioManager.BeginGameStart_Announcer(p1_selectedCharacter.announcerLine1, p2_selectedCharacter.announcerLine2, m_announcerStart);
 
         yield return new WaitForSeconds(Constants.SPLASH_COUNTDOWN + 4);
 
